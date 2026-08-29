@@ -215,6 +215,29 @@
     });
   })();
 
+  /* ---------- Google Ads: outbound order-click conversions ----------
+     Checkout happens on Clover, a domain we don't control, so the real
+     Purchase event can't fire here. We count the click through to the
+     ordering page instead. Uber Eats / DoorDash are tracked automatically
+     by Google Ads, so they're left alone. */
+  (function () {
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || !/cloveronline\.com/.test(a.href)) return;
+      if (typeof gtag !== 'function') return;
+      var card = a.closest('[data-dish]');
+      var dish = '';
+      try { dish = card ? JSON.parse(card.getAttribute('data-dish')).n : ''; } catch (err) {}
+      gtag('event', 'conversion', {
+        send_to: 'AW-16929805337/LSGDCISaj-ocEJmo4Yg_',
+        value: 1.0,
+        currency: 'USD',
+        transaction_id: '',
+        items: dish ? [{ item_name: dish }] : undefined
+      });
+    }, true);
+  })();
+
   /* ---------- close the nav dropdown on outside click ---------- */
   document.addEventListener('click', function (e) {
     $$('details[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
