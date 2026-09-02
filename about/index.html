@@ -225,6 +225,9 @@
       nav>a:first-child{order:1!important;flex:0 0 auto!important}
       nav>div:last-child{display:contents!important}
       nav>div:last-child>a{order:2!important;margin-left:auto!important;flex:0 0 auto!important;box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;height:40px!important;min-height:40px!important;padding:0 20px!important;font-size:14px!important}
+      nav>div:last-child>a{height:38px!important;min-height:38px!important;padding:0 13px!important;font-size:12.5px!important;gap:0!important}
+      nav>div:last-child>a>span[aria-hidden="true"]{display:none!important}
+      nav>div:last-child>a+a{margin-left:6px!important;padding:0 13px!important}
       [data-screen-label="nav-links"]{order:3!important;flex:1 1 100%!important;width:100%!important;min-width:100%!important;flex-wrap:nowrap!important;overflow:visible!important;justify-content:flex-start!important;align-items:center!important;gap:18px!important;padding:0!important}
       [data-screen-label="nav-links"] a,[data-screen-label="nav-links"] summary{font-size:14.5px!important}
       nav details{position:relative!important}
@@ -241,7 +244,13 @@
       body{overflow-x:hidden}
     }
 
-  </style>
+      @media (max-width:400px){ nav img{height:34px!important} }
+    @media (max-width:340px){
+      nav img{height:28px!important}
+      nav>div:last-child>a{padding:0 10px!important;font-size:12px!important}
+      nav>div:last-child>a+a{padding:0 10px!important;margin-left:5px!important}
+    }
+</style>
 <style>.hv0:hover{opacity:1;transform:scale(1.1)}
 .hv1:hover{opacity:1;transform:scale(1.1)}
 .hv2:hover{opacity:1;transform:scale(1.1)}
@@ -262,17 +271,17 @@
 .hv17:hover{background:#F2EBE1}
 .hv18:hover{background:#F2EBE1}
 .hv19:hover{background:#F2EBE1}
-.hv20:hover{background:#FFB84D}
-.hv21:hover{background:#F2EBE1}
+.hv20:hover{background:#4F7A3A;color:#FFFFFF}
+.hv21:hover{background:#FFB84D}
 .hv22:hover{background:#F2EBE1}
 .hv23:hover{background:#F2EBE1}
 .hv24:hover{background:#F2EBE1}
-.hv25:hover{transform:translateY(-4px) rotate(-0.5deg)}
+.hv25:hover{background:#F2EBE1}
 .hv26:hover{transform:translateY(-4px) rotate(-0.5deg)}
 .hv27:hover{transform:translateY(-4px) rotate(-0.5deg)}
-.hv28:hover{color:#fff}
+.hv28:hover{transform:translateY(-4px) rotate(-0.5deg)}
 .hv29:hover{color:#fff}
-.hv30:hover{color:#B07A2B}
+.hv30:hover{color:#fff}
 .hv31:hover{color:#B07A2B}
 .hv32:hover{color:#B07A2B}
 .hv33:hover{color:#B07A2B}
@@ -285,6 +294,7 @@
 .hv40:hover{color:#B07A2B}
 .hv41:hover{color:#B07A2B}
 .hv42:hover{color:#B07A2B}
+.hv43:hover{color:#B07A2B}
 .filter-on{border-color:#A93720!important;background:#C7452B!important;color:#fff!important;box-shadow:0 2px 8px rgba(199,69,43,.3)!important}
 [data-t]{display:inline}</style>
 </head>
@@ -328,38 +338,38 @@
     <div style="display:flex;align-items:center;gap:clamp(10px,2.5vw,28px);flex-wrap:wrap;overflow:visible;justify-content:center;min-width:0;flex:1 1 auto" data-screen-label="nav-links">
       <a href="../menu/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="0">Menu</span></a>
       <a href="../about/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="1">About</span></a>
-      <a href="../vegan/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="2">Vegan</span></a>
-      <a href="../reviews/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="3">Reviews</span></a>
-      <a href="../faq/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="4">FAQ</span></a>
+      <a href="../reviews/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="2">Reviews</span></a>
+      <a href="../faq/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="3">FAQ</span></a>
       <details style="position:relative">
-        <summary style="font:600 15px 'Archivo';white-space:nowrap;cursor:pointer;list-style:none"><span data-t="5">More ▾</span></summary>
+        <summary style="font:600 15px 'Archivo';white-space:nowrap;cursor:pointer;list-style:none"><span data-t="4">More ▾</span></summary>
         <div style="position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#FAF7F3;border:1px solid rgba(27,21,18,0.14);border-radius:16px;box-shadow:0 6px 18px rgba(27,21,18,0.08);padding:10px;display:flex;flex-direction:column;gap:4px;min-width:150px;z-index:70">
-          <a class="more-page hv6" href="../menu/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="6">Menu</span></a>
-          <a class="more-page hv7" href="../about/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="7">About</span></a>
-          <a class="more-page hv8" href="../vegan/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="8">Vegan</span></a>
-          <a class="more-page hv9" href="../reviews/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="9">Reviews</span></a>
-          <a class="more-page hv10" href="../faq/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="10">FAQ</span></a>
+          <a class="more-page hv6" href="../menu/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="5">Menu</span></a>
+          <a class="more-page hv7" href="../about/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="6">About</span></a>
+          <a class="more-page hv8" href="../vegan/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="7">Vegan</span></a>
+          <a class="more-page hv9" href="../reviews/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="8">Reviews</span></a>
+          <a class="more-page hv10" href="../faq/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="9">FAQ</span></a>
           <div class="more-page" style="height:1px;background:#E8D9BE;margin:4px 2px"></div>
-          <a class="hv11" href="../about/#blog" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="11">Blog</span></a>
-          <a class="hv12" href="../contact/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="12">Contact</span></a>
-          <a class="hv13" href="../menu/#order" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="13">Order Online</span></a>
+          <a class="hv11" href="../about/#blog" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="10">Blog</span></a>
+          <a class="hv12" href="../contact/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="11">Contact</span></a>
+          <a class="hv13" href="../menu/#order" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="12">Order Online</span></a>
           <div style="height:1px;background:#E8D9BE;margin:4px 2px"></div>
           <a class="hv14" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Instagram</a>
           <a class="hv15" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Facebook</a>
           <a class="hv16" href="https://www.tiktok.com/@banna_restaurant" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">TikTok</a>
           <a class="hv17" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Yelp</a>
-          <a class="hv18" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="14">★ Leave us a Google Review</span></a>
+          <a class="hv18" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="13">★ Leave us a Google Review</span></a>
           <a class="hv19" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Google Business Profile</a>
         </div>
       </details>
     </div>
     <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-      <a class="hv20" href="https://banna-restaurant.cloveronline.com/menu/all" style="background:#C7452B;color:#FFFFFF;font:600 13px 'Archivo';padding:9px 18px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);white-space:nowrap" data-om-label="Link"><span data-t="15">Order Now</span></a>
+      <a class="hv20" href="../vegan/" style="display:inline-flex;align-items:center;gap:7px;background:#3E6B2E;color:#FFFFFF;font:600 13px 'Archivo';padding:9px 16px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);white-space:nowrap" data-om-label="Link"><span aria-hidden="true" style="flex:none;width:6px;height:6px;border-radius:50%;background:#9DC188"></span><span data-t="14">Vegan</span></a>
+      <a class="hv21" href="https://banna-restaurant.cloveronline.com/menu/all" style="background:#C7452B;color:#FFFFFF;font:600 13px 'Archivo';padding:9px 18px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);white-space:nowrap" data-om-label="Link"><span data-t="15">Order Now</span></a>
       <div class="lang-switch" style="display:flex;align-items:center;gap:6px;flex-shrink:0">
-        <button class="hv21" data-lang-active="true" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="en">EN</button>
-        <button class="hv22" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="es">ES</button>
-        <button class="hv23" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="am">አማ</button>
-        <button class="hv24" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="ti">ትግ</button>
+        <button class="hv22" data-lang-active="true" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="en">EN</button>
+        <button class="hv23" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="es">ES</button>
+        <button class="hv24" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="am">አማ</button>
+        <button class="hv25" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="ti">ትግ</button>
       </div>
     </div>
   </nav>
@@ -455,7 +465,7 @@
       </div>
       <div class="blog-stack" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px">
         
-          <div class="stack-active hv25" style="background:#fff;border:1px solid rgba(27,21,18,0.14);border-radius:20px;overflow:hidden;box-shadow:0 6px 18px rgba(27,21,18,0.08);min-width:0;max-width:220px;margin:0 auto;--sy:0px;--sr:0deg;--sz:50;cursor:pointer">
+          <div class="stack-active hv26" style="background:#fff;border:1px solid rgba(27,21,18,0.14);border-radius:20px;overflow:hidden;box-shadow:0 6px 18px rgba(27,21,18,0.08);min-width:0;max-width:220px;margin:0 auto;--sy:0px;--sr:0deg;--sz:50;cursor:pointer">
             <div style="min-width:0;aspect-ratio:9/16;background:#1B1512">
               <iframe src="https://www.youtube-nocookie.com/embed/-sL9ZYlrEK0?rel=0&amp;modestbranding=1" title="How to Eat Injera Like a Local" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;height:100%;border:0;display:block" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
             </div>
@@ -466,7 +476,7 @@
             </div>
           </div>
         
-          <div class=" hv26" style="background:#fff;border:1px solid rgba(27,21,18,0.14);border-radius:20px;overflow:hidden;box-shadow:0 6px 18px rgba(27,21,18,0.08);min-width:0;max-width:220px;margin:0 auto;--sy:24px;--sr:4deg;--sz:2;cursor:pointer">
+          <div class=" hv27" style="background:#fff;border:1px solid rgba(27,21,18,0.14);border-radius:20px;overflow:hidden;box-shadow:0 6px 18px rgba(27,21,18,0.08);min-width:0;max-width:220px;margin:0 auto;--sy:24px;--sr:4deg;--sz:2;cursor:pointer">
             <div style="min-width:0;aspect-ratio:9/16;background:#1B1512">
               <iframe src="https://www.youtube-nocookie.com/embed/7ofnzdhdOCo?rel=0&amp;modestbranding=1" title="What Makes Berbere Spice Special" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;height:100%;border:0;display:block" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
             </div>
@@ -477,7 +487,7 @@
             </div>
           </div>
         
-          <div class=" hv27" style="background:#fff;border:1px solid rgba(27,21,18,0.14);border-radius:20px;overflow:hidden;box-shadow:0 6px 18px rgba(27,21,18,0.08);min-width:0;max-width:220px;margin:0 auto;--sy:36px;--sr:-5deg;--sz:1;cursor:pointer">
+          <div class=" hv28" style="background:#fff;border:1px solid rgba(27,21,18,0.14);border-radius:20px;overflow:hidden;box-shadow:0 6px 18px rgba(27,21,18,0.08);min-width:0;max-width:220px;margin:0 auto;--sy:36px;--sr:-5deg;--sz:1;cursor:pointer">
             <div style="min-width:0;aspect-ratio:9/16;background:#1B1512">
               <iframe src="https://www.youtube-nocookie.com/embed/VbwlaPxcS6o?rel=0&amp;modestbranding=1" title="Inside the Eritrean/Ethiopian Coffee Ceremony" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" style="width:100%;height:100%;border:0;display:block" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
             </div>
@@ -551,8 +561,8 @@
         <p style="font:600 14px/1.6;color:#B8A88E;max-width:280px;margin:0 0 8px"><span data-t="29">"Habesha hospitality means no one leaves the table hungry, or a stranger."</span></p>
         <p style="font:600 14px/1.6;color:#B8A88E;max-width:280px;margin:0">Eritrean &amp; Ethiopian Restaurant and Bar · 9560 Skillman St #120, Dallas, TX 75243</p>
         <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">
-          <a class="hv28" href="tel:+12147580752" style="font:600 14px 'Archivo';color:#B07A2B">(214) 758-0752</a>
-          <a class="hv29" href="mailto:Banna9560@gmail.com" style="font:600 14px 'Archivo';color:#B07A2B">Banna9560@gmail.com</a>
+          <a class="hv29" href="tel:+12147580752" style="font:600 14px 'Archivo';color:#B07A2B">(214) 758-0752</a>
+          <a class="hv30" href="mailto:Banna9560@gmail.com" style="font:600 14px 'Archivo';color:#B07A2B">Banna9560@gmail.com</a>
           <span style="font:600 14px/1.6 'Archivo';color:#B8A88E">Open daily 11am &#8211; 2am</span>
         </div>
       </div>
@@ -560,24 +570,24 @@
         <div>
           <div style="font:600 13px 'Archivo';letter-spacing:1px;color:#B07A2B;margin-bottom:12px"><span data-t="30">EXPLORE</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;font:600 14px 'Archivo'">
-            <a class="hv30" href="../menu/" style="color:#E4DBD1"><span data-t="31">Menu</span></a>
-            <a class="hv31" href="../about/" style="color:#E4DBD1"><span data-t="32">About</span></a>
-            <a class="hv32" href="../about/#blog" style="color:#E4DBD1"><span data-t="33">Blog</span></a>
-            <a class="hv33" href="../vegan/" style="color:#E4DBD1"><span data-t="34">Vegan</span></a>
-            <a class="hv34" href="../faq/" style="color:#E4DBD1"><span data-t="35">FAQ</span></a>
-            <a class="hv35" href="../contact/" style="color:#E4DBD1"><span data-t="36">Contact</span></a>
-            <a class="hv36" href="../menu/#order" style="color:#E4DBD1">Order Online</a>
+            <a class="hv31" href="../menu/" style="color:#E4DBD1"><span data-t="31">Menu</span></a>
+            <a class="hv32" href="../about/" style="color:#E4DBD1"><span data-t="32">About</span></a>
+            <a class="hv33" href="../about/#blog" style="color:#E4DBD1"><span data-t="33">Blog</span></a>
+            <a class="hv34" href="../vegan/" style="color:#E4DBD1"><span data-t="34">Vegan</span></a>
+            <a class="hv35" href="../faq/" style="color:#E4DBD1"><span data-t="35">FAQ</span></a>
+            <a class="hv36" href="../contact/" style="color:#E4DBD1"><span data-t="36">Contact</span></a>
+            <a class="hv37" href="../menu/#order" style="color:#E4DBD1">Order Online</a>
           </div>
         </div>
         <div>
           <div style="font:600 13px 'Archivo';letter-spacing:1px;color:#B07A2B;margin-bottom:12px"><span data-t="37">FOLLOW &amp; REVIEW</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;font:600 14px 'Archivo'">
-            <a class="hv37" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" style="color:#E4DBD1">Instagram</a>
-            <a class="hv38" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" style="color:#E4DBD1">Facebook</a>
-            <a class="hv39" href="https://www.tiktok.com/@banna_restaurant" target="_blank" style="color:#E4DBD1">TikTok</a>
-            <a class="hv40" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" style="color:#E4DBD1">Yelp</a>
-            <a class="hv41" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" style="color:#E4DBD1"><span data-t="38">★ Leave us a Google Review</span></a>
-            <a class="hv42" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" style="color:#E4DBD1">Google Business Profile</a>
+            <a class="hv38" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" style="color:#E4DBD1">Instagram</a>
+            <a class="hv39" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" style="color:#E4DBD1">Facebook</a>
+            <a class="hv40" href="https://www.tiktok.com/@banna_restaurant" target="_blank" style="color:#E4DBD1">TikTok</a>
+            <a class="hv41" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" style="color:#E4DBD1">Yelp</a>
+            <a class="hv42" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" style="color:#E4DBD1"><span data-t="38">★ Leave us a Google Review</span></a>
+            <a class="hv43" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" style="color:#E4DBD1">Google Business Profile</a>
           </div>
         </div>
       </div>
@@ -591,7 +601,7 @@
 </div>
 
 
-<script id="i18n" type="application/json">{"es":{"0":"Menú","1":"Nosotros","2":"Vegano","3":"Reseñas","4":"Preguntas","5":"Más ▾","6":"Menú","7":"Nosotros","8":"Vegano","9":"Reseñas","10":"Preguntas","11":"Blog","12":"Contacto","13":"Ordenar en línea","14":"★ Déjanos una Reseña en Google","15":"Ordena Ahora","16":"NUESTRA HISTORIA","17":"Un sabor de la herencia eritrea y etíope.","18":"Banna trae los sabores vibrantes y la cálida hospitalidad de Etiopía y Eritrea a Dallas. Desde la injera tradicional hasta guisos ricos y especiados, nuestro menú refleja una profunda dedicación a preservar la esencia de estas antiguas cocinas.","19":"Hace dos años abrimos nuestras puertas en Skillman St con un objetivo: cocinar como lo hacían nuestras abuelas, para cualquiera dispuesto a sentarse a la mesa. Ven con hambre, comparte un platillo con amigos y quédate para la música, las cosas se animan después de las 11:30pm.","20":"Años en Dallas","21":"Hecho desde cero","22":"Opciones disponibles","23":"Años Fuertes","24":"Barrigas Llenas","25":"Favoritos Veganos","26":"Hecho Desde Cero","27":"DESDE LA COCINA","28":"Blog de Banna","29":"\"La hospitalidad habesha significa que nadie se va de la mesa con hambre, ni como un extraño.\"","30":"EXPLORAR","31":"Menú","32":"Nosotros","33":"Blog","34":"Vegano","35":"Preguntas","36":"Contacto","37":"SÍGUENOS Y OPINA","38":"★ Déjanos una Reseña en Google","39":"© 2026 Banna Restaurant & Bar. Todos los derechos reservados.","40":"Hecho con amor en Dallas, TX"},"am":{"0":"ምናሌ","1":"ስለ እኛ","2":"ቬጋን","3":"ግምገማዎች","4":"ጥያቄዎች","5":"ተጨማሪ ▾","6":"ምናሌ","7":"ስለ እኛ","8":"ቬጋን","9":"ግምገማዎች","10":"ጥያቄዎች","11":"ብሎግ","12":"አግኙን","13":"በመስመር ላይ ይዘዙ","14":"★ በጉግል ግምገማ ይተውልን","15":"አሁን ይዘዙ","16":"ታሪካችን","17":"የኤርትራ እና የኢትዮጵያ ባህል ጣዕም።","18":"ባና የኢትዮጵያን እና የኤርትራን ብሩህ ጣዕም እና ሞቅ ያለ እንግዳ ተቀባይነት ወደ ዳላስ ያመጣል። ከባህላዊ እንጀራ እስከ ወፍራም የቅመማ ቅመም ወጦች ድረስ ምናሌያችን ጥንታዊ ምግቦችን ማንነት ለመጠበቅ ያለንን ጥልቅ ቁርጠኝነት ያሳያል።","19":"ከሁለት ዓመት በፊት በስኪልማን ጎዳና በራችንን የከፈትነው በአንድ ግብ ነው፦ አያቶቻችን እንደሚያበስሉት ማብሰል፣ ወንበር ለመሳብ ለሚፈልግ ለማንኛውም ሰው። በርሃብ ይምጡ፣ ከጓደኞችዎ ጋር ምግብ ይጋሩ፣ ለሙዚቃውም ይቆዩ።","20":"ዓመታት በዳላስ","21":"ከመጀመሪያ የተዘጋጀ","22":"አማራጮች ይገኛሉ","23":"ጠንካራ ዓመታት","24":"ሆዶች ተሞልተዋል","25":"ተወዳጅ የቬጂ ምርጫዎች","26":"ከመጀመሪያ የተዘጋጀ","27":"ከወጥ ቤት","28":"የባና ብሎግ","29":"«የሐበሻ እንግዳ ተቀባይነት ማለት ማንም ከጠረጴዛው በረሃብ ወይም እንደ እንግዳ አይሄድም።»","30":"ያስሱ","31":"ምናሌ","32":"ስለ እኛ","33":"ብሎግ","34":"ቬጋን","35":"ጥያቄዎች","36":"አግኙን","37":"ይከተሉን እና ይገምግሙ","38":"★ በጉግል ግምገማ ይተውልን","39":"© 2026 ባና ሬስቶራንት እና ባር። ሁሉም መብቶች የተጠበቁ ናቸው።","40":"በፍቅር በዳላስ ቴክሳስ የተሰራ"},"ti":{"0":"ዝርዝር","1":"ብዛዕባና","2":"ቬጋን","3":"ግምገማታት","4":"ሕቶታት","5":"ተወሳኺ ▾","6":"ዝርዝር","7":"ብዛዕባና","8":"ቬጋን","9":"ግምገማታት","10":"ሕቶታት","11":"ብሎግ","12":"ርኸቡና","13":"ብመስመር ኣዘዙ","14":"★ ኣብ ጉግል ግምገማ ግደፉልና","15":"ሕጂ ኣዘዙ","16":"ታሪኽና","17":"ጣዕሚ ናይ ኤርትራውን ኢትዮጵያውን ክብሪ።","18":"ባና ንብሩህ ጣዕምን ልብዊ ኣቀባብላን ኢትዮጵያን ኤርትራን ናብ ዳላስ የምጽእ። ካብ ባህላዊ እንጀራ ክሳብ ጽዑቕ ቅመም ዘለዎ ጸብሒታት፡ ዝርዝርና ነዚ ጥንታዊ ብልዒ ንምዕቃብ ዘሎና ጽኑዕ ቅሩብነት የንጸባርቕ።","19":"ቅድሚ ክልተ ዓመት ኣብ ስኪልማን ጎደና ማዕጾና ዝኸፈትና ብሓደ ዕላማ እዩ፦ ከምቲ ኣያታትና ዘብስልኦ ንምብሳል፡ ንዝኾነ ኮፍ ኢሉ ኪበልዕ ዝደሊ። ጠምዩ ንዑ፡ ምስ ኣዕሩኽትኹም ብልዒ ተማቐሉ፡ ንሙዚቃውን ጽንሑ።","20":"ዓመታት ኣብ ዳላስ","21":"ካብ ጅምር ዝተዳለወ","22":"ኣማራጺታት ኣለው","23":"ሓያል ዓመታት","24":"ከርሲ ተመሊኡ","25":"ተፈታዊ ናይ ቬጂ ምርጫታት","26":"ካብ ጅምር ዝተዳለወ","27":"ካብ ክሽነ","28":"ብሎግ ባና","29":"«ሓበሻዊ ኣቀባብላ ማለት ካብ ጣውላ ብጥሜት ወይ ከም ጋሻ ዝወጽእ የለን ማለት እዩ።»","30":"ርአዩ","31":"ዝርዝር","32":"ብዛዕባና","33":"ብሎግ","34":"ቬጋን","35":"ሕቶታት","36":"ርኸቡና","37":"ስዓቡናን ገምግሙናን","38":"★ ኣብ ጉግል ግምገማ ግደፉልና","39":"© 2026 ባና ቤት-መግብን መስተን። ኩሉ መሰላት ዝተሓለወ እዩ።","40":"ብፍቕሪ ኣብ ዳላስ ተክሳስ ዝተሰርሐ"}}</script>
+<script id="i18n" type="application/json">{"es":{"0":"Menú","1":"Nosotros","2":"Reseñas","3":"Preguntas","4":"Más ▾","5":"Menú","6":"Nosotros","7":"Vegano","8":"Reseñas","9":"Preguntas","10":"Blog","11":"Contacto","12":"Ordenar en línea","13":"★ Déjanos una Reseña en Google","14":"Vegano","15":"Ordena Ahora","16":"NUESTRA HISTORIA","17":"Un sabor de la herencia eritrea y etíope.","18":"Banna trae los sabores vibrantes y la cálida hospitalidad de Etiopía y Eritrea a Dallas. Desde la injera tradicional hasta guisos ricos y especiados, nuestro menú refleja una profunda dedicación a preservar la esencia de estas antiguas cocinas.","19":"Hace dos años abrimos nuestras puertas en Skillman St con un objetivo: cocinar como lo hacían nuestras abuelas, para cualquiera dispuesto a sentarse a la mesa. Ven con hambre, comparte un platillo con amigos y quédate para la música, las cosas se animan después de las 11:30pm.","20":"Años en Dallas","21":"Hecho desde cero","22":"Opciones disponibles","23":"Años Fuertes","24":"Barrigas Llenas","25":"Favoritos Veganos","26":"Hecho Desde Cero","27":"DESDE LA COCINA","28":"Blog de Banna","29":"\"La hospitalidad habesha significa que nadie se va de la mesa con hambre, ni como un extraño.\"","30":"EXPLORAR","31":"Menú","32":"Nosotros","33":"Blog","34":"Vegano","35":"Preguntas","36":"Contacto","37":"SÍGUENOS Y OPINA","38":"★ Déjanos una Reseña en Google","39":"© 2026 Banna Restaurant & Bar. Todos los derechos reservados.","40":"Hecho con amor en Dallas, TX"},"am":{"0":"ምናሌ","1":"ስለ እኛ","2":"ግምገማዎች","3":"ጥያቄዎች","4":"ተጨማሪ ▾","5":"ምናሌ","6":"ስለ እኛ","7":"ቬጋን","8":"ግምገማዎች","9":"ጥያቄዎች","10":"ብሎግ","11":"አግኙን","12":"በመስመር ላይ ይዘዙ","13":"★ በጉግል ግምገማ ይተውልን","14":"ቬጋን","15":"አሁን ይዘዙ","16":"ታሪካችን","17":"የኤርትራ እና የኢትዮጵያ ባህል ጣዕም።","18":"ባና የኢትዮጵያን እና የኤርትራን ብሩህ ጣዕም እና ሞቅ ያለ እንግዳ ተቀባይነት ወደ ዳላስ ያመጣል። ከባህላዊ እንጀራ እስከ ወፍራም የቅመማ ቅመም ወጦች ድረስ ምናሌያችን ጥንታዊ ምግቦችን ማንነት ለመጠበቅ ያለንን ጥልቅ ቁርጠኝነት ያሳያል።","19":"ከሁለት ዓመት በፊት በስኪልማን ጎዳና በራችንን የከፈትነው በአንድ ግብ ነው፦ አያቶቻችን እንደሚያበስሉት ማብሰል፣ ወንበር ለመሳብ ለሚፈልግ ለማንኛውም ሰው። በርሃብ ይምጡ፣ ከጓደኞችዎ ጋር ምግብ ይጋሩ፣ ለሙዚቃውም ይቆዩ።","20":"ዓመታት በዳላስ","21":"ከመጀመሪያ የተዘጋጀ","22":"አማራጮች ይገኛሉ","23":"ጠንካራ ዓመታት","24":"ሆዶች ተሞልተዋል","25":"ተወዳጅ የቬጂ ምርጫዎች","26":"ከመጀመሪያ የተዘጋጀ","27":"ከወጥ ቤት","28":"የባና ብሎግ","29":"«የሐበሻ እንግዳ ተቀባይነት ማለት ማንም ከጠረጴዛው በረሃብ ወይም እንደ እንግዳ አይሄድም።»","30":"ያስሱ","31":"ምናሌ","32":"ስለ እኛ","33":"ብሎግ","34":"ቬጋን","35":"ጥያቄዎች","36":"አግኙን","37":"ይከተሉን እና ይገምግሙ","38":"★ በጉግል ግምገማ ይተውልን","39":"© 2026 ባና ሬስቶራንት እና ባር። ሁሉም መብቶች የተጠበቁ ናቸው።","40":"በፍቅር በዳላስ ቴክሳስ የተሰራ"},"ti":{"0":"ዝርዝር","1":"ብዛዕባና","2":"ግምገማታት","3":"ሕቶታት","4":"ተወሳኺ ▾","5":"ዝርዝር","6":"ብዛዕባና","7":"ቬጋን","8":"ግምገማታት","9":"ሕቶታት","10":"ብሎግ","11":"ርኸቡና","12":"ብመስመር ኣዘዙ","13":"★ ኣብ ጉግል ግምገማ ግደፉልና","14":"ቬጋን","15":"ሕጂ ኣዘዙ","16":"ታሪኽና","17":"ጣዕሚ ናይ ኤርትራውን ኢትዮጵያውን ክብሪ።","18":"ባና ንብሩህ ጣዕምን ልብዊ ኣቀባብላን ኢትዮጵያን ኤርትራን ናብ ዳላስ የምጽእ። ካብ ባህላዊ እንጀራ ክሳብ ጽዑቕ ቅመም ዘለዎ ጸብሒታት፡ ዝርዝርና ነዚ ጥንታዊ ብልዒ ንምዕቃብ ዘሎና ጽኑዕ ቅሩብነት የንጸባርቕ።","19":"ቅድሚ ክልተ ዓመት ኣብ ስኪልማን ጎደና ማዕጾና ዝኸፈትና ብሓደ ዕላማ እዩ፦ ከምቲ ኣያታትና ዘብስልኦ ንምብሳል፡ ንዝኾነ ኮፍ ኢሉ ኪበልዕ ዝደሊ። ጠምዩ ንዑ፡ ምስ ኣዕሩኽትኹም ብልዒ ተማቐሉ፡ ንሙዚቃውን ጽንሑ።","20":"ዓመታት ኣብ ዳላስ","21":"ካብ ጅምር ዝተዳለወ","22":"ኣማራጺታት ኣለው","23":"ሓያል ዓመታት","24":"ከርሲ ተመሊኡ","25":"ተፈታዊ ናይ ቬጂ ምርጫታት","26":"ካብ ጅምር ዝተዳለወ","27":"ካብ ክሽነ","28":"ብሎግ ባና","29":"«ሓበሻዊ ኣቀባብላ ማለት ካብ ጣውላ ብጥሜት ወይ ከም ጋሻ ዝወጽእ የለን ማለት እዩ።»","30":"ርአዩ","31":"ዝርዝር","32":"ብዛዕባና","33":"ብሎግ","34":"ቬጋን","35":"ሕቶታት","36":"ርኸቡና","37":"ስዓቡናን ገምግሙናን","38":"★ ኣብ ጉግል ግምገማ ግደፉልና","39":"© 2026 ባና ቤት-መግብን መስተን። ኩሉ መሰላት ዝተሓለወ እዩ።","40":"ብፍቕሪ ኣብ ዳላስ ተክሳስ ዝተሰርሐ"}}</script>
 <script src="../klaviyo-gift.js" defer></script>
 <script src="../banna.js" defer></script>
 </body>

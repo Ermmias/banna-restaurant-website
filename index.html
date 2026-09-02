@@ -225,6 +225,9 @@
       nav>a:first-child{order:1!important;flex:0 0 auto!important}
       nav>div:last-child{display:contents!important}
       nav>div:last-child>a{order:2!important;margin-left:auto!important;flex:0 0 auto!important;box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;height:40px!important;min-height:40px!important;padding:0 20px!important;font-size:14px!important}
+      nav>div:last-child>a{height:38px!important;min-height:38px!important;padding:0 13px!important;font-size:12.5px!important;gap:0!important}
+      nav>div:last-child>a>span[aria-hidden="true"]{display:none!important}
+      nav>div:last-child>a+a{margin-left:6px!important;padding:0 13px!important}
       [data-screen-label="nav-links"]{order:3!important;flex:1 1 100%!important;width:100%!important;min-width:100%!important;flex-wrap:nowrap!important;overflow:visible!important;justify-content:flex-start!important;align-items:center!important;gap:18px!important;padding:0!important}
       [data-screen-label="nav-links"] a,[data-screen-label="nav-links"] summary{font-size:14.5px!important}
       nav details{position:relative!important}
@@ -245,7 +248,13 @@
     .zoom-frame{animation:zoom-pop .26s cubic-bezier(.2,.8,.3,1) both}
     @media (max-width:640px){.zoom-frame{border-radius:16px}}
 
-  </style>
+      @media (max-width:400px){ nav img{height:34px!important} }
+    @media (max-width:340px){
+      nav img{height:28px!important}
+      nav>div:last-child>a{padding:0 10px!important;font-size:12px!important}
+      nav>div:last-child>a+a{padding:0 10px!important;margin-left:5px!important}
+    }
+</style>
 <style>.hv0:hover{opacity:1;transform:scale(1.1)}
 .hv1:hover{opacity:1;transform:scale(1.1)}
 .hv2:hover{opacity:1;transform:scale(1.1)}
@@ -266,16 +275,16 @@
 .hv17:hover{background:#F2EBE1}
 .hv18:hover{background:#F2EBE1}
 .hv19:hover{background:#F2EBE1}
-.hv20:hover{background:#FFB84D}
-.hv21:hover{background:#F2EBE1}
+.hv20:hover{background:#4F7A3A;color:#FFFFFF}
+.hv21:hover{background:#FFB84D}
 .hv22:hover{background:#F2EBE1}
 .hv23:hover{background:#F2EBE1}
 .hv24:hover{background:#F2EBE1}
-.hv25:hover{background:#A93720;color:#FFFFFF}
-.hv26:hover{background:rgba(253,249,244,0.1);color:#FDF9F4}
-.hv27:hover{background:#1B1512;color:#FAF7F3;border-color:#1B1512}
-.hv28:hover{background:#3E2A15;color:#F6EBD9}
-.hv29:hover{background:#A93720;color:#FFFFFF;box-shadow:0 12px 24px -9px rgba(169,55,32,0.85);transform:translateY(-1px)}
+.hv25:hover{background:#F2EBE1}
+.hv26:hover{background:#A93720;color:#FFFFFF}
+.hv27:hover{background:rgba(253,249,244,0.1);color:#FDF9F4}
+.hv28:hover{background:#1B1512;color:#FAF7F3;border-color:#1B1512}
+.hv29:hover{background:#3E2A15;color:#F6EBD9}
 .hv30:hover{background:#A93720;color:#FFFFFF;box-shadow:0 12px 24px -9px rgba(169,55,32,0.85);transform:translateY(-1px)}
 .hv31:hover{background:#A93720;color:#FFFFFF;box-shadow:0 12px 24px -9px rgba(169,55,32,0.85);transform:translateY(-1px)}
 .hv32:hover{background:#A93720;color:#FFFFFF;box-shadow:0 12px 24px -9px rgba(169,55,32,0.85);transform:translateY(-1px)}
@@ -295,12 +304,12 @@
 .hv46:hover{background:#A93720;color:#FFFFFF;box-shadow:0 12px 24px -9px rgba(169,55,32,0.85);transform:translateY(-1px)}
 .hv47:hover{background:#A93720;color:#FFFFFF;box-shadow:0 12px 24px -9px rgba(169,55,32,0.85);transform:translateY(-1px)}
 .hv48:hover{background:#A93720;color:#FFFFFF;box-shadow:0 12px 24px -9px rgba(169,55,32,0.85);transform:translateY(-1px)}
-.hv49:hover{background:#3E2A15;color:#E9E0D4}
-.hv50:hover{background:#05a659;color:#fff}
-.hv51:hover{background:#c81300;color:#fff}
-.hv52:hover{color:#fff}
+.hv49:hover{background:#A93720;color:#FFFFFF;box-shadow:0 12px 24px -9px rgba(169,55,32,0.85);transform:translateY(-1px)}
+.hv50:hover{background:#3E2A15;color:#E9E0D4}
+.hv51:hover{background:#05a659;color:#fff}
+.hv52:hover{background:#c81300;color:#fff}
 .hv53:hover{color:#fff}
-.hv54:hover{color:#B07A2B}
+.hv54:hover{color:#fff}
 .hv55:hover{color:#B07A2B}
 .hv56:hover{color:#B07A2B}
 .hv57:hover{color:#B07A2B}
@@ -313,6 +322,7 @@
 .hv64:hover{color:#B07A2B}
 .hv65:hover{color:#B07A2B}
 .hv66:hover{color:#B07A2B}
+.hv67:hover{color:#B07A2B}
 .filter-on{border-color:#A93720!important;background:#C7452B!important;color:#fff!important;box-shadow:0 2px 8px rgba(199,69,43,.3)!important}
 [data-t]{display:inline}</style>
 </head>
@@ -356,38 +366,38 @@
     <div style="display:flex;align-items:center;gap:clamp(10px,2.5vw,28px);flex-wrap:wrap;overflow:visible;justify-content:center;min-width:0;flex:1 1 auto" data-screen-label="nav-links">
       <a href="./menu/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="0">Menu</span></a>
       <a href="./about/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="1">About</span></a>
-      <a href="./vegan/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="2">Vegan</span></a>
-      <a href="./reviews/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="3">Reviews</span></a>
-      <a href="./faq/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="4">FAQ</span></a>
+      <a href="./reviews/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="2">Reviews</span></a>
+      <a href="./faq/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="3">FAQ</span></a>
       <details style="position:relative">
-        <summary style="font:600 15px 'Archivo';white-space:nowrap;cursor:pointer;list-style:none"><span data-t="5">More ▾</span></summary>
+        <summary style="font:600 15px 'Archivo';white-space:nowrap;cursor:pointer;list-style:none"><span data-t="4">More ▾</span></summary>
         <div style="position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#FAF7F3;border:1px solid rgba(27,21,18,0.14);border-radius:16px;box-shadow:0 6px 18px rgba(27,21,18,0.08);padding:10px;display:flex;flex-direction:column;gap:4px;min-width:150px;z-index:70">
-          <a class="more-page hv6" href="./menu/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="6">Menu</span></a>
-          <a class="more-page hv7" href="./about/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="7">About</span></a>
-          <a class="more-page hv8" href="./vegan/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="8">Vegan</span></a>
-          <a class="more-page hv9" href="./reviews/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="9">Reviews</span></a>
-          <a class="more-page hv10" href="./faq/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="10">FAQ</span></a>
+          <a class="more-page hv6" href="./menu/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="5">Menu</span></a>
+          <a class="more-page hv7" href="./about/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="6">About</span></a>
+          <a class="more-page hv8" href="./vegan/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="7">Vegan</span></a>
+          <a class="more-page hv9" href="./reviews/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="8">Reviews</span></a>
+          <a class="more-page hv10" href="./faq/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="9">FAQ</span></a>
           <div class="more-page" style="height:1px;background:#E8D9BE;margin:4px 2px"></div>
-          <a class="hv11" href="./about/#blog" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="11">Blog</span></a>
-          <a class="hv12" href="./contact/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="12">Contact</span></a>
-          <a class="hv13" href="./menu/#order" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="13">Order Online</span></a>
+          <a class="hv11" href="./about/#blog" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="10">Blog</span></a>
+          <a class="hv12" href="./contact/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="11">Contact</span></a>
+          <a class="hv13" href="./menu/#order" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="12">Order Online</span></a>
           <div style="height:1px;background:#E8D9BE;margin:4px 2px"></div>
           <a class="hv14" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Instagram</a>
           <a class="hv15" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Facebook</a>
           <a class="hv16" href="https://www.tiktok.com/@banna_restaurant" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">TikTok</a>
           <a class="hv17" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Yelp</a>
-          <a class="hv18" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="14">★ Leave us a Google Review</span></a>
+          <a class="hv18" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="13">★ Leave us a Google Review</span></a>
           <a class="hv19" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Google Business Profile</a>
         </div>
       </details>
     </div>
     <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-      <a class="hv20" href="#menu" style="background:#C7452B;color:#FFFFFF;font:600 13px 'Archivo';padding:9px 18px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);white-space:nowrap" data-om-label="Link"><span data-t="15">Order Now</span></a>
+      <a class="hv20" href="./vegan/" style="display:inline-flex;align-items:center;gap:7px;background:#3E6B2E;color:#FFFFFF;font:600 13px 'Archivo';padding:9px 16px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);white-space:nowrap" data-om-label="Link"><span aria-hidden="true" style="flex:none;width:6px;height:6px;border-radius:50%;background:#9DC188"></span><span data-t="14">Vegan</span></a>
+      <a class="hv21" href="#menu" style="background:#C7452B;color:#FFFFFF;font:600 13px 'Archivo';padding:9px 18px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);white-space:nowrap" data-om-label="Link"><span data-t="15">Order Now</span></a>
       <div class="lang-switch" style="display:flex;align-items:center;gap:6px;flex-shrink:0">
-        <button class="hv21" data-lang-active="true" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="en">EN</button>
-        <button class="hv22" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="es">ES</button>
-        <button class="hv23" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="am">አማ</button>
-        <button class="hv24" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="ti">ትግ</button>
+        <button class="hv22" data-lang-active="true" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="en">EN</button>
+        <button class="hv23" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="es">ES</button>
+        <button class="hv24" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="am">አማ</button>
+        <button class="hv25" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="ti">ትግ</button>
       </div>
     </div>
   </nav>
@@ -404,8 +414,8 @@
       <h1 style="margin:0;max-width:19ch;font:700 clamp(38px,5.4vw,72px)/1.02 'Baloo 2';letter-spacing:-0.02em;color:#FDF9F4;text-wrap:balance"><span data-t="16">Eritrean &amp; Ethiopian Restaurant in Dallas, TX</span></h1>
       <p class="hero-sub" style="margin:0;max-width:44ch;font:400 clamp(16px,1.5vw,19px)/1.6 'Archivo';color:rgba(253,249,244,0.76);text-wrap:pretty"><span data-t="17">Dallas's favorite Eritrean &amp; Ethiopian restaurant, slow-cooked stews, sizzling tibs, and injera served family-style, made for sharing.</span></p>
       <div style="display:flex;flex-wrap:wrap;gap:14px;padding-top:4px">
-        <a class="hv25" href="#menu" style="display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:16px 34px;border-radius:100px;background:#C7452B;color:#FFFFFF;font:600 15.5px 'Archivo'" data-om-label="Link"><span data-t="18">Order Now</span></a>
-        <a class="hv26" href="./menu/" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:16px 30px;border-radius:100px;border:1px solid rgba(253,249,244,0.34);color:#FDF9F4;font:500 15.5px 'Archivo'"><span data-t="19">View Menu</span> <span style="font-size:17px">&#8595;</span></a>
+        <a class="hv26" href="#menu" style="display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:16px 34px;border-radius:100px;background:#C7452B;color:#FFFFFF;font:600 15.5px 'Archivo'" data-om-label="Link"><span data-t="18">Order Now</span></a>
+        <a class="hv27" href="./menu/" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:16px 30px;border-radius:100px;border:1px solid rgba(253,249,244,0.34);color:#FDF9F4;font:500 15.5px 'Archivo'"><span data-t="19">View Menu</span> <span style="font-size:17px">&#8595;</span></a>
       </div>
       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 26px;margin-top:clamp(6px,1.5vw,14px);padding-top:18px;border-top:1px solid rgba(253,249,244,0.16);font:500 13px 'Archivo';color:rgba(253,249,244,0.62)">
         <span style="color:#E8B26A;letter-spacing:0.04em">&#9733; 4.8 on Google</span>
@@ -431,7 +441,7 @@
         <div style="font:600 11.5px 'Archivo';letter-spacing:0.26em;text-transform:uppercase;color:#C7452B;margin-bottom:12px">Guest favorites</div>
         <h2 style="margin:0;font:700 clamp(32px,4.4vw,52px)/1.05 'Baloo 2';letter-spacing:-0.015em">All twenty dishes Dallas keeps ordering</h2>
       </div>
-      <a class="hv27" href="./menu/" style="display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:14px 26px;border-radius:100px;border:1px solid rgba(27,21,18,0.2);color:#1B1512;font:600 14px 'Archivo';white-space:nowrap">Full menu &amp; prices &#8594;</a>
+      <a class="hv28" href="./menu/" style="display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:14px 26px;border-radius:100px;border:1px solid rgba(27,21,18,0.2);color:#1B1512;font:600 14px 'Archivo';white-space:nowrap">Full menu &amp; prices &#8594;</a>
     </div>
     <div class="dish-filters" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px">
       
@@ -447,7 +457,7 @@
       
         <button type="button" style="padding:10px 18px;min-height:42px;border-radius:100px;cursor:pointer;white-space:nowrap;font-family:'Archivo',system-ui,sans-serif;font-size:13px;font-weight:800;border:1px solid rgba(27,21,18,0.14);box-shadow:0 1px 2px rgba(27,21,18,0.05);background:#FFFFFF;transition:background .18s,box-shadow .18s,transform .18s;transform:none;outline:none;-webkit-tap-highlight-color:transparent;color:#1B1512" data-cat="plate">Rice, sandwich &amp; pasta</button>
       
-      <a class="hv28" href="https://banna-restaurant.cloveronline.com/menu/all#Beverages" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;box-sizing:border-box;padding:10px 18px;min-height:42px;border-radius:100px;border:1px solid #1B1512;background:#1B1512;color:#F6EBD9;font:800 13px 'Archivo';white-space:nowrap;box-shadow:0 2px 8px rgba(27,21,18,0.18)">Drinks &amp; coffee <span style="opacity:.75">&#8599;</span></a>
+      <a class="hv29" href="https://banna-restaurant.cloveronline.com/menu/all#Beverages" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;box-sizing:border-box;padding:10px 18px;min-height:42px;border-radius:100px;border:1px solid #1B1512;background:#1B1512;color:#F6EBD9;font:800 13px 'Archivo';white-space:nowrap;box-shadow:0 2px 8px rgba(27,21,18,0.18)">Drinks &amp; coffee <span style="opacity:.75">&#8599;</span></a>
     </div>
     <div style="font:600 12px 'Archivo';letter-spacing:1.5px;text-transform:uppercase;color:rgba(27,21,18,0.5);margin-bottom:24px">20 dishes shown &middot; <span style="text-transform:none;letter-spacing:0.02em;font-weight:500;font-size:13px;color:#3E2A15">beer, wine &amp; cocktails are dine-in only</span></div>
     <div class="dish-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:24px">
@@ -487,7 +497,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$25.69</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Tender lamb sautéed in a rich awaze sauce, served with injera, flavorful and slightly tangy without heavy chili heat.</p>
-            <a class="hv29" href="https://banna-restaurant.cloveronline.com/menu/awaze-lamb-tibs-1Y8M4Q1QXC4Q0" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv30" href="https://banna-restaurant.cloveronline.com/menu/awaze-lamb-tibs-1Y8M4Q1QXC4Q0" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -526,7 +536,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$35.15</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Sizzling beef tibs served straight from a hot clay pot for a dramatic, flavor-packed presentation.</p>
-            <a class="hv30" href="https://banna-restaurant.cloveronline.com/menu/shekla-beef-tibs-MXKRGHC1V41SP" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv31" href="https://banna-restaurant.cloveronline.com/menu/shekla-beef-tibs-MXKRGHC1V41SP" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -565,7 +575,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$29.75</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">A colorful platter of assorted vegetarian dishes bursting with fresh flavor. Serves three.</p>
-            <a class="hv31" href="https://banna-restaurant.cloveronline.com/menu/veggie-special-combo-QBXFDHZR179P0" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv32" href="https://banna-restaurant.cloveronline.com/menu/veggie-special-combo-QBXFDHZR179P0" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -602,7 +612,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$33.79</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">A generous platter of savory meats and fresh vegetable sides, perfect for sharing or sampling a bit of everything.</p>
-            <a class="hv32" href="https://banna-restaurant.cloveronline.com/menu/meat-and-veggie-combo-201QN8FE1122P" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv33" href="https://banna-restaurant.cloveronline.com/menu/meat-and-veggie-combo-201QN8FE1122P" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -639,7 +649,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$21.65</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">A creamy, spiced chickpea stew that's comforting, hearty, and full of warmth.</p>
-            <a class="hv33" href="https://banna-restaurant.cloveronline.com/menu/shiro-PM1T7HS97D120" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv34" href="https://banna-restaurant.cloveronline.com/menu/shiro-PM1T7HS97D120" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -678,7 +688,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$25.69</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Tender chunks of lamb sautéed with onion and spices until juicy, traditionally served with injera.</p>
-            <a class="hv34" href="https://banna-restaurant.cloveronline.com/menu/juicy-tibs-lamb-B7WC8JD3TGFSJ" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv35" href="https://banna-restaurant.cloveronline.com/menu/juicy-tibs-lamb-B7WC8JD3TGFSJ" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -715,7 +725,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$29.75</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Lamb dry-fried with onion and green pepper until deeply caramelized, with awaze and mitmita on the side.</p>
-            <a class="hv35" href="https://banna-restaurant.cloveronline.com/menu/lamb-derek-tibsi-MNWCV0Y77Y8XR" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv36" href="https://banna-restaurant.cloveronline.com/menu/lamb-derek-tibsi-MNWCV0Y77Y8XR" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -750,7 +760,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$29.75</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Tender beef and potatoes slow-cooked in a mild, comforting sauce.</p>
-            <a class="hv36" href="https://banna-restaurant.cloveronline.com/menu/kilkil-J2EMXT2EVZD6M" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv37" href="https://banna-restaurant.cloveronline.com/menu/kilkil-J2EMXT2EVZD6M" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -785,7 +795,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Beef simmered in a deep red berbere sauce and served in a clay pot, our boldest, spiciest plate.</p>
-            <a class="hv37" href="https://banna-restaurant.cloveronline.com/menu/keyweta-tibs-beef-8BFTE87D17FTC" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv38" href="https://banna-restaurant.cloveronline.com/menu/keyweta-tibs-beef-8BFTE87D17FTC" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -820,7 +830,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Slow-cooked beef in a mild, buttery turmeric sauce with onion and green pepper, served with injera.</p>
-            <a class="hv38" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Find it on our menu<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv39" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Find it on our menu<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -855,7 +865,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Finely chopped tripe, liver and beef sautéed with spiced butter and chili. For guests who know exactly what they want.</p>
-            <a class="hv39" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Find it on our menu<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv40" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Find it on our menu<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -890,7 +900,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Dried spiced beef strips tossed with torn injera in a berbere, onion and tomato sauce.</p>
-            <a class="hv40" href="https://banna-restaurant.cloveronline.com/menu/quanta-firfir-WX2JMD2SRQ3WA" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv41" href="https://banna-restaurant.cloveronline.com/menu/quanta-firfir-WX2JMD2SRQ3WA" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -925,7 +935,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Torn kitcha flatbread folded through spiced butter and berbere, served with a side of mitmita. Order it with meat or without.</p>
-            <a class="hv41" href="https://banna-restaurant.cloveronline.com/menu/kitcha-fitfit-meat-DMWW5P8V95ABA" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv42" href="https://banna-restaurant.cloveronline.com/menu/kitcha-fitfit-meat-DMWW5P8V95ABA" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -962,7 +972,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Red lentils slow-cooked in berbere until rich and deep. A vegan staple of the menu.</p>
-            <a class="hv42" href="https://banna-restaurant.cloveronline.com/menu/misir-wot-NNHGWD8KQATZW" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv43" href="https://banna-restaurant.cloveronline.com/menu/misir-wot-NNHGWD8KQATZW" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -999,7 +1009,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$18.95</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Our classic fava bean stew, elevated with egg, fresh veggies and warm bread.</p>
-            <a class="hv43" href="https://banna-restaurant.cloveronline.com/menu/special-ful-4X45CC22H09FW" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv44" href="https://banna-restaurant.cloveronline.com/menu/special-ful-4X45CC22H09FW" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -1036,7 +1046,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">$6.75</span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Crispy pastry stuffed with seasoned, spiced lentil filling.</p>
-            <a class="hv44" href="https://banna-restaurant.cloveronline.com/menu/sambusa-KC5E01QAVVD18" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv45" href="https://banna-restaurant.cloveronline.com/menu/sambusa-KC5E01QAVVD18" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -1071,7 +1081,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Pan-fried fish sautéed with onion, tomato and pepper, served with seasoned rice, salad and lime.</p>
-            <a class="hv45" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Find it on our menu<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv46" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Find it on our menu<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -1106,7 +1116,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Chicken sautéed with onion, tomato and green pepper, served with seasoned rice and fresh salad.</p>
-            <a class="hv46" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Find it on our menu<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv47" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Find it on our menu<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -1141,7 +1151,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">A crisp fried fish fillet on a soft roll with lettuce, tomato, red onion and house sauce.</p>
-            <a class="hv47" href="https://banna-restaurant.cloveronline.com/menu/fish-sandwich-N5V93GT78Y4R8" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv48" href="https://banna-restaurant.cloveronline.com/menu/fish-sandwich-N5V93GT78Y4R8" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -1176,7 +1186,7 @@
               <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Penne tossed in a spiced tomato sauce with fresh green pepper.</p>
-            <a class="hv48" href="https://banna-restaurant.cloveronline.com/menu/macaroni-pasta-WMY04V583AHJC" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
+            <a class="hv49" href="https://banna-restaurant.cloveronline.com/menu/macaroni-pasta-WMY04V583AHJC" target="_blank" rel="noopener" style="margin-top:auto;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7);transition:background .18s,box-shadow .18s,transform .18s">Order this dish<span style="font:700 15px 'Archivo'">&#8594;</span></a>
           </div>
         </article>
       
@@ -1226,9 +1236,9 @@
 
       <div style="background:#fff;border:4px solid #1B1512;border-radius:24px;padding:40px;box-shadow:0 6px 18px rgba(27,21,18,0.08);display:flex;flex-direction:column;gap:16px">
         <div style="font:700 20px 'Baloo 2';color:#1B1512;margin-bottom:4px">Choose where to order</div>
-        <a class="hv49" href="https://banna-restaurant.cloveronline.com/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#1B1512;color:#E9E0D4;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">Order Direct (Clover) <span>→</span></a>
-        <a class="hv50" href="https://www.ubereats.com/store/banna-restaurant-and-bar/9eeCsjv6RUW8-X5vssh71A?diningMode=DELIVERY" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#06C167;color:#fff;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">Uber Eats <span>→</span></a>
-        <a class="hv51" href="https://www.doordash.com/store/banna-ethiopian-bar-and-restaurant-dallas-34728527/110909369/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#EB1700;color:#fff;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">DoorDash <span>→</span></a>
+        <a class="hv50" href="https://banna-restaurant.cloveronline.com/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#1B1512;color:#E9E0D4;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">Order Direct (Clover) <span>→</span></a>
+        <a class="hv51" href="https://www.ubereats.com/store/banna-restaurant-and-bar/9eeCsjv6RUW8-X5vssh71A?diningMode=DELIVERY" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#06C167;color:#fff;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">Uber Eats <span>→</span></a>
+        <a class="hv52" href="https://www.doordash.com/store/banna-ethiopian-bar-and-restaurant-dallas-34728527/110909369/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#EB1700;color:#fff;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">DoorDash <span>→</span></a>
       </div>
     </div>
   </section>
@@ -1251,8 +1261,8 @@
         <p style="font:600 14px/1.6;color:#B8A88E;max-width:280px;margin:0 0 8px"><span data-t="48">"Habesha hospitality means no one leaves the table hungry, or a stranger."</span></p>
         <p style="font:600 14px/1.6;color:#B8A88E;max-width:280px;margin:0">Eritrean &amp; Ethiopian Restaurant and Bar · 9560 Skillman St #120, Dallas, TX 75243</p>
         <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">
-          <a class="hv52" href="tel:+12147580752" style="font:600 14px 'Archivo';color:#B07A2B">(214) 758-0752</a>
-          <a class="hv53" href="mailto:Banna9560@gmail.com" style="font:600 14px 'Archivo';color:#B07A2B">Banna9560@gmail.com</a>
+          <a class="hv53" href="tel:+12147580752" style="font:600 14px 'Archivo';color:#B07A2B">(214) 758-0752</a>
+          <a class="hv54" href="mailto:Banna9560@gmail.com" style="font:600 14px 'Archivo';color:#B07A2B">Banna9560@gmail.com</a>
           <span style="font:600 14px/1.6 'Archivo';color:#B8A88E">Open daily 11am &#8211; 2am</span>
         </div>
       </div>
@@ -1260,24 +1270,24 @@
         <div>
           <div style="font:600 13px 'Archivo';letter-spacing:1px;color:#B07A2B;margin-bottom:12px"><span data-t="49">EXPLORE</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;font:600 14px 'Archivo'">
-            <a class="hv54" href="./menu/" style="color:#E4DBD1"><span data-t="50">Menu</span></a>
-            <a class="hv55" href="./about/" style="color:#E4DBD1"><span data-t="51">About</span></a>
-            <a class="hv56" href="./about/#blog" style="color:#E4DBD1"><span data-t="52">Blog</span></a>
-            <a class="hv57" href="./vegan/" style="color:#E4DBD1"><span data-t="53">Vegan</span></a>
-            <a class="hv58" href="./faq/" style="color:#E4DBD1"><span data-t="54">FAQ</span></a>
-            <a class="hv59" href="./contact/" style="color:#E4DBD1"><span data-t="55">Contact</span></a>
-            <a class="hv60" href="./menu/#order" style="color:#E4DBD1">Order Online</a>
+            <a class="hv55" href="./menu/" style="color:#E4DBD1"><span data-t="50">Menu</span></a>
+            <a class="hv56" href="./about/" style="color:#E4DBD1"><span data-t="51">About</span></a>
+            <a class="hv57" href="./about/#blog" style="color:#E4DBD1"><span data-t="52">Blog</span></a>
+            <a class="hv58" href="./vegan/" style="color:#E4DBD1"><span data-t="53">Vegan</span></a>
+            <a class="hv59" href="./faq/" style="color:#E4DBD1"><span data-t="54">FAQ</span></a>
+            <a class="hv60" href="./contact/" style="color:#E4DBD1"><span data-t="55">Contact</span></a>
+            <a class="hv61" href="./menu/#order" style="color:#E4DBD1">Order Online</a>
           </div>
         </div>
         <div>
           <div style="font:600 13px 'Archivo';letter-spacing:1px;color:#B07A2B;margin-bottom:12px"><span data-t="56">FOLLOW &amp; REVIEW</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;font:600 14px 'Archivo'">
-            <a class="hv61" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" style="color:#E4DBD1">Instagram</a>
-            <a class="hv62" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" style="color:#E4DBD1">Facebook</a>
-            <a class="hv63" href="https://www.tiktok.com/@banna_restaurant" target="_blank" style="color:#E4DBD1">TikTok</a>
-            <a class="hv64" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" style="color:#E4DBD1">Yelp</a>
-            <a class="hv65" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" style="color:#E4DBD1"><span data-t="57">★ Leave us a Google Review</span></a>
-            <a class="hv66" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" style="color:#E4DBD1">Google Business Profile</a>
+            <a class="hv62" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" style="color:#E4DBD1">Instagram</a>
+            <a class="hv63" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" style="color:#E4DBD1">Facebook</a>
+            <a class="hv64" href="https://www.tiktok.com/@banna_restaurant" target="_blank" style="color:#E4DBD1">TikTok</a>
+            <a class="hv65" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" style="color:#E4DBD1">Yelp</a>
+            <a class="hv66" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" style="color:#E4DBD1"><span data-t="57">★ Leave us a Google Review</span></a>
+            <a class="hv67" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" style="color:#E4DBD1">Google Business Profile</a>
           </div>
         </div>
       </div>
@@ -1292,7 +1302,7 @@
 
   
 
-<script id="i18n" type="application/json">{"es":{"0":"Menú","1":"Nosotros","2":"Vegano","3":"Reseñas","4":"Preguntas","5":"Más ▾","6":"Menú","7":"Nosotros","8":"Vegano","9":"Reseñas","10":"Preguntas","11":"Blog","12":"Contacto","13":"Ordenar en línea","14":"★ Déjanos una Reseña en Google","15":"Ordena Ahora","16":"Injera, Especias y la Compañía de Banna.","17":"El restaurante eritreo y etíope favorito de Dallas, guisos a fuego lento, tibs chisporroteantes e injera servida para compartir en familia.","18":"Ordena Ahora","19":"Ver Menú","20":"Medio","21":"Suave","22":"Suave","23":"Suave","24":"Suave","25":"Suave","26":"Medio","27":"Suave","28":"Picante","29":"Suave","30":"Picante","31":"Picante","32":"Medio","33":"Medio","34":"Suave","35":"Suave","36":"Suave","37":"Suave","38":"Suave","39":"Medio","40":"Años Fuertes","41":"Barrigas Llenas","42":"Favoritos Veganos","43":"Hecho Desde Cero","44":"PARA LLEVAR Y ENTREGA","45":"Ordena en Línea","46":"Come aquí, recoge tu pedido o pide entrega a domicilio. Ordena directamente para el menú completo, o por tu app de entrega favorita.","47":"Abierto todos los días de 11am a 2am","48":"\"La hospitalidad habesha significa que nadie se va de la mesa con hambre, ni como un extraño.\"","49":"EXPLORAR","50":"Menú","51":"Nosotros","52":"Blog","53":"Vegano","54":"Preguntas","55":"Contacto","56":"SÍGUENOS Y OPINA","57":"★ Déjanos una Reseña en Google","58":"© 2026 Banna Restaurant & Bar. Todos los derechos reservados.","59":"Hecho con amor en Dallas, TX"},"am":{"0":"ምናሌ","1":"ስለ እኛ","2":"ቬጋን","3":"ግምገማዎች","4":"ጥያቄዎች","5":"ተጨማሪ ▾","6":"ምናሌ","7":"ስለ እኛ","8":"ቬጋን","9":"ግምገማዎች","10":"ጥያቄዎች","11":"ብሎግ","12":"አግኙን","13":"በመስመር ላይ ይዘዙ","14":"★ በጉግል ግምገማ ይተውልን","15":"አሁን ይዘዙ","16":"እንጀራ፣ ቅመማ ቅመም እና የባና ጓደኝነት።","17":"በዳላስ ተወዳጅ የኤርትራ እና የኢትዮጵያ ምግብ ቤት, በዝግታ የበሰለ ወጥ፣ የሚንተከተክ ጥብስ እና ለመጋራት የተዘጋጀ እንጀራ።","18":"አሁን ይዘዙ","19":"ምናሌ ይመልከቱ","20":"መካከለኛ","21":"ለስላሳ","22":"ለስላሳ","23":"ለስላሳ","24":"ለስላሳ","25":"ለስላሳ","26":"መካከለኛ","27":"ለስላሳ","28":"የሚያቃጥል","29":"ለስላሳ","30":"የሚያቃጥል","31":"የሚያቃጥል","32":"መካከለኛ","33":"መካከለኛ","34":"ለስላሳ","35":"ለስላሳ","36":"ለስላሳ","37":"ለስላሳ","38":"ለስላሳ","39":"መካከለኛ","40":"ጠንካራ ዓመታት","41":"ሆዶች ተሞልተዋል","42":"ተወዳጅ የቬጂ ምርጫዎች","43":"ከመጀመሪያ የተዘጋጀ","44":"ውሰድ እና ማድረስ","45":"በመስመር ላይ ይዘዙ","46":"በቦታው ይመገቡ፣ ይውሰዱ ወይም ያስደርሱልን። ለሙሉ ምናሌ በቀጥታ ይዘዙ ወይም በሚወዱት የማድረስ መተግበሪያ ይዘዙ።","47":"በየቀኑ ከ11am እስከ 2am ክፍት ነው","48":"«የሐበሻ እንግዳ ተቀባይነት ማለት ማንም ከጠረጴዛው በረሃብ ወይም እንደ እንግዳ አይሄድም።»","49":"ያስሱ","50":"ምናሌ","51":"ስለ እኛ","52":"ብሎግ","53":"ቬጋን","54":"ጥያቄዎች","55":"አግኙን","56":"ይከተሉን እና ይገምግሙ","57":"★ በጉግል ግምገማ ይተውልን","58":"© 2026 ባና ሬስቶራንት እና ባር። ሁሉም መብቶች የተጠበቁ ናቸው።","59":"በፍቅር በዳላስ ቴክሳስ የተሰራ"},"ti":{"0":"ዝርዝር","1":"ብዛዕባና","2":"ቬጋን","3":"ግምገማታት","4":"ሕቶታት","5":"ተወሳኺ ▾","6":"ዝርዝር","7":"ብዛዕባና","8":"ቬጋን","9":"ግምገማታት","10":"ሕቶታት","11":"ብሎግ","12":"ርኸቡና","13":"ብመስመር ኣዘዙ","14":"★ ኣብ ጉግል ግምገማ ግደፉልና","15":"ሕጂ ኣዘዙ","16":"እንጀራ፡ ቅመማ ቅመምን ምስ ሕብረት ባናን።","17":"ኣብ ዳላስ ተፈታዊ ናይ ኤርትራን ኢትዮጵያን ቤት-መግቢ, በቀስታ ዝበሰለ ጸብሒ፡ ዝንጣጠፍ ጥብሲ፡ ንምክፋል ዝቐረበ እንጀራ።","18":"ሕጂ ኣዘዙ","19":"ዝርዝር ብሉይ ርአ","20":"ማእከላይ","21":"ልስሉስ","22":"ልስሉስ","23":"ልስሉስ","24":"ልስሉስ","25":"ልስሉስ","26":"ማእከላይ","27":"ልስሉስ","28":"ዘንድድ","29":"ልስሉስ","30":"ዘንድድ","31":"ዘንድድ","32":"ማእከላይ","33":"ማእከላይ","34":"ልስሉስ","35":"ልስሉስ","36":"ልስሉስ","37":"ልስሉስ","38":"ልስሉስ","39":"ማእከላይ","40":"ሓያል ዓመታት","41":"ከርሲ ተመሊኡ","42":"ተፈታዊ ናይ ቬጂ ምርጫታት","43":"ካብ ጅምር ዝተዳለወ","44":"ምውሳድን ምብጻሕን","45":"ብመስመር ኣዘዙ","46":"ኣብዚ ብልዑ፡ ውሰዱ ወይ ኣብጽሑልና። ንምሉእ ዝርዝር ብቐጥታ ኣዘዙ ወይ ብዝፈትዉዎ መተግበሪ ምብጻሕ ኣዘዙ።","47":"ኩሉ መዓልቲ ካብ 11ጽባሕ ክሳብ 2ለይቲ ክፉት","48":"«ሓበሻዊ ኣቀባብላ ማለት ካብ ጣውላ ብጥሜት ወይ ከም ጋሻ ዝወጽእ የለን ማለት እዩ።»","49":"ርአዩ","50":"ዝርዝር","51":"ብዛዕባና","52":"ብሎግ","53":"ቬጋን","54":"ሕቶታት","55":"ርኸቡና","56":"ስዓቡናን ገምግሙናን","57":"★ ኣብ ጉግል ግምገማ ግደፉልና","58":"© 2026 ባና ቤት-መግብን መስተን። ኩሉ መሰላት ዝተሓለወ እዩ።","59":"ብፍቕሪ ኣብ ዳላስ ተክሳስ ዝተሰርሐ"}}</script>
+<script id="i18n" type="application/json">{"es":{"0":"Menú","1":"Nosotros","2":"Reseñas","3":"Preguntas","4":"Más ▾","5":"Menú","6":"Nosotros","7":"Vegano","8":"Reseñas","9":"Preguntas","10":"Blog","11":"Contacto","12":"Ordenar en línea","13":"★ Déjanos una Reseña en Google","14":"Vegano","15":"Ordena Ahora","16":"Injera, Especias y la Compañía de Banna.","17":"El restaurante eritreo y etíope favorito de Dallas, guisos a fuego lento, tibs chisporroteantes e injera servida para compartir en familia.","18":"Ordena Ahora","19":"Ver Menú","20":"Medio","21":"Suave","22":"Suave","23":"Suave","24":"Suave","25":"Suave","26":"Medio","27":"Suave","28":"Picante","29":"Suave","30":"Picante","31":"Picante","32":"Medio","33":"Medio","34":"Suave","35":"Suave","36":"Suave","37":"Suave","38":"Suave","39":"Medio","40":"Años Fuertes","41":"Barrigas Llenas","42":"Favoritos Veganos","43":"Hecho Desde Cero","44":"PARA LLEVAR Y ENTREGA","45":"Ordena en Línea","46":"Come aquí, recoge tu pedido o pide entrega a domicilio. Ordena directamente para el menú completo, o por tu app de entrega favorita.","47":"Abierto todos los días de 11am a 2am","48":"\"La hospitalidad habesha significa que nadie se va de la mesa con hambre, ni como un extraño.\"","49":"EXPLORAR","50":"Menú","51":"Nosotros","52":"Blog","53":"Vegano","54":"Preguntas","55":"Contacto","56":"SÍGUENOS Y OPINA","57":"★ Déjanos una Reseña en Google","58":"© 2026 Banna Restaurant & Bar. Todos los derechos reservados.","59":"Hecho con amor en Dallas, TX"},"am":{"0":"ምናሌ","1":"ስለ እኛ","2":"ግምገማዎች","3":"ጥያቄዎች","4":"ተጨማሪ ▾","5":"ምናሌ","6":"ስለ እኛ","7":"ቬጋን","8":"ግምገማዎች","9":"ጥያቄዎች","10":"ብሎግ","11":"አግኙን","12":"በመስመር ላይ ይዘዙ","13":"★ በጉግል ግምገማ ይተውልን","14":"ቬጋን","15":"አሁን ይዘዙ","16":"እንጀራ፣ ቅመማ ቅመም እና የባና ጓደኝነት።","17":"በዳላስ ተወዳጅ የኤርትራ እና የኢትዮጵያ ምግብ ቤት, በዝግታ የበሰለ ወጥ፣ የሚንተከተክ ጥብስ እና ለመጋራት የተዘጋጀ እንጀራ።","18":"አሁን ይዘዙ","19":"ምናሌ ይመልከቱ","20":"መካከለኛ","21":"ለስላሳ","22":"ለስላሳ","23":"ለስላሳ","24":"ለስላሳ","25":"ለስላሳ","26":"መካከለኛ","27":"ለስላሳ","28":"የሚያቃጥል","29":"ለስላሳ","30":"የሚያቃጥል","31":"የሚያቃጥል","32":"መካከለኛ","33":"መካከለኛ","34":"ለስላሳ","35":"ለስላሳ","36":"ለስላሳ","37":"ለስላሳ","38":"ለስላሳ","39":"መካከለኛ","40":"ጠንካራ ዓመታት","41":"ሆዶች ተሞልተዋል","42":"ተወዳጅ የቬጂ ምርጫዎች","43":"ከመጀመሪያ የተዘጋጀ","44":"ውሰድ እና ማድረስ","45":"በመስመር ላይ ይዘዙ","46":"በቦታው ይመገቡ፣ ይውሰዱ ወይም ያስደርሱልን። ለሙሉ ምናሌ በቀጥታ ይዘዙ ወይም በሚወዱት የማድረስ መተግበሪያ ይዘዙ።","47":"በየቀኑ ከ11am እስከ 2am ክፍት ነው","48":"«የሐበሻ እንግዳ ተቀባይነት ማለት ማንም ከጠረጴዛው በረሃብ ወይም እንደ እንግዳ አይሄድም።»","49":"ያስሱ","50":"ምናሌ","51":"ስለ እኛ","52":"ብሎግ","53":"ቬጋን","54":"ጥያቄዎች","55":"አግኙን","56":"ይከተሉን እና ይገምግሙ","57":"★ በጉግል ግምገማ ይተውልን","58":"© 2026 ባና ሬስቶራንት እና ባር። ሁሉም መብቶች የተጠበቁ ናቸው።","59":"በፍቅር በዳላስ ቴክሳስ የተሰራ"},"ti":{"0":"ዝርዝር","1":"ብዛዕባና","2":"ግምገማታት","3":"ሕቶታት","4":"ተወሳኺ ▾","5":"ዝርዝር","6":"ብዛዕባና","7":"ቬጋን","8":"ግምገማታት","9":"ሕቶታት","10":"ብሎግ","11":"ርኸቡና","12":"ብመስመር ኣዘዙ","13":"★ ኣብ ጉግል ግምገማ ግደፉልና","14":"ቬጋን","15":"ሕጂ ኣዘዙ","16":"እንጀራ፡ ቅመማ ቅመምን ምስ ሕብረት ባናን።","17":"ኣብ ዳላስ ተፈታዊ ናይ ኤርትራን ኢትዮጵያን ቤት-መግቢ, በቀስታ ዝበሰለ ጸብሒ፡ ዝንጣጠፍ ጥብሲ፡ ንምክፋል ዝቐረበ እንጀራ።","18":"ሕጂ ኣዘዙ","19":"ዝርዝር ብሉይ ርአ","20":"ማእከላይ","21":"ልስሉስ","22":"ልስሉስ","23":"ልስሉስ","24":"ልስሉስ","25":"ልስሉስ","26":"ማእከላይ","27":"ልስሉስ","28":"ዘንድድ","29":"ልስሉስ","30":"ዘንድድ","31":"ዘንድድ","32":"ማእከላይ","33":"ማእከላይ","34":"ልስሉስ","35":"ልስሉስ","36":"ልስሉስ","37":"ልስሉስ","38":"ልስሉስ","39":"ማእከላይ","40":"ሓያል ዓመታት","41":"ከርሲ ተመሊኡ","42":"ተፈታዊ ናይ ቬጂ ምርጫታት","43":"ካብ ጅምር ዝተዳለወ","44":"ምውሳድን ምብጻሕን","45":"ብመስመር ኣዘዙ","46":"ኣብዚ ብልዑ፡ ውሰዱ ወይ ኣብጽሑልና። ንምሉእ ዝርዝር ብቐጥታ ኣዘዙ ወይ ብዝፈትዉዎ መተግበሪ ምብጻሕ ኣዘዙ።","47":"ኩሉ መዓልቲ ካብ 11ጽባሕ ክሳብ 2ለይቲ ክፉት","48":"«ሓበሻዊ ኣቀባብላ ማለት ካብ ጣውላ ብጥሜት ወይ ከም ጋሻ ዝወጽእ የለን ማለት እዩ።»","49":"ርአዩ","50":"ዝርዝር","51":"ብዛዕባና","52":"ብሎግ","53":"ቬጋን","54":"ሕቶታት","55":"ርኸቡና","56":"ስዓቡናን ገምግሙናን","57":"★ ኣብ ጉግል ግምገማ ግደፉልና","58":"© 2026 ባና ቤት-መግብን መስተን። ኩሉ መሰላት ዝተሓለወ እዩ።","59":"ብፍቕሪ ኣብ ዳላስ ተክሳስ ዝተሰርሐ"}}</script>
 <script src="./klaviyo-gift.js" defer></script>
 <script src="./banna.js" defer></script>
 </body>
