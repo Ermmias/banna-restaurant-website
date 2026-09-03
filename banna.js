@@ -238,6 +238,48 @@
     }, true);
   })();
 
+  /* ---------- True purchase matching: log click + gclid for offline conversion import ----------
+     Logs {gclid, dish, uid, timestamp} to a Google Sheet via Apps Script web app,
+     so a later Clover order can be matched to this click and uploaded to Google Ads
+     as a real Purchase conversion. See /banna-conversion-tracking/README.md. */
+  (function () {
+    var GAS_WEBAPP_URL = 'GAS_WEBAPP_URL_PLACEHOLDER'; // replace after deploying the Apps Script web app
+
+    function getGclid() {
+      try {
+        var fromUrl = new URLSearchParams(window.location.search).get('gclid');
+        if (fromUrl) return fromUrl;
+        var m = document.cookie.match(/(?:^|;\s*)_gcl_aw=([^;]+)/);
+        if (m) {
+          var parts = decodeURIComponent(m[1]).split('.');
+          return parts.length >= 3 ? parts[2] : '';
+        }
+      } catch (err) {}
+      return '';
+    }
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || !/cloveronline\.com/.test(a.href)) return;
+      if (!GAS_WEBAPP_URL || GAS_WEBAPP_URL === 'GAS_WEBAPP_URL_PLACEHOLDER') return;
+
+      var gclid = getGclid();
+      if (!gclid) return; // not an ad-attributable visit, skip logging
+
+      var card = a.closest('[data-dish]');
+      var dish = '';
+      try { dish = card ? JSON.parse(card.getAttribute('data-dish')).n : ''; } catch (err) {}
+      var uid = Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+
+      try {
+        navigator.sendBeacon(GAS_WEBAPP_URL, new Blob(
+          [JSON.stringify({ gclid: gclid, dish: dish, uid: uid })],
+          { type: 'text/plain' }
+        ));
+      } catch (err) {}
+    }, true);
+  })();
+
   /* ---------- close the nav dropdown on outside click ---------- */
   document.addEventListener('click', function (e) {
     $$('details[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
