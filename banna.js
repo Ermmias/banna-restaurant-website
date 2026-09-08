@@ -16,7 +16,10 @@
      ORDER_API stays empty until the Worker is deployed; while it is empty the cart
      shows the call-to-order button instead of a card form that could not charge. */
   window.BANNA_CLOVER_KEY = window.BANNA_CLOVER_KEY || '69bf1c479ca5807f655b44410ee63081';
-  window.BANNA_CLOVER_MID = window.BANNA_CLOVER_MID || '526627181880';
+  /* Clover's API merchant id (dashboard URL, after /m/) — NOT the billing MID
+     shown on the Business information page. The two are different values and the
+     API rejects the billing one with 401. */
+  window.BANNA_CLOVER_MID = window.BANNA_CLOVER_MID || 'NABWHEFRJNFQ1';
   window.BANNA_ORDER_API  = window.BANNA_ORDER_API  || 'https://banna-order.ermmiastec.workers.dev';
   function dishPrice(p) {
     var n = parseFloat(String(p || '').replace(/[^0-9.]/g, ''));
