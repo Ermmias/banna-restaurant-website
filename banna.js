@@ -2,6 +2,16 @@
    Small vanilla helpers: language switch, dish filters, photo lightbox, stat counters.
    No frameworks, no CDN dependencies. */
 (function () {
+  var FULL_MENU = 'https://banna-restaurant.cloveronline.com/menu/all';
+
+  /* Apps Script web app that logs orders and ad clicks to the Google Sheet.
+     Paste the deployed /exec URL here — it is the only place it appears.
+     See /orders-sheet/README.md. */
+  window.BANNA_GAS_URL = window.BANNA_GAS_URL || 'GAS_WEBAPP_URL_PLACEHOLDER';
+  function dishPrice(p) {
+    var n = parseFloat(String(p || '').replace(/[^0-9.]/g, ''));
+    return isFinite(n) && n > 0 ? n : 0;
+  }
   'use strict';
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -111,9 +121,16 @@
               (heat ? '<div style="margin-top:4px">' + heat + '</div>' : '') +
               '<p style="font:400 14px/1.6 Archivo,system-ui,sans-serif;color:#6B5D52;margin:8px 0 0;text-wrap:pretty">' + d.d + '</p>' +
             '</div>' +
-            '<a href="' + d.u + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:48px;padding:0 26px;border-radius:999px;background:#C7452B;color:#fff;font:700 15px Archivo,system-ui,sans-serif;text-decoration:none;white-space:nowrap">' + d.c + '</a>' +
+            (dishPrice(d.p)
+              ? '<button type="button" data-lb-add style="display:inline-flex;align-items:center;min-height:48px;padding:0 26px;border-radius:999px;border:1px solid #A93720;background:#C7452B;color:#fff;font:700 15px Archivo,system-ui,sans-serif;white-space:nowrap;cursor:pointer">Add to cart &middot; ' + d.p + '</button>'
+              : '<a href="' + FULL_MENU + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:48px;padding:0 26px;border-radius:999px;background:#C7452B;color:#fff;font:700 15px Archivo,system-ui,sans-serif;text-decoration:none;white-space:nowrap">View the full menu</a>') +
           '</div>' +
         '</div>';
+      var lbAdd = box.querySelector('[data-lb-add]');
+      if (lbAdd) lbAdd.addEventListener('click', function () {
+        if (window.BannaCart) window.BannaCart.add({ name: d.n, price: d.p, img: String(d.s || '').split('/').pop() });
+        close();
+      });
       box.addEventListener('click', function (e) {
         if (e.target === box || e.target.hasAttribute('data-close')) close();
       });
@@ -215,6 +232,20 @@
     });
   })();
 
+  /* ---------- dish cards: Add to cart buttons ---------- */
+  (function () {
+    $$('[data-dish] [data-add]').forEach(function (btn) {
+      var card = btn.closest('[data-dish]');
+      btn.addEventListener('click', function () {
+        var d;
+        try { d = JSON.parse(card.getAttribute('data-dish')); } catch (e) { return; }
+        if (window.BannaCart) window.BannaCart.add({
+          name: d.n, price: d.p, img: String(d.s || '').split('/').pop()
+        });
+      });
+    });
+  })();
+
   /* ---------- Google Ads: outbound order-click conversions ----------
      Checkout happens on Clover, a domain we don't control, so the real
      Purchase event can't fire here. We count the click through to the
@@ -241,9 +272,9 @@
   /* ---------- True purchase matching: log click + gclid for offline conversion import ----------
      Logs {gclid, dish, uid, timestamp} to a Google Sheet via Apps Script web app,
      so a later Clover order can be matched to this click and uploaded to Google Ads
-     as a real Purchase conversion. See /banna-conversion-tracking/README.md. */
+     as a real Purchase conversion. See /conversion-tracking/README.md. */
   (function () {
-    var GAS_WEBAPP_URL = 'GAS_WEBAPP_URL_PLACEHOLDER'; // replace after deploying the Apps Script web app
+    var GAS_WEBAPP_URL = window.BANNA_GAS_URL || '';
 
     function getGclid() {
       try {
@@ -277,6 +308,33 @@
           { type: 'text/plain' }
         ));
       } catch (err) {}
+    }, true);
+  })();
+
+  /* ---------- Google Ads: Get Directions conversion ----------
+     Delegated so every "Get Directions" link on every page is covered.
+     Swap the label below for the real one from Google Ads
+     (Conversions > your Directions action > Tag setup > send_to value after the slash). */
+  window.BANNA_ADS = window.BANNA_ADS || {
+    id: 'AW-16929805337',
+    directionsLabel: 'DIRECTIONS_LABEL', // replace
+    cloverLabel: 'LSGDCISaj-ocEJmo4Yg_', // outbound order click (live)
+    internalLabel: 'INTERNAL_LABEL'      // replace when in-house checkout goes live
+  };
+  window.bannaConversion = function (label, params) {
+    var c = window.BANNA_ADS;
+    if (!label || /_LABEL$/.test(label)) return false;      // placeholder not yet replaced
+    if (typeof gtag !== 'function') return false;
+    var payload = { send_to: c.id + '/' + label };
+    if (params) for (var k in params) payload[k] = params[k];
+    gtag('event', 'conversion', payload);
+    return true;
+  };
+  (function () {
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || !/(google\.[a-z.]+\/maps|maps\.google\.)/.test(a.href)) return;
+      window.bannaConversion(window.BANNA_ADS.directionsLabel);
     }, true);
   })();
 

@@ -58,6 +58,56 @@ GitHub Pages serves gzip and sets cache headers automatically. The remaining opt
 is WebP versions of the photos (~40% smaller at the same sharpness) — ask and I'll add them
 with JPEG fallback.
 
+## Google Ads conversions
+
+The base Ads tag (`AW-16929805337`) is already in the `<head>` of all seven pages.
+Three conversion actions hang off it; two need their label pasted in.
+
+Labels live in one place: the `window.BANNA_ADS` block near the bottom of `banna.js`.
+A label still reading `*_LABEL` simply doesn't fire — nothing breaks.
+
+| Action | Where it fires | Status |
+| --- | --- | --- |
+| Outbound order click | any link to `cloveronline.com` | live (`LSGDCISaj-ocEJmo4Yg_`) |
+| Get Directions | any Google Maps link, all pages | paste `directionsLabel` |
+| In-house order | **temporary:** tapping "Continue to payment" | paste `internalLabel` |
+
+The in-house order conversion is deliberately firing one step early — on "Continue to
+payment" rather than on a confirmed payment — because the Clover payment backend isn't
+connected yet, so reaching that screen is the strongest purchase signal we have. It will
+over-count anyone who abandons at the card field. When real payments go live, move that
+call from the `[data-details]` submit handler back to the `[data-pay]` handler in
+`banna-cart.js`; both spots are commented.
+
+To get a label: Google Ads → **Goals → Conversions** → the action → **Tag setup → Install
+manually**. In the snippet's `send_to: 'AW-16929805337/AbC_dEfGhIj'`, the part after the
+slash is the label.
+
+### Clover's own thank-you page
+
+Clover checkout runs on `cloveronline.com`, so we can't add a script to its confirmation
+page from here. Two ways to count it:
+
+1. **What's live now** — the outbound click to Clover is counted as the conversion. Slightly
+   over-counts (some clickers don't finish paying), works today, no Clover access needed.
+2. **Exact** — if your Clover online-ordering dashboard has a tracking/analytics snippet
+   field, paste this there:
+
+```html
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16929805337"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-16929805337');
+  gtag('event', 'conversion', {'send_to': 'AW-16929805337/CLOVER_LABEL'});
+</script>
+```
+
+   Then switch the outbound-click action in Ads to **Secondary** so the order isn't counted
+   twice. If Clover has no such field, option 1 is the ceiling — or use the offline-import
+   route already scaffolded in `banna.js` (needs the Apps Script URL, still a placeholder).
+
 ## Editing later
 
 The editable sources are the `.dc.html` files one level up. After changing those, the
