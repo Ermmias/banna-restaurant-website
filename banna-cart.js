@@ -356,7 +356,7 @@
              number ever exists in this page's DOM or reaches our server. */
           ? (window.BannaPay.sandbox
               ? '<div class="stub">Clover sandbox &mdash; test cards only. No real money moves.</div>' : '') +
-            window.BannaPay.fieldsHtml() +
+            '<slot name="cardfields"></slot>' +
             '<button type="button" class="primary" data-realpay>Pay ' + money(tot) + '</button>' +
             '<div class="bp-secure"><span aria-hidden="true">&#128274;</span> Card handled by Clover. We never see or store your card number.</div>'
           : '<div class="cardslot"><div class="slotlabel">SECURE CARD FIELD</div>' +
@@ -396,8 +396,7 @@
       var done = this.step === "done";
       var titles = { cart: "Your order", details: "Pickup details", pay: "Payment", done: "Order confirmed" };
       var steps = { cart: "STEP 1 OF 3 &middot; REVIEW", details: "STEP 2 OF 3 &middot; YOUR INFO", pay: "STEP 3 OF 3 &middot; PAY", done: "" };
-      this.root.innerHTML = '<style>' + BannaCart.css +
-        (LIVE_PAY_NOW() ? window.BannaPay.css : "") + '</style>' + (!n && !done ? "" : (!n ? "" :
+      this.root.innerHTML = '<style>' + BannaCart.css + '</style>' + (!n && !done ? "" : (!n ? "" :
         '<div class="spacer" aria-hidden="true"></div>' +
         '<div class="bar"><div class="bmeta"><span class="bcount">' + n + (n === 1 ? " item" : " items") + '</span>' +
         '<span class="bsub">Pickup &middot; <strong>TO GO ONLY</strong></span></div>' +
@@ -477,11 +476,14 @@
         self.eta = etaWindow(new Date());
         self.step = "details"; self.render();
       };
-      /* ---------- Real card payment ---------- */
+      /* ---------- Real card payment ----------
+         Mounted against the custom element, not the shadow root: Clover resolves
+         its mount target with document.querySelector, so the fields have to sit
+         in the light DOM and reach the modal through the <slot> above. */
       if (this.step === "pay" && LIVE_PAY_NOW()) {
-        var mroot = this.root;
-        window.BannaPay.mount(mroot).catch(function (e) {
-          window.BannaPay.showError(mroot, "The card form didn't load. Refresh the page, or call us and we'll take your order by phone.");
+        var hostEl = this.root.host;
+        window.BannaPay.mount(hostEl).catch(function (e) {
+          window.BannaPay.showError(hostEl, "The card form didn't load. Refresh the page, or call us and we'll take your order by phone.");
           console.error("clover mount failed:", e);
         });
       }
@@ -489,7 +491,7 @@
       var realpay = this.root.querySelector("[data-realpay]");
       if (realpay) realpay.onclick = function () {
         if (!orderingOpen()) { self.render(); return; }
-        var rootEl = self.root;
+        var rootEl = self.root.host;
         var sub3 = self.subtotal(), tot3 = Math.round(sub3 * (1 + TAX) * 100) / 100;
         var lines = self.cart.map(function (l) { return { name: l.name, price: l.price, qty: l.qty }; });
         var eta = self.eta || etaWindow(new Date());

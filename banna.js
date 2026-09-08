@@ -17,7 +17,7 @@
      shows the call-to-order button instead of a card form that could not charge. */
   window.BANNA_CLOVER_KEY = window.BANNA_CLOVER_KEY || '69bf1c479ca5807f655b44410ee63081';
   window.BANNA_CLOVER_MID = window.BANNA_CLOVER_MID || '526627181880';
-  window.BANNA_ORDER_API  = window.BANNA_ORDER_API  || '';
+  window.BANNA_ORDER_API  = window.BANNA_ORDER_API  || 'https://banna-order.ermmiastec.workers.dev';
   function dishPrice(p) {
     var n = parseFloat(String(p || '').replace(/[^0-9.]/g, ''));
     return isFinite(n) && n > 0 ? n : 0;

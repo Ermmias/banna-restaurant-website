@@ -59,11 +59,22 @@
     img: { display: "none" }
   };
 
+  /* Clover's mount() takes a CSS SELECTOR and resolves it with
+     document.querySelector — it cannot see into a shadow root. The cart's modal
+     lives in one, so the fields are built in the light DOM (where Clover can find
+     them) and projected into the modal through a <slot>. Their styles have to go
+     in the document too: shadow CSS does not cross a slot boundary. */
+  var LIGHT_ID = "banna-card-fields";
+  var SEL = {
+    CARD_NUMBER: "#bp-number", CARD_DATE: "#bp-date",
+    CARD_CVV: "#bp-cvv", CARD_POSTAL_CODE: "#bp-zip"
+  };
+
   var FIELDS = [
-    { key: "CARD_NUMBER", mount: "#bp-number", label: "Card number" },
-    { key: "CARD_DATE", mount: "#bp-date", label: "Expiry" },
-    { key: "CARD_CVV", mount: "#bp-cvv", label: "CVC" },
-    { key: "CARD_POSTAL_CODE", mount: "#bp-zip", label: "ZIP" }
+    { key: "CARD_NUMBER", label: "Card number" },
+    { key: "CARD_DATE", label: "Expiry" },
+    { key: "CARD_CVV", label: "CVC" },
+    { key: "CARD_POSTAL_CODE", label: "ZIP" }
   ];
 
   var state = { clover: null, elements: null, mounted: false, errors: {} };
@@ -86,10 +97,12 @@
     ".bp-fields{display:flex;flex-direction:column;gap:12px;margin-top:14px}",
     ".bp-row{display:flex;flex-direction:column;gap:6px;min-width:0}",
     ".bp-row label{font:700 12px 'Archivo',system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:rgba(27,21,18,.6)}",
-    /* Clover's iframe reports its own height; 48px keeps the box from collapsing
-       to nothing before the iframe finishes loading. */
-    ".bp-slot{min-height:48px}",
-    ".bp-slot iframe{width:100%!important;border:0;display:block}",
+    /* Clover's iframes default to 150px tall — they reserve room for their own
+       inline error text, which we don't use (field errors surface in .bp-err
+       instead, from the change events). Clamp them to input height so the form
+       reads as four fields rather than four empty panels. */
+    ".bp-slot{height:50px;overflow:hidden}",
+    ".bp-slot iframe{width:100%!important;height:50px!important;border:0;display:block}",
     ".bp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}",
     ".bp-err{display:none;font:600 13px/1.5 'Archivo',system-ui,sans-serif;color:#A93720}",
     ".bp-err.on{display:block}",
@@ -97,9 +110,35 @@
     "@media (max-width:400px){.bp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}"
   ].join("");
 
-  /* Mount into whatever root the cart gives us — it lives in a shadow root, and
-     Clover needs real selectors, so the fields are mounted by element reference. */
-  function mount(root) {
+  /* Mount into the light DOM, once. The container is a child of the <banna-cart>
+     element rather than its shadow root, so it survives the cart re-rendering its
+     own markup and the iframes are never torn down mid-payment. */
+  function injectCss() {
+    if (document.getElementById("banna-pay-css")) return;
+    var s = document.createElement("style");
+    s.id = "banna-pay-css";
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  function container(hostEl) {
+    var c = document.getElementById(LIGHT_ID);
+    if (!c) {
+      c = document.createElement("div");
+      c.id = LIGHT_ID;
+      c.setAttribute("slot", "cardfields");
+      c.innerHTML = fieldsHtml();
+      hostEl.appendChild(c);
+    } else if (c.parentNode !== hostEl) {
+      hostEl.appendChild(c);
+    }
+    return c;
+  }
+
+  function mount(hostEl) {
+    injectCss();
+    var box = container(hostEl);
+    if (state.mounted) return Promise.resolve(box);
     return loadSdk().then(function (Clover) {
       if (!state.clover) {
         /* The merchant id is required whenever reCAPTCHA is switched on for the
@@ -108,27 +147,22 @@
         state.clover = MID ? new Clover(KEY, { merchantId: MID }) : new Clover(KEY);
       }
       var elements = state.clover.elements();
-      var made = {};
       FIELDS.forEach(function (f) {
-        var host = root.querySelector(f.mount);
-        if (!host) return;
-        host.innerHTML = "";
         var el = elements.create(f.key, FIELD_STYLES);
-        el.mount(host);
+        el.mount(SEL[f.key]);
         el.addEventListener("change", function (ev) {
           state.errors[f.key] = (ev && ev.error) || "";
-          showError(root, "");
+          showError(hostEl, "");
         });
-        made[f.key] = el;
       });
       state.elements = elements;
       state.mounted = true;
-      return made;
+      return box;
     });
   }
 
-  function showError(root, msg) {
-    var box = root.querySelector("[data-bp-error]");
+  function showError(hostEl, msg) {
+    var box = document.querySelector("#" + LIGHT_ID + " [data-bp-error]");
     if (!box) return;
     box.textContent = msg || "";
     box.classList.toggle("on", !!msg);
