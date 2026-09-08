@@ -1,0 +1,14 @@
+name = "banna-order"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Not secret: the MID is printed on every receipt.
+[vars]
+CLOVER_MERCHANT_ID = "526627181880"
+CLOVER_ENV = "production"
+TAX_RATE = "0.0825"
+
+# The two private tokens are NOT in this file and must never be.
+# Set them with:
+#   wrangler secret put CLOVER_TOKEN
+#   wrangler secret put CLOVER_ECOMM_TOKEN

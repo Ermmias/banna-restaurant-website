@@ -1,0 +1,346 @@
+/* Banna order + payment API — Cloudflare Worker.
+ *
+ * Takes a card token from the browser, charges it through Clover's ecommerce API,
+ * then writes the order into the Clover POS so it prints in the kitchen.
+ *
+ * NEITHER Clover token ever reaches the browser. Both live only in this Worker's
+ * secret store. The browser sends a one-time card token (useless on its own) and
+ * gets back an order number.
+ *
+ *   browser ──card──▶ Clover SDK ──token──▶ this Worker ──charge──▶ Clover
+ *                                            (secrets)   ──order──▶ POS / kitchen
+ *
+ * Routes
+ *   POST /order    -> { ok, orderId, ticket, total, last4 }
+ *   GET  /health   -> { ok: true, configured: bool }
+ *
+ * Secrets / vars (see README.md)
+ *   CLOVER_TOKEN         REST API token — inventory + order creation (secret)
+ *   CLOVER_ECOMM_TOKEN   Ecommerce API private token — charges (secret)
+ *   CLOVER_MERCHANT_ID   526627181880
+ *   CLOVER_ENV           "sandbox" | "production"  (default sandbox — fail safe)
+ *   TAX_RATE             optional, default 0.0825
+ *   ALLOWED_ORIGINS      optional, comma-separated
+ *
+ * PRICE AUTHORITY: the browser's prices are never trusted. Every line is re-priced
+ * from live Clover inventory and the total is recomputed here. If the client total
+ * disagrees by more than a cent the order is REJECTED rather than charged — a guest
+ * is never billed an amount they were not shown.
+ */
+
+const DEFAULT_ORIGINS = "https://bannarestaurant.com,https://www.bannarestaurant.com";
+const DEFAULT_TAX = 0.0825;
+const MAX_ITEMS = 40;
+const MAX_QTY = 20;
+/* Total units per order. The POS write is a single bulk call, so this is a
+   sanity bound on one ticket, not a platform limit. */
+const MAX_UNITS = 120;
+const MAX_TOTAL_CENTS = 100000; /* $1,000 — a to-go order above this is a mistake or fraud */
+
+const HOSTS = {
+  sandbox: { api: "https://apisandbox.dev.clover.com", pay: "https://scl-sandbox.dev.clover.com" },
+  production: { api: "https://api.clover.com", pay: "https://scl.clover.com" }
+};
+
+function hosts(env) {
+  return HOSTS[env.CLOVER_ENV === "production" ? "production" : "sandbox"];
+}
+
+function cors(origin, env) {
+  const allowed = (env.ALLOWED_ORIGINS || DEFAULT_ORIGINS).split(",").map((s) => s.trim());
+  const ok = origin && allowed.includes(origin);
+  return {
+    "Access-Control-Allow-Origin": ok ? origin : allowed[0],
+    "Access-Control-Allow-Methods": "POST,GET,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type,Idempotency-Key",
+    "Vary": "Origin"
+  };
+}
+
+function json(body, status, headers) {
+  return new Response(JSON.stringify(body), {
+    status: status || 200,
+    headers: Object.assign({ "Content-Type": "application/json; charset=utf-8" }, headers || {})
+  });
+}
+
+function cents(n) { return Math.round(Number(n) * 100); }
+
+/* A guest-facing message never leaks Clover internals. Everything else is logged. */
+function fail(msg, status, head, detail) {
+  if (detail) console.error("order failed:", detail);
+  return json({ ok: false, error: msg }, status || 400, head);
+}
+
+/* ---------- Clover REST ---------- */
+
+async function clover(env, path, init) {
+  const res = await fetch(hosts(env).api + path, Object.assign({}, init, {
+    headers: Object.assign({
+      Authorization: "Bearer " + env.CLOVER_TOKEN,
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }, (init && init.headers) || {})
+  }));
+  const text = await res.text();
+  if (!res.ok) throw new Error("clover " + path + " " + res.status + " " + text.slice(0, 300));
+  return text ? JSON.parse(text) : {};
+}
+
+/* Full inventory as a name -> {id, price} map. Cached 10 min at the edge: a busy
+   Friday costs a handful of Clover calls, and a price change in the POS reaches
+   the checkout within ten minutes. */
+async function priceBook(env, ctx) {
+  const key = new Request("https://banna.internal/pricebook", { method: "GET" });
+  const cache = caches.default;
+  const hit = await cache.match(key);
+  if (hit) return hit.json();
+
+  const data = await clover(env, "/v3/merchants/" + env.CLOVER_MERCHANT_ID + "/items?limit=1000");
+  const book = {};
+  for (const it of (data.elements || [])) {
+    if (!it || !it.name || it.hidden || it.available === false) continue;
+    if (it.priceType === "VARIABLE" || typeof it.price !== "number") continue;
+    book[it.name.trim().toLowerCase()] = { id: it.id, price: it.price, name: it.name.trim() };
+  }
+  const res = json(book, 200, { "Cache-Control": "public, max-age=600" });
+  if (ctx) ctx.waitUntil(cache.put(key, res.clone()));
+  return book;
+}
+
+/* ---------- Charge ---------- */
+
+async function charge(env, amountCents, cardToken, idemKey, meta) {
+  const res = await fetch(hosts(env).pay + "/v1/charges", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + env.CLOVER_ECOMM_TOKEN,
+      "Content-Type": "application/json",
+      "Idempotency-Key": idemKey
+    },
+    body: JSON.stringify({
+      amount: amountCents,
+      currency: "usd",
+      source: cardToken,
+      /* "ecom" = card not present, keyed online. Wrong value here costs a higher
+         interchange rate on every single order. */
+      ecomind: "ecom",
+      capture: true,
+      description: "Banna online pickup order " + meta.ticket,
+      metadata: { ticket: meta.ticket, name: meta.name, phone: meta.phone, channel: "website" }
+    })
+  });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok || body.error) {
+    const e = body.error || {};
+    /* Clover's decline messages are guest-safe and more useful than ours. */
+    throw Object.assign(new Error(e.message || "charge failed " + res.status), {
+      declined: true,
+      guest: e.message || "Your card was declined. Try another card, or call us and we'll take the order by phone."
+    });
+  }
+  return body;
+}
+
+/* ---------- POS order ---------- */
+
+/* Attaching the payment needs a tender. We use the merchant's external-payment
+   tender so the money shows in Clover reporting as already collected online and
+   nobody at the counter tries to charge the card a second time. */
+async function externalTender(env) {
+  const t = await clover(env, "/v3/merchants/" + env.CLOVER_MERCHANT_ID + "/tenders");
+  const list = t.elements || [];
+  const pick = list.find((x) => /external/i.test(x.labelKey || "") || /external/i.test(x.label || ""));
+  return pick ? pick.id : null;
+}
+
+async function writeOrder(env, lines, totals, meta, chargeInfo) {
+  const mid = "/v3/merchants/" + env.CLOVER_MERCHANT_ID;
+
+  const order = await clover(env, mid + "/orders", {
+    method: "POST",
+    body: JSON.stringify({
+      state: "open",
+      title: "WEB " + meta.ticket,
+      note: [
+        "ONLINE PICKUP — PAID",
+        meta.ticket,
+        meta.name,
+        meta.phone,
+        meta.eta ? "Ready " + meta.eta : ""
+      ].filter(Boolean).join(" · ")
+    })
+  });
+
+  /* Every unit in ONE bulk call. Posting line items one at a time would spend a
+     subrequest per unit against the Worker's per-request cap, and a big family or
+     catering order would throw partway — printing a ticket missing an
+     unpredictable number of dishes, after the card was already charged. One call
+     means the ticket is either complete or absent, never half. */
+  const units = [];
+  for (const l of lines) {
+    for (let i = 0; i < l.qty; i++) {
+      units.push(l.id ? { item: { id: l.id } } : { name: l.name, price: l.price });
+    }
+  }
+
+  try {
+    await clover(env, mid + "/orders/" + order.id + "/bulk_line_items", {
+      method: "POST",
+      body: JSON.stringify({ items: units })
+    });
+  } catch (e) {
+    /* An order with no dishes on it is worse than no order: it prints a blank
+       ticket and hides the problem. Remove it and let the caller log loudly. */
+    try {
+      await clover(env, mid + "/orders/" + order.id, { method: "DELETE" });
+    } catch (e2) {
+      console.error("could not delete empty order " + order.id + ":", String(e2.message || e2));
+    }
+    throw e;
+  }
+
+  /* Best effort: the money is already captured, so a failure here must never
+     surface to the guest as a failed order. It surfaces in the logs instead. */
+  try {
+    const tender = await externalTender(env);
+    if (tender) {
+      await clover(env, mid + "/orders/" + order.id + "/payments", {
+        method: "POST",
+        body: JSON.stringify({
+          amount: totals.total,
+          tender: { id: tender },
+          externalPaymentId: chargeInfo.id || meta.ticket
+        })
+      });
+    } else {
+      console.error("no external tender on merchant; order " + order.id + " left unpaid in POS");
+    }
+  } catch (e) {
+    console.error("payment attach failed for order " + order.id + ":", String(e.message || e));
+  }
+
+  return order;
+}
+
+/* ---------- Route ---------- */
+
+async function handleOrder(request, env, ctx, head) {
+  let body;
+  try { body = await request.json(); } catch (e) { return fail("Bad request.", 400, head); }
+
+  const items = Array.isArray(body.items) ? body.items : [];
+  const name = String(body.name || "").trim().slice(0, 80);
+  const phone = String(body.phone || "").trim().slice(0, 32);
+  const cardToken = String(body.cardToken || "").trim();
+
+  if (!items.length) return fail("Your cart is empty.", 400, head);
+  if (items.length > MAX_ITEMS) return fail("That's a large order — please call us so we can get it right.", 400, head);
+  if (!name) return fail("We need a name for the order.", 400, head);
+  if (phone.replace(/\D/g, "").length < 10) return fail("Please enter a mobile number we can reach you on.", 400, head);
+  if (!cardToken) return fail("Card details are incomplete.", 400, head);
+
+  /* Re-price every line from Clover. An unknown item is a hard stop: it means the
+     website and the POS disagree, and guessing a price is worse than refusing. */
+  const book = await priceBook(env, ctx);
+  const lines = [];
+  let subtotal = 0;
+  let units = 0;
+  for (const raw of items) {
+    const nm = String((raw && raw.name) || "").trim();
+    const qty = Math.max(1, Math.min(MAX_QTY, Math.round(Number(raw && raw.qty) || 1)));
+    const found = book[nm.toLowerCase()];
+    if (!found) return fail("\u201C" + nm + "\u201D isn't available right now. Please call us to order it.", 409, head, "unpriced item: " + nm);
+    lines.push({ id: found.id, name: found.name, price: found.price, qty: qty });
+    subtotal += found.price * qty;
+    units += qty;
+  }
+
+  /* Checked BEFORE the charge: every refusal has to happen while the guest still
+     has their money. */
+  if (units > MAX_UNITS) return fail("That's a big order \u2014 please call us so we can get it right.", 400, head, "unit cap: " + units);
+
+  const rate = Number(env.TAX_RATE || DEFAULT_TAX);
+  const tax = Math.round(subtotal * rate);
+  const total = subtotal + tax;
+
+  if (total > MAX_TOTAL_CENTS) return fail("Please call us for an order this size.", 400, head);
+
+  /* The guest must be charged exactly what the page showed them. */
+  const claimed = cents(body.total);
+  if (claimed && Math.abs(claimed - total) > 1) {
+    return fail(
+      "Our prices changed while you were ordering. Please reopen your cart to see the current total.",
+      409, head, "total mismatch: client " + claimed + " vs server " + total
+    );
+  }
+
+  const ticket = String(body.ticket || "").trim().slice(0, 24) || "WEB-" + Date.now().toString(36).toUpperCase();
+  const meta = { ticket, name, phone, eta: String(body.eta || "").slice(0, 40) };
+
+  /* Idempotency: a double-tap or a retry on a flaky phone connection must not
+     charge twice. Same cart + same ticket = same key = one charge at Clover. */
+  const idemKey = request.headers.get("Idempotency-Key") || (ticket + ":" + total);
+
+  let paid;
+  try {
+    paid = await charge(env, total, cardToken, idemKey, meta);
+  } catch (e) {
+    if (e.declined) return fail(e.guest, 402, head, e.message);
+    return fail("We couldn't process the payment. Nothing was charged — please try again or call us.", 502, head, String(e.message || e));
+  }
+
+  /* Money is captured from here on. The guest's order is real no matter what
+     fails next, so we always return ok and log the rest. */
+  let orderId = null;
+  try {
+    const order = await writeOrder(env, lines, { subtotal, tax, total }, meta, paid);
+    orderId = order.id;
+  } catch (e) {
+    console.error("PAID BUT NOT IN POS — ticket " + ticket + " charge " + (paid.id || "?") + ":", String(e.message || e));
+  }
+
+  return json({
+    ok: true,
+    ticket: ticket,
+    orderId: orderId,
+    chargeId: paid.id || null,
+    total: total / 100,
+    subtotal: subtotal / 100,
+    tax: tax / 100,
+    last4: (paid.source && paid.source.last4) || null,
+    inPos: !!orderId
+  }, 200, head);
+}
+
+export default {
+  async fetch(request, env, ctx) {
+    const origin = request.headers.get("Origin");
+    const head = cors(origin, env);
+    const { pathname } = new URL(request.url);
+
+    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: head });
+
+    if (pathname === "/health") {
+      return json({
+        ok: true,
+        env: env.CLOVER_ENV === "production" ? "production" : "sandbox",
+        configured: !!(env.CLOVER_TOKEN && env.CLOVER_ECOMM_TOKEN && env.CLOVER_MERCHANT_ID)
+      }, 200, head);
+    }
+
+    if (pathname !== "/order") return json({ ok: false, error: "not found" }, 404, head);
+    if (request.method !== "POST") return json({ ok: false, error: "method not allowed" }, 405, head);
+
+    if (!env.CLOVER_TOKEN || !env.CLOVER_ECOMM_TOKEN || !env.CLOVER_MERCHANT_ID) {
+      return fail("Online payment isn't switched on yet. Please call us to order.", 503, head,
+        "worker not configured: need CLOVER_TOKEN, CLOVER_ECOMM_TOKEN, CLOVER_MERCHANT_ID");
+    }
+
+    try {
+      return await handleOrder(request, env, ctx, head);
+    } catch (e) {
+      return fail("Something went wrong. Nothing was charged — please try again or call us.", 500, head, String(e.stack || e));
+    }
+  }
+};
