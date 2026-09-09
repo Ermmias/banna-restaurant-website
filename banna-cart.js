@@ -222,6 +222,55 @@
 
   var instances = [];
 
+  /* ---------- Live prices ----------
+     Cart lines are saved in localStorage with the price that was showing when
+     they were added, so a guest who opens a stale tab — or whose prices we
+     changed in Clover since — quotes a total the Worker will refuse. Rather than
+     fail at the pay button, pull Clover's real prices on load and correct every
+     line in place. Clover is the authority; this makes the page agree with it
+     before the guest ever reaches checkout. */
+  var PRICE_API = (window.BANNA_ORDER_API || "").replace(/\/$/, "");
+  var LIVE_PRICES = null;
+
+  /* Same normalisation the Worker uses, so "Shiro - Side Order" and
+     "Shiro – Side Order" are one key regardless of dash or spacing. */
+  function pkey(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+  function livePrice(name) {
+    if (!LIVE_PRICES) return undefined;
+    var v = LIVE_PRICES[pkey(name)];
+    return typeof v === "number" ? v : undefined;
+  }
+
+  function repriceAll() {
+    for (var i = 0; i < SIDES.length; i++) {
+      var sp = livePrice(SIDES[i].name);
+      if (sp !== undefined) SIDES[i].price = sp;
+    }
+    var cart = read(), changed = false;
+    for (var j = 0; j < cart.length; j++) {
+      var lp = livePrice(cart[j].name);
+      if (lp !== undefined && lp !== cart[j].price) { cart[j].price = lp; changed = true; }
+    }
+    if (changed) write(cart);
+    instances.forEach(function (el) { el.cart = read(); el.render(); });
+  }
+
+  function loadPrices() {
+    if (!PRICE_API) return;
+    fetch(PRICE_API + "/prices", { credentials: "omit" })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (d) {
+        var items = (d && d.items) || {};
+        var map = {}, n = 0;
+        for (var name in items) { map[pkey(name)] = items[name]; n++; }
+        /* An empty or failed price list must never zero out the menu. */
+        if (!n) return;
+        LIVE_PRICES = map;
+        repriceAll();
+      })
+      .catch(function () {});
+  }
+
   class BannaCart extends HTMLElement {
     connectedCallback() {
       if (this._built) return;
@@ -687,6 +736,7 @@
   ].join("");
 
   loadDrinks();
+  loadPrices();
 
   if (!window.customElements.get("banna-cart")) window.customElements.define("banna-cart", BannaCart);
 
