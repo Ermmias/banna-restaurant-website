@@ -78,21 +78,24 @@
     { name: "Sprite (Can)", price: 1.99 },
     { name: "Apple Juice", price: 1.99 }
   ];
-  /* Extra sides, confirmed against the Clover menu by Ermmias, Sep 2026. */
+  /* Extra sides. Names and prices are Clover's own, verified against live
+     inventory Sep 2026 (/find?q=side order). Clover lists the small portions as
+     "X - Side Order" — a bare "Shiro" is the $17.99 platter, not the $4.99 side —
+     so the site must say it Clover's way or the kitchen ticket is wrong. */
   var SIDES = [
     { name: "Egg", price: 0.79 },
     { name: "Bread", price: 1.39 },
-    { name: "Injera (Regular)", price: 1.99 },
-    { name: "Injera (Teff)", price: 2.49 },
-    { name: "Gomen", price: 4.99 },
-    { name: "Shiro", price: 4.99 },
-    { name: "Salad", price: 4.99 },
-    { name: "Rice", price: 4.99 },
-    { name: "Defen Misir", price: 4.99 },
-    { name: "Atter", price: 4.99 },
-    { name: "Cabbage", price: 4.99 },
-    { name: "Misir Wot", price: 6.99 },
-    { name: "Fosolia", price: 9.99 }
+    { name: "Injera", price: 1.99 },
+    { name: "Teff Injera", price: 2.49 },
+    { name: "Gomen - Side Order", label: "Gomen", price: 4.99 },
+    { name: "Shiro - Side Order", label: "Shiro", price: 4.99 },
+    { name: "Salad - Side Order", label: "Salad", price: 4.99 },
+    { name: "Rice - Side Order", label: "Rice", price: 4.99 },
+    { name: "Defen Misir - Side Order", label: "Defen Misir", price: 4.99 },
+    { name: "Atter - Side Order", label: "Atter", price: 4.99 },
+    { name: "Cabbage - Side Order", label: "Cabbage", price: 4.99 },
+    { name: "Misir Wot - Side Order", label: "Misir Wot", price: 6.99 },
+    { name: "Fosolia - Side Order", label: "Fosolia", price: 9.99 }
   ];
 
   var DRINKS = FALLBACK_DRINKS, DRINKS_LIVE = false, DRINKS_STATE = MENU_API ? "loading" : "fallback";
@@ -259,7 +262,10 @@
           ? '<span class="dskel"></span><span class="dskel"></span><span class="dskel"></span>'
           : list.map(function (d) {
               return '<button type="button" class="dchip" data-addon="' + esc(d.name) + '" data-kind="' + tab + '">' +
-                '<span class="dn">' + esc(d.name) + '</span>' +
+                /* Guests read "Shiro"; Clover and the kitchen ticket get
+                   "Shiro - Side Order". Display name and POS name are not the
+                   same string and must not be conflated. */
+                '<span class="dn">' + esc(d.label || d.name) + '</span>' +
                 '<span class="dp">' + money(d.price) + '</span>' +
                 '<span class="dplus" aria-hidden="true">+</span></button>';
             }).join("")) +
