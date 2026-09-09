@@ -338,6 +338,12 @@
     }
     place(item) {
       var name = item.name, price = num(item.price);
+      /* Clover always wins. A menu card's price is baked into the page and drifts
+         the moment someone edits the POS; the Worker re-prices from Clover and
+         refuses anything else, so a stale card price is a checkout that fails
+         after the guest has typed their card in. Correct it on the way in. */
+      var live = livePrice(name);
+      if (live !== undefined) price = live;
       var found = null;
       for (var i = 0; i < this.cart.length; i++) if (this.cart[i].name === name) found = this.cart[i];
       if (found) found.qty += 1;
