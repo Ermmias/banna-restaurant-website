@@ -8,7 +8,7 @@
 
   function directions() {
     var nav = document.querySelector("nav");
-    if (!nav || nav.querySelector("[data-directions]")) return;
+    if (!nav || nav.querySelector('[data-directions], .dir-btn, a[href*="maps/dir"]')) return;
     var a = document.createElement("a");
     a.href = MAPS;
     a.target = "_blank";
