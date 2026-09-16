@@ -95,6 +95,30 @@
     { name: "Fosolia", price: 9.99 }
   ];
 
+  /* Photo for cart lines added from the cart's own drink/side chips, which carry
+     no image of their own. Matched loosely on the name so live Clover naming
+     variants still land on the right photo. */
+  var THUMBS = [
+    [/topo\s*chico|sparkling/i, "drink-topo-chico.jpg"],
+    [/cappuccino/i, "drink-cappuccino.jpg"],
+    [/latte/i, "drink-latte.jpg"],
+    [/macchiato|espresso/i, "drink-macchiato.jpg"],
+    [/shakiato/i, "drink-shakiato.jpg"],
+    [/ginger/i, "drink-ginger-tea.jpg"],
+    [/korent/i, "drink-korent-tea.jpg"],
+    [/coffee/i, "drink-coffee-traditional.jpg"],
+    [/tea/i, "drink-tea-traditional.jpg"],
+    [/apple\s*juice/i, "drink-apple-juice.jpg"],
+    [/coke|sprite|soda/i, "drink-coke.jpg"],
+    [/shiro/i, "shiro.jpg"],
+    [/misir|defen/i, "miser.jpg"],
+    [/rice/i, "chicken-rice.jpg"]
+  ];
+  function thumbFor(name) {
+    for (var i = 0; i < THUMBS.length; i++) if (THUMBS[i][0].test(name || "")) return THUMBS[i][1];
+    return "";
+  }
+
   var DRINKS = FALLBACK_DRINKS, DRINKS_LIVE = false, DRINKS_STATE = MENU_API ? "loading" : "fallback";
   var drinkWaiters = [];
 
@@ -213,6 +237,21 @@
   function read() { try { var r = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
   function write(c) { try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} }
   function track(name, params) { try { if (typeof window.gtag === "function") window.gtag("event", name, params || {}); } catch (e) {} }
+
+  /* Conversion on the confirmation screen. Fired once per order id (the screen
+     survives reloads, and a double count would inflate Ads reporting). */
+  function trackConfirmed(order, total, items) {
+    try {
+      var seen = "banna_conv_" + (order || "");
+      if (!order || localStorage.getItem(seen) === "1") return;
+      localStorage.setItem(seen, "1");
+      track("order_confirmed", { transaction_id: order, currency: "USD", value: total, items: items || [] });
+      var label = window.BANNA_ADS_CONVERSION || "";
+      if (label && typeof window.gtag === "function") {
+        window.gtag("event", "conversion", { send_to: label, transaction_id: order, currency: "USD", value: total });
+      }
+    } catch (e) {}
+  }
   function acked() { try { return localStorage.getItem(ACK) === "1"; } catch (e) { return false; } }
   function ack() { try { localStorage.setItem(ACK, "1"); } catch (e) {} }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -286,7 +325,7 @@
       var found = null;
       for (var i = 0; i < this.cart.length; i++) if (this.cart[i].name === name) found = this.cart[i];
       if (found) found.qty += 1;
-      else this.cart.push({ name: name, price: price, img: item.img || "", qty: 1, drink: !!item.drink });
+      else this.cart.push({ name: name, price: price, img: item.img || thumbFor(name), qty: 1, drink: !!item.drink });
       this.step = "cart";
       track("add_to_cart", { currency: "USD", value: price, items: [{ item_name: name, price: price, quantity: 1 }] });
       this.commit(true);
@@ -308,8 +347,9 @@
     lines() {
       var self = this;
       return this.cart.map(function (l) {
+        var lsrc = l.img || thumbFor(l.name);
         return '<div class="line">' +
-          (l.img ? '<img src="' + IMG_BASE + esc(l.img) + '" alt="" width="56" height="56" loading="lazy">' : '<div class="noimg"></div>') +
+          (lsrc ? '<img src="' + IMG_BASE + esc(lsrc) + '" alt="" width="56" height="56" loading="lazy">' : '<div class="noimg"></div>') +
           '<div class="lmeta"><span class="lname">' + esc(l.name) + '</span><span class="leach">' + money(l.price) + ' each</span></div>' +
           '<div class="qty"><button type="button" data-dec="' + esc(l.name) + '" aria-label="Remove one ' + esc(l.name) + '">&minus;</button>' +
           '<span>' + l.qty + '</span>' +
@@ -468,6 +508,7 @@
           });
         }
         self.cart = []; self.step = "done"; self.commit(true);
+        trackConfirmed(self.order && self.order.id, self.order && self.order.total, []);
       };
       var go = this.root.querySelector("[data-go]");
       if (go) go.onclick = function () {
@@ -533,6 +574,7 @@
             });
           }
           self.cart = []; self.step = "done"; self.commit(true);
+        trackConfirmed(self.order && self.order.id, self.order && self.order.total, []);
         }).catch(function (err) {
           /* Nothing is charged on any path that lands here, and the cart is left
              exactly as it was so the guest can retry without rebuilding it. */
@@ -584,7 +626,7 @@
     ".closed strong{font:800 15px 'Archivo',system-ui,sans-serif;color:" + INK + "}",
     ".closed span{font:600 13px/1.55 'Archivo',system-ui,sans-serif;color:rgba(27,21,18,.66)}",
     ".closed .primary{margin-top:6px}",
-    ".bar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:flex;align-items:center;gap:14px;padding:12px clamp(12px,4vw,20px);padding-bottom:calc(12px + env(safe-area-inset-bottom));background:" + INK + ";box-shadow:0 -8px 24px rgba(27,21,18,.25)}",
+    ".bar{position:fixed;left:0;right:0;bottom:0;z-index:90050;display:flex;align-items:center;gap:14px;padding:12px clamp(12px,4vw,20px);padding-bottom:calc(12px + env(safe-area-inset-bottom));background:" + INK + ";box-shadow:0 -8px 24px rgba(27,21,18,.25)}",
     ".bmeta{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}",
     ".bcount{font-weight:800;font-size:15px;color:" + SAND + ";white-space:nowrap}",
     ".bsub{font-weight:600;font-size:12px;color:rgba(246,235,217,.7);white-space:nowrap}",

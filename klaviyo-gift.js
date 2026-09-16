@@ -16,7 +16,7 @@
         <style>
           :host{all:initial}
           *{box-sizing:border-box;font-family:Archivo,system-ui,sans-serif}
-          .wrap{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+          .wrap{position:fixed;right:18px;bottom:18px;z-index:80;transition:bottom .2s ease;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
           button.fab{width:56px;height:56px;border-radius:50%;border:1px solid rgba(27,21,18,.14);background:#C7452B;color:#FFF7EA;
             display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 22px rgba(27,21,18,.28);padding:0}
           button.fab:hover{background:#A93720}
@@ -109,4 +109,35 @@
     }
   }
   customElements.define('klaviyo-gift', KlaviyoGift);
+})();
+
+/* BANNA_CART_OFFSET — the order bar owns the bottom edge whenever it is showing,
+   so the gift bubble steps up out of its way instead of covering the total. */
+(function () {
+  function wraps() {
+    var out = [];
+    document.querySelectorAll("klaviyo-gift").forEach(function (el) {
+      var w = el.shadowRoot && el.shadowRoot.querySelector(".wrap");
+      if (w) out.push(w);
+    });
+    return out;
+  }
+  var last = null;
+  setInterval(function () {
+    var busy = false;
+    try { busy = !!(window.BannaCart && window.BannaCart.count && window.BannaCart.count() > 0); } catch (e) {}
+    /* Klaviyo's hosted teaser (fixed, z-index 90000) is injected long after the
+       first tick, so this pass runs EVERY tick — no caching guard — or a teaser
+       that appears later never gets moved off the order bar. */
+    document.querySelectorAll('[class*="kl-teaser"]').forEach(function (el) {
+      var w = busy ? "translateY(-96px)" : "";
+      if (el.style.transform === w) return;
+      el.style.transition = "transform .2s ease";
+      el.style.transform = w;
+    });
+    var want = busy ? "104px" : "18px";
+    if (want === last) return;
+    last = want;
+    wraps().forEach(function (w) { w.style.bottom = want; });
+  }, 600);
 })();
