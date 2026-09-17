@@ -346,7 +346,11 @@ ${helmetHtml.trim()}
 ${bodyHtml}
 ${hasT ? `<script id="i18n" type="application/json">${JSON.stringify(tTable)}</script>` : ''}
 ${[...extraScripts].map(u => `<script src="${u}" defer></script>`).join('\n')}
+${[...extraScripts].some(u => /banna-cart\.js/.test(u)) ? '' : `<script src="${opts.base || './'}banna-cart.js" defer></script>`}
+<script src="${opts.base || './'}banna-config.js" defer></script>
 <script src="${opts.base || './'}banna.js" defer></script>
+<script src="${opts.base || './'}banna-pay.js" defer></script>
+<script src="${opts.base || './'}banna-addcart.js" defer></script>
 </body>
 </html>`;
 
