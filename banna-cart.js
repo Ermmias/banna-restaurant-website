@@ -350,11 +350,11 @@
         var lsrc = l.img || thumbFor(l.name);
         return '<div class="line">' +
           (lsrc ? '<img src="' + IMG_BASE + esc(lsrc) + '" alt="" width="56" height="56" loading="lazy">' : '<div class="noimg"></div>') +
-          '<div class="lmeta"><span class="lname">' + esc(l.name) + '</span><span class="leach">' + money(l.price) + ' each</span></div>' +
+          '<div class="lmeta"><span class="lname">' + esc(l.name) + '</span><span class="leach">' + (l.price > 0 ? money(l.price) + ' each' : 'Priced at pickup') + '</span></div>' +
           '<div class="qty"><button type="button" data-dec="' + esc(l.name) + '" aria-label="Remove one ' + esc(l.name) + '">&minus;</button>' +
           '<span>' + l.qty + '</span>' +
           '<button type="button" data-inc="' + esc(l.name) + '" aria-label="Add one ' + esc(l.name) + '">+</button></div>' +
-          '<span class="ltot">' + money(l.price * l.qty) + '</span></div>';
+          '<span class="ltot">' + (l.price > 0 ? money(l.price * l.qty) : '&mdash;') + '</span></div>';
       }).join("");
     }
 
@@ -367,7 +367,9 @@
           '<div class="totals">' +
           '<div class="row"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
           '<div class="row"><span>Estimated tax</span><span>' + money(tax) + '</span></div>' +
-          '<div class="row grand"><span>Total</span><span>' + money(tot) + '</span></div></div>' +
+          '<div class="row grand"><span>Total</span><span>' + money(tot) + '</span></div>' +
+          (this.cart.some(function (l) { return !(l.price > 0); }) ? '<div class="row"><span style="font-size:11.5px;opacity:.75">Items marked &ldquo;priced at pickup&rdquo; are added to your total when we confirm the order.</span><span></span></div>' : '') +
+          '</div>' +
           (orderingOpen()
             ? '<button type="button" class="primary" data-go>Checkout <span aria-hidden="true">&#8594;</span></button>'
             : closedNotice()) +
@@ -436,8 +438,8 @@
       var done = this.step === "done";
       var titles = { cart: "Your order", details: "Pickup details", pay: "Payment", done: "Order confirmed" };
       var steps = { cart: "STEP 1 OF 3 &middot; REVIEW", details: "STEP 2 OF 3 &middot; YOUR INFO", pay: "STEP 3 OF 3 &middot; PAY", done: "" };
+      try { document.body.style.paddingBottom = (n || done) ? "104px" : ""; } catch (e) {}
       this.root.innerHTML = '<style>' + BannaCart.css + '</style>' + (!n && !done ? "" : (!n ? "" :
-        '<div class="spacer" aria-hidden="true"></div>' +
         '<div class="bar"><div class="bmeta"><span class="bcount">' + n + (n === 1 ? " item" : " items") + '</span>' +
         '<span class="bsub">Pickup &middot; <strong>TO GO ONLY</strong></span></div>' +
         '<button type="button" class="bview" data-open>View cart <span>' + money(sub) + '</span></button></div>') +
@@ -621,7 +623,8 @@
   BannaCart.css = [
     ":host{font-family:'Archivo',system-ui,sans-serif}",
     "*{box-sizing:border-box}",
-    ".spacer{height:96px}",
+    ":host{position:fixed!important;left:0;right:0;bottom:0;width:100%;z-index:150;pointer-events:none}",
+    ":host *{pointer-events:auto}",
     ".closed{display:flex;flex-direction:column;gap:8px;margin-top:16px;padding:16px 18px;border-radius:16px;background:" + PANEL + ";border:1px solid rgba(27,21,18,.14)}",
     ".closed strong{font:800 15px 'Archivo',system-ui,sans-serif;color:" + INK + "}",
     ".closed span{font:600 13px/1.55 'Archivo',system-ui,sans-serif;color:rgba(27,21,18,.66)}",

@@ -406,7 +406,7 @@
         <h1 style="margin:0;max-width:19ch;font:700 clamp(30px,4.3vw,54px)/1.04 'Baloo 2';letter-spacing:-0.015em;color:#FDF9F4;text-wrap:balance">Ethiopian &amp; Eritrean Dishes in Dallas</h1>
         <p style="margin:0;max-width:46ch;font:400 clamp(14.5px,1.25vw,16.5px)/1.6 'Archivo';color:rgba(253,249,244,0.72);text-wrap:pretty">Twenty dishes on Skillman St, slow-cooked stews and sizzling tibs served family-style on injera. Every dish shows its heat level and taps straight through to ordering.</p>
         <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px">
-          <a href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border-radius:100px;background:#C7452B;border:1px solid #A93720;color:#FFFFFF;font:800 15px 'Archivo';text-decoration:none;white-space:nowrap">Order pickup <span aria-hidden="true">&#8594;</span></a>
+          <a href="#menu" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border-radius:100px;background:#C7452B;border:1px solid #A93720;color:#FFFFFF;font:800 15px 'Archivo';text-decoration:none;white-space:nowrap">Start your order <span aria-hidden="true">&#8595;</span></a>
           <a href="tel:+12147580752" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:100px;background:transparent;border:1px solid rgba(253,249,244,0.34);color:#FDF9F4;font:700 15px 'Archivo';text-decoration:none;white-space:nowrap">Call (214) 758-0752</a>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
@@ -435,9 +435,6 @@
       <img src="img/injera-sticker.png" alt="" loading="lazy" decoding="async" style="position:absolute;top:-30px;right:0;width:clamp(56px,14vw,90px);transform:rotate(8deg);opacity:.9;pointer-events:none">
       <div style="font:600 13px 'Archivo';letter-spacing:2px;color:#B07A2B;margin-bottom:12px">{{ topSellersLabel }}</div>
       <h2 style="font:700 46px 'Baloo 2'; margin: 0 0 16px; position: relative">{{ topSellersTitle }}</h2>
-      <div style="font:600 15px 'Archivo';margin:0 0 24px" dangerouslySetInnerHTML="{{ viewFullMenuHtml }}"></div>
-
-      <a href="https://banna-restaurant.cloveronline.com/menu/all" style="display:inline-block;background:#C7452B;color:#FFFFFF;font:600 15px 'Archivo';padding:14px 30px;white-space:nowrap;border-radius:100px;border:1px solid rgba(27,21,18,0.14);box-shadow:0 6px 18px rgba(27,21,18,0.08)" style-hover="background:#A93720;color:#FFFFFF" data-om-label="Link">{{ orderNow }}</a>
     </div>
     <div class="dish-filters" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:4px 0 14px">
       <sc-for list="{{ favFilters }}" as="f" hint-placeholder-count="6">
@@ -476,12 +473,7 @@
             </div>
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">{{ item.desc }}</p>
             <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
-              <sc-if value="{{ item.canAdd }}" hint-placeholder-val="{{ true }}">
                 <button type="button" onClick="{{ item.onAdd }}" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)" style-hover="background:#A93720;color:#FFFFFF"><span style="font:700 16px 'Archivo';line-height:1">+</span>{{ item.addLabel }}</button>
-              </sc-if>
-              <sc-if value="{{ item.noPrice }}" hint-placeholder-val="{{ false }}">
-                <a href="{{ item.url }}" target="_blank" rel="noopener" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid rgba(27,21,18,0.2);background:#FFFFFF;color:#1B1512;font:800 14px 'Archivo';white-space:nowrap" style-hover="background:#F2EBE1;color:#1B1512">{{ item.cta }}<span style="font:700 15px 'Archivo'">&#8594;</span></a>
-              </sc-if>
             </div>
           </div>
         </article>
@@ -489,11 +481,11 @@
     </div>
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;background:#F2EBE1;border:1px solid rgba(27,21,18,0.14);border-radius:24px;box-shadow:0 6px 18px rgba(27,21,18,0.08);padding:clamp(22px,4vw,30px);text-align:left">
       <div style="min-width:0;flex:1 1 300px">
-        <h3 style="font:700 clamp(22px,3.4vw,28px) 'Baloo 2';margin:0 0 8px">These are the guest favorites, not the whole kitchen</h3>
-        <p style="font:600 14px/1.6 'Archivo';color:rgba(27,21,18,0.62);margin:0 0 10px;text-wrap:pretty">Doro wat, kitfo, breakfast, drinks and the rest of the lineup live on our ordering page.</p>
-        <p style="font:500 13.5px/1.6 'Archivo';color:#3E2A15;margin:0;text-wrap:pretty">Coffee, tea, juices and soft drinks are listed there too. Beer, wine and cocktails are dine-in and bar only &mdash; alcohol is not available for online orders, pickup or delivery.</p>
+        <h3 style="font:700 clamp(22px,3.4vw,28px) 'Baloo 2';margin:0 0 8px">Looking for something not listed here?</h3>
+        <p style="font:600 14px/1.6 'Archivo';color:rgba(27,21,18,0.62);margin:0 0 10px;text-wrap:pretty">Doro wat, kitfo, breakfast plates and the rest of the kitchen are on our full ordering page.</p>
+        <p style="font:500 13.5px/1.6 'Archivo';color:#3E2A15;margin:0;text-wrap:pretty">Beer, wine and cocktails are dine-in and bar only &mdash; alcohol is not available for online orders, pickup or delivery.</p>
       </div>
-      <a href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="display:inline-block;background:#C7452B;color:#FFFFFF;font:600 15px 'Archivo';padding:14px 30px;white-space:nowrap;border-radius:100px;border:1px solid rgba(27,21,18,0.14);box-shadow:0 6px 18px rgba(27,21,18,0.08)" style-hover="background:#A93720;color:#FFFFFF">See the full menu &#8594;</a>
+      <a href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="display:inline-block;background:#C7452B;color:#FFFFFF;font:600 15px 'Archivo';padding:14px 30px;white-space:nowrap;border-radius:100px;border:1px solid rgba(27,21,18,0.14);box-shadow:0 6px 18px rgba(27,21,18,0.08)" style-hover="background:#A93720;color:#FFFFFF">See the full ordering menu &#8594;</a>
     </div>
   </section>
 
@@ -520,7 +512,7 @@
         </article>
       </sc-for>
     </div>
-    <p style="margin:clamp(18px,2.5vw,26px) 0 0;font:500 13.5px/1.6 'Archivo';color:#3E2A15">Beer, wine, cocktails and Tej are dine-in only. For the full beverage list, <a href="https://banna-restaurant.cloveronline.com/menu/all#Beverages" target="_blank" rel="noopener" style="color:#C7452B;font-weight:700">see beverages on Clover &#8594;</a></p>
+    <p style="margin:clamp(18px,2.5vw,26px) 0 0;font:500 13.5px/1.6 'Archivo';color:#3E2A15">Beer, wine, cocktails and Tej are dine-in only &mdash; alcohol is not available for pickup or delivery.</p>
   </section>
 
     <!-- ORDER -->
@@ -616,7 +608,9 @@
             <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px"><h3 style="margin:0;font:700 22px/1.2 'Baloo 2';color:#1B1512">{{ lightboxName }}</h3><span style="font:700 15px 'Archivo';color:#9C6B15">{{ lightboxPrice }}</span></div>
             <p style="margin:6px 0 0;font:500 14px/1.55 'Archivo';color:#3E2A15;text-wrap:pretty">{{ lightboxDesc }}</p>
           </div>
-          <a href="{{ lightboxUrl }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:9px;box-sizing:border-box;min-height:50px;padding:14px 26px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 15px 'Archivo';white-space:nowrap;box-shadow:0 8px 18px -8px rgba(199,69,43,0.75)" style-hover="background:#A93720;color:#FFFFFF">{{ lightboxCta }}<span style="font:700 16px 'Archivo'">&#8594;</span></a>
+          <sc-if value="{{ lightboxCanAdd }}" hint-placeholder-val="{{ true }}">
+            <button type="button" onClick="{{ lightboxAdd }}" style="display:inline-flex;align-items:center;justify-content:center;gap:9px;box-sizing:border-box;min-height:50px;padding:14px 26px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 15px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 8px 18px -8px rgba(199,69,43,0.75)" style-hover="background:#A93720;color:#FFFFFF"><span style="font:700 17px 'Archivo';line-height:1">+</span>Add to cart</button>
+          </sc-if>
         </div>
       </div>
     </div>
@@ -700,7 +694,7 @@ const REVIEWS = [
 ];
 
 const TOP_SELLERS = [
-  { name: "Awaze Lamb Tibs", source: "meat", price: "$$", desc: "Tender lamb cubes seared to perfection and tossed in a bold, spicy awaze chili sauce that packs a flavorful kick.", img: "awaze-lamb-tibs-opt.jpg", imgId: "top-awaze-lamb", badge: "#1 MOST LIKED", cardBg: "#fff" },
+  { name: "Awaze Lamb Tibs", source: "meat", price: "$25.69", desc: "Tender lamb cubes seared to perfection and tossed in a bold, spicy awaze chili sauce that packs a flavorful kick.", img: "awaze-lamb-tibs-opt.jpg", imgId: "top-awaze-lamb", badge: "#1 MOST LIKED", cardBg: "#fff" },
   { name: "Shekla Beef Tibs", source: "meat", price: "$27.99", desc: "Sizzling beef tibs served straight from a hot clay pot for a dramatic, flavor-packed presentation.", img: "shekla-beef-tibs.jpg", imgId: "top-shekla", badge: "#2 MOST LIKED", cardBg: "#fff" },
   { name: "KilKil", source: "meat", price: "$22.99", desc: "Tender beef and potatoes slow-cooked in a mild, comforting sauce.", img: "kilkil.jpg", imgId: "top-kilkil", badge: "#3 MOST LIKED", cardBg: "#fff" },
   { name: "Veggie Special Combo", source: "veggie", price: "$24.99", desc: "A colorful platter of assorted vegetarian dishes bursting with fresh flavor.", img: "veggie-combo.jpg", imgId: "top-veggie", badge: "FAN FAVORITE", cardBg: "#EEF2E9" }
@@ -1080,10 +1074,8 @@ class Component extends DCLogic {
     const FALLBACK_MENU = "https://banna-restaurant.cloveronline.com/menu/all";
     const favVisible = FAVORITES.filter(it => favCat === "all" || it.cat === favCat).map(it => ({
       name: it.name,
-      price: it.price,
+      price: /[0-9]/.test(String(it.price || "")) ? it.price : "At pickup",
       priceNum: parseFloat(String(it.price || "").replace(/[^0-9.]/g, "")) || 0,
-      canAdd: /[0-9]/.test(String(it.price || "")),
-      noPrice: !/[0-9]/.test(String(it.price || "")),
       desc: it.desc,
       badge: it.badge || null,
       diet: it.diet || null,
@@ -1098,7 +1090,9 @@ class Component extends DCLogic {
     })).map((m, i) => Object.assign(m, {
       idx: i,
       src: (i < 6 || (this.state.shown && this.state.shown[i])) ? "img/" + m.img : LAZY_PH,
-      onZoom: (e) => this.openLightbox(e, m),
+      onZoom: (e) => this.openLightbox(e, Object.assign({}, m, {
+        add: () => { if (window.BannaCart) window.BannaCart.add(m); }
+      })),
       onAdd: () => { if (window.BannaCart) window.BannaCart.add(m); },
       addLabel: "Add to cart"
     }));
@@ -1126,8 +1120,8 @@ class Component extends DCLogic {
       lightboxName: this.state.lightbox ? this.state.lightbox.name : "",
       lightboxPrice: this.state.lightbox ? this.state.lightbox.price : "",
       lightboxDesc: this.state.lightbox ? this.state.lightbox.desc : "",
-      lightboxUrl: this.state.lightbox ? this.state.lightbox.url : "",
-      lightboxCta: this.state.lightbox ? this.state.lightbox.cta : "",
+      lightboxCanAdd: !!(this.state.lightbox && this.state.lightbox.add),
+      lightboxAdd: this.state.lightbox && this.state.lightbox.add ? this.state.lightbox.add : (() => {}),
       closeLightbox: this.closeLightbox,
       drinkCards: DRINKS.map(d => ({
         name: d.name,
@@ -1137,8 +1131,7 @@ class Component extends DCLogic {
         onAdd: () => { if (window.BannaCart) window.BannaCart.add({ name: d.name, price: d.price, img: d.img, drink: true }); },
         onZoom: (e) => this.openLightbox(e, {
           name: d.name, desc: d.desc, price: d.price, src: "img/" + d.img,
-          url: "https://banna-restaurant.cloveronline.com/menu/all#Beverages",
-          cta: "See drinks on Clover"
+          add: () => { if (window.BannaCart) window.BannaCart.add({ name: d.name, price: d.price, img: d.img, drink: true }); }
         })
       })),
       favVisible,
