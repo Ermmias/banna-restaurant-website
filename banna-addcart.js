@@ -1,84 +1,71 @@
-/* Banna — turns each dish card's Clover link back into an "Add to cart" button.
+/* Banna — cart wiring the static build cannot carry over.
  *
- * The pages are generated, so this conversion lives in a script rather than in
- * the markup: a rebuild of site/ would wipe hand-edited buttons, but this file
- * survives it. It is the exact mirror of banna-cart-clover-handoff.js, which
- * did the opposite when ordering was handed to Clover.
+ * The generated pages come from the .dc.html designs, where every "Add to cart"
+ * button has a React onClick. Those handlers do not survive the build, so the
+ * markup arrives inert. banna.js already binds dish cards ([data-dish]
+ * [data-add]); this file covers the two cases it does not:
  *
- * A card whose dish has no price keeps its Clover link — a cart line with no
- * amount cannot be charged, so sending those guests to Clover is the honest
- * outcome rather than a button that fails at the pay step.
+ *   1. drink cards — plain <article> elements with no data-dish payload, so the
+ *      name, price and photo are read off the card itself.
+ *   2. the photo lightbox — its Add button is cloned from the card, so it is
+ *      bound when the box opens rather than at load.
  *
  * Load order (all defer, so source order holds):
  *   banna.js  →  banna-cart.js  →  banna-pay.js  →  this file
  */
 (function () {
-  function dish(card) {
-    try { return JSON.parse(card.getAttribute("data-dish") || "{}"); }
-    catch (e) { return {}; }
-  }
-  function priceNum(p) {
-    var n = parseFloat(String(p || "").replace(/[^0-9.]/g, ""));
-    return isFinite(n) && n > 0 ? n : 0;
-  }
+  function txt(el) { return el ? (el.textContent || "").trim() : ""; }
+  function hasPrice(s) { return /[0-9]/.test(s || ""); }
 
-  /* Same box, same styling — a change of behaviour, not a restyle. */
-  function toAddButton(link, card) {
-    var d = dish(card);
-    if (!priceNum(d.p)) return;
-
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = link.className;
-    b.setAttribute("style", link.getAttribute("style") || "");
-    b.style.cursor = "pointer";
-    b.style.font = b.style.font || "700 15px 'Archivo',system-ui,sans-serif";
-    b.setAttribute("data-add", "");
-    b.setAttribute("aria-label", "Add " + (d.n || "this dish") + " to your order");
-
-    b.textContent = "Add to cart";
-    var span = document.createElement("span");
-    span.setAttribute("style", "opacity:.8;font-weight:600");
-    span.textContent = "\u00B7 " + d.p;
-    b.appendChild(span);
-
-    /* Bound here rather than left to banna.js: that wiring runs once at load,
-       before these buttons exist. */
-    b.addEventListener("click", function () {
-      if (!window.BannaCart) { location.href = link.href; return; }
-      window.BannaCart.add({
-        name: d.n,
-        price: d.p,
-        img: String(d.s || "").split("/").pop()
-      });
-    });
-
-    link.parentNode.replaceChild(b, link);
-  }
-
-  function convert() {
-    var cards = document.querySelectorAll("[data-dish]");
+  function wireDrinks() {
+    var grid = document.querySelector(".drink-grid");
+    if (!grid) return;
+    var cards = grid.querySelectorAll("article");
     for (var i = 0; i < cards.length; i++) {
-      var link = cards[i].querySelector('a[href*="cloveronline.com"]');
-      if (link) toAddButton(link, cards[i]);
+      (function (card) {
+        var btn = card.querySelector("button[data-add]");
+        if (!btn || btn.getAttribute("data-wired")) return;
+        var spans = card.querySelectorAll("span");
+        var name = txt(spans[0]);
+        var price = txt(spans[1]);
+        var img = card.querySelector("img");
+        var file = img ? String(img.getAttribute("src") || "").split("/").pop() : "";
+        if (!name) return;
+        btn.setAttribute("data-wired", "1");
+        btn.addEventListener("click", function () {
+          if (!window.BannaCart) return;
+          window.BannaCart.add({
+            name: name,
+            price: hasPrice(price) ? price : "",
+            img: file,
+            drink: true
+          });
+        });
+      })(cards[i]);
     }
   }
 
-  /* The cart's own bottom bar appears the moment something is in it, in the same
-     place as the mobile quick-action bar. Two stacked bars is worse than either:
-     while there is an order in progress, the cart bar wins. */
-  function watchBars() {
-    var mbar = document.querySelector(".m-bar");
-    if (!mbar || !window.BannaCart) return;
-    var shown = "";
-    setInterval(function () {
-      var busy = window.BannaCart.count() > 0;
-      var want = busy ? "none" : "";
-      if (want !== shown) { mbar.style.display = want; shown = want; }
-    }, 400);
+  /* banna.js opens the lightbox and looks for [data-lb-add]; the built markup
+     has an unmarked button instead, so claim it once the box exists. */
+  function wireLightbox() {
+    document.addEventListener("click", function () {
+      setTimeout(function () {
+        var boxes = document.querySelectorAll("[data-lightbox], .lightbox, [role='dialog']");
+        for (var i = 0; i < boxes.length; i++) {
+          var btns = boxes[i].querySelectorAll("button");
+          for (var j = 0; j < btns.length; j++) {
+            var b = btns[j];
+            if (b.getAttribute("data-wired")) continue;
+            if (!/add to cart/i.test(b.textContent || "")) continue;
+            b.setAttribute("data-wired", "1");
+            b.setAttribute("data-lb-add", "");
+          }
+        }
+      }, 60);
+    }, true);
   }
 
-  function start() { convert(); watchBars(); }
+  function start() { wireDrinks(); wireLightbox(); }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", start);

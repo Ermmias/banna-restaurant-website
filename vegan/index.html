@@ -60,6 +60,7 @@
     gtag('js', new Date());
     gtag('config', 'AW-16929805337');
   </script>
+  <script src="../banna-config.js"></script>
   
   <script>!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();</script>
   <script type="application/ld+json">
@@ -290,6 +291,17 @@
       body{overflow-x:hidden}
     }
 
+    /* ==== header parity with the home page (keep last) ====
+       Logo + Directions + More only: the Vegan/Order pills and the four-way
+       language switch made this bar read as a second menu. */
+    nav .lang-switch{display:none!important}
+    nav>div:last-child>a{display:none!important}
+    /* The panel is taller than a short viewport, and with overflow visible its
+       lower half (Catering, Contact, socials) fell off-screen — unreachable. */
+    nav details>div{max-height:calc(100dvh - 264px)!important;min-height:150px!important;padding-bottom:88px!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important}
+    @media (max-width:1000px){
+      nav [data-screen-label="nav-links"]>a{display:none!important}
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -359,28 +371,28 @@
 .hv17:hover{background:#F2EBE1}
 .hv18:hover{background:#F2EBE1}
 .hv19:hover{background:#F2EBE1}
-.hv20:hover{background:#FFB84D}
-.hv21:hover{background:#1B1512;color:#FFFFFF}
-.hv22:hover{background:#F2EBE1}
+.hv20:hover{background:#F2EBE1}
+.hv21:hover{background:#FFB84D}
+.hv22:hover{background:#1B1512;color:#FFFFFF}
 .hv23:hover{background:#F2EBE1}
 .hv24:hover{background:#F2EBE1}
 .hv25:hover{background:#F2EBE1}
-.hv26:hover{background:#A93720;color:#FFFFFF}
+.hv26:hover{background:#F2EBE1}
 .hv27:hover{background:#A93720;color:#FFFFFF}
-.hv28:hover{background:#F2EBE1;color:#1B1512}
+.hv28:hover{background:#A93720;color:#FFFFFF}
 .hv29:hover{background:#A93720;color:#FFFFFF}
 .hv30:hover{background:#A93720;color:#FFFFFF}
 .hv31:hover{background:#A93720;color:#FFFFFF}
 .hv32:hover{background:#A93720;color:#FFFFFF}
 .hv33:hover{background:#A93720;color:#FFFFFF}
-.hv34:hover{transform:translate(-2px,-2px);background:#C7452B;color:#FFFFFF}
-.hv35:hover{background:#A93720;color:#FFFFFF}
-.hv36:hover{background:#3E2A15;color:#E9E0D4}
-.hv37:hover{background:#05a659;color:#fff}
-.hv38:hover{background:#c81300;color:#fff}
-.hv39:hover{color:#fff}
+.hv34:hover{background:#A93720;color:#FFFFFF}
+.hv35:hover{transform:translate(-2px,-2px);background:#C7452B;color:#FFFFFF}
+.hv36:hover{background:#A93720;color:#FFFFFF}
+.hv37:hover{background:#3E2A15;color:#E9E0D4}
+.hv38:hover{background:#05a659;color:#fff}
+.hv39:hover{background:#c81300;color:#fff}
 .hv40:hover{color:#fff}
-.hv41:hover{color:#B07A2B}
+.hv41:hover{color:#fff}
 .hv42:hover{color:#B07A2B}
 .hv43:hover{color:#B07A2B}
 .hv44:hover{color:#B07A2B}
@@ -393,12 +405,14 @@
 .hv51:hover{color:#B07A2B}
 .hv52:hover{color:#B07A2B}
 .hv53:hover{color:#B07A2B}
+.hv54:hover{color:#B07A2B}
 .filter-on{border-color:#A93720!important;background:#C7452B!important;color:#fff!important;box-shadow:0 2px 8px rgba(199,69,43,.3)!important}
 [data-t]{display:inline}</style>
 </head>
 <body>
 
 
+<banna-cart></banna-cart>
 <klaviyo-gift></klaviyo-gift>
 
 <div style="min-height:100vh;background:#FAF7F3;overflow-x:clip">
@@ -430,44 +444,45 @@
 
   
   <nav style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px clamp(20px,5vw,48px);background:rgba(255,247,234,0.92);backdrop-filter:blur(6px);border-bottom:3px solid #1B1512">
-    <a href="../" style="display:flex;align-items:center;gap:10px">
+    <a href="index.dc.html" style="display:flex;align-items:center;gap:10px">
       <img src="../img/banna-logo-cropped-transparent.png" alt="Banna Restaurant and Bar logo" style="height:52px;width:auto;display:block">
     </a>
     <div style="display:flex;align-items:center;gap:clamp(10px,2.5vw,28px);flex-wrap:wrap;overflow:visible;justify-content:center;min-width:0;flex:1 1 auto" data-screen-label="nav-links">
-      <a href="../menu/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="0">Menu</span></a>
-      <a href="../about/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="1">About</span></a>
-      <a href="../reviews/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="2">Reviews</span></a>
-      <a href="../faq/" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="3">FAQ</span></a>
+      <a href="Menu.dc.html" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="0">Menu</span></a>
+      <a href="About.dc.html" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="1">About</span></a>
+      <a href="Reviews.dc.html" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="2">Reviews</span></a>
+      <a href="FAQ.dc.html" style="font:600 15px 'Archivo';white-space:nowrap"><span data-t="3">FAQ</span></a>
       <details style="position:relative">
         <summary style="font:600 15px 'Archivo';white-space:nowrap;cursor:pointer;list-style:none"><span data-t="4">More ▾</span></summary>
         <div style="position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#FAF7F3;border:1px solid rgba(27,21,18,0.14);border-radius:16px;box-shadow:0 6px 18px rgba(27,21,18,0.08);padding:10px;display:flex;flex-direction:column;gap:4px;min-width:150px;z-index:70">
-          <a class="more-page hv6" href="../menu/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="5">Menu</span></a>
-          <a class="more-page hv7" href="../about/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="6">About</span></a>
-          <a class="more-page hv8" href="../vegan/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="7">Vegan</span></a>
-          <a class="more-page hv9" href="../reviews/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="8">Reviews</span></a>
-          <a class="more-page hv10" href="../faq/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="9">FAQ</span></a>
+          <a class="more-page hv6" href="Menu.dc.html" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="5">Menu</span></a>
+          <a class="more-page hv7" href="About.dc.html" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="6">About</span></a>
+          <a class="more-page hv8" href="Vegan.dc.html" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="7">Vegan</span></a>
+          <a class="more-page hv9" href="Reviews.dc.html" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="8">Reviews</span></a>
+          <a class="more-page hv10" href="FAQ.dc.html" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="9">FAQ</span></a>
           <div class="more-page" style="height:1px;background:#E8D9BE;margin:4px 2px"></div>
-          <a class="hv11" href="../about/#blog" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="10">Blog</span></a>
-          <a class="hv12" href="../contact/" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="11">Contact</span></a>
-          <a class="hv13" href="../menu/#order" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="12">Order Online</span></a>
+          <a class="hv11" href="About.dc.html#blog" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="10">Blog</span></a>
+          <a class="hv12" href="Contact.dc.html#catering" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Catering &amp; trays</a>
+          <a class="hv13" href="Contact.dc.html" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="11">Contact</span></a>
+          <a class="hv14" href="Menu.dc.html#order" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="12">Order Online</span></a>
           <div style="height:1px;background:#E8D9BE;margin:4px 2px"></div>
-          <a class="hv14" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Instagram</a>
-          <a class="hv15" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Facebook</a>
-          <a class="hv16" href="https://www.tiktok.com/@banna_restaurant" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">TikTok</a>
-          <a class="hv17" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Yelp</a>
-          <a class="hv18" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="13">★ Leave us a Google Review</span></a>
-          <a class="hv19" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Google Business Profile</a>
+          <a class="hv15" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Instagram</a>
+          <a class="hv16" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Facebook</a>
+          <a class="hv17" href="https://www.tiktok.com/@banna_restaurant" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">TikTok</a>
+          <a class="hv18" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Yelp</a>
+          <a class="hv19" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px"><span data-t="13">★ Leave us a Google Review</span></a>
+          <a class="hv20" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" rel="noopener" style="font:600 14px 'Archivo';white-space:nowrap;padding:8px 10px;border-radius:10px">Google Business Profile</a>
         </div>
       </details>
     </div>
     <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-      <a class="hv20" href="https://banna-restaurant.cloveronline.com/menu/all" style="background:#C7452B;color:#FFFFFF;font:600 13px 'Archivo';padding:9px 18px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);white-space:nowrap" data-om-label="Link"><span data-t="14">Order Now</span></a>
-      <a class="hv21" href="https://www.google.com/maps/dir/?api=1&amp;amp;destination=Banna+Restaurant+%26+Bar%2C+9560+Skillman+St+%23120%2C+Dallas%2C+TX+75243" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#FFFFFF;color:#1B1512;font:600 13px 'Archivo';padding:9px 16px;border-radius:100px;border:1px solid rgba(27,21,18,0.22);white-space:nowrap" data-om-label="Link"><span aria-hidden="true" style="flex:none">&#9906;</span>Get Directions</a>
+      <a class="hv21" href="https://banna-restaurant.cloveronline.com/menu/all" style="background:#C7452B;color:#FFFFFF;font:600 13px 'Archivo';padding:9px 18px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);white-space:nowrap" data-om-label="Link"><span data-t="14">Order Now</span></a>
+      <a class="hv22" href="https://www.google.com/maps/dir/?api=1&amp;amp;destination=Banna+Restaurant+%26+Bar%2C+9560+Skillman+St+%23120%2C+Dallas%2C+TX+75243" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#FFFFFF;color:#1B1512;font:600 13px 'Archivo';padding:9px 16px;border-radius:100px;border:1px solid rgba(27,21,18,0.22);white-space:nowrap" data-om-label="Link"><span aria-hidden="true" style="flex:none">&#9906;</span>Get Directions</a>
       <div class="lang-switch" style="display:flex;align-items:center;gap:6px;flex-shrink:0">
-        <button class="hv22" data-lang-active="true" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="en">EN</button>
-        <button class="hv23" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="es">ES</button>
-        <button class="hv24" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="am">አማ</button>
-        <button class="hv25" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="ti">ትግ</button>
+        <button class="hv23" data-lang-active="true" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="en">EN</button>
+        <button class="hv24" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="es">ES</button>
+        <button class="hv25" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="am">አማ</button>
+        <button class="hv26" style="font:600 12px 'Archivo';padding:6px 10px;border-radius:100px;border:1px solid rgba(27,21,18,0.14);cursor:pointer;color:#1B1512;background:#fff" data-setlang="ti">ትግ</button>
       </div>
     </div>
   </nav>
@@ -705,10 +720,7 @@
             
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">A full beyaynetu platter: shiro, misir wot, collard greens, cabbage and salad over injera.</p>
             <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
-              
-                <a class="hv26" href="https://banna-restaurant.cloveronline.com/menu/veggie-special-combo-QBXFDHZR179P0" target="_blank" rel="noopener" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)">Order on Clover · $29.75<span style="font:700 15px 'Archivo'">&#8594;</span></a>
-              
-              
+                <button class="hv27" type="button" data-add="" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)"><span style="font:700 16px 'Archivo';line-height:1">+</span>Add to cart</button>
             </div>
           </div>
         </article>
@@ -748,10 +760,7 @@
             
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">A creamy, spiced chickpea stew that's comforting, hearty, and full of warmth.</p>
             <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
-              
-                <a class="hv27" href="https://banna-restaurant.cloveronline.com/menu/shiro-PM1T7HS97D120" target="_blank" rel="noopener" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)">Order on Clover · $21.65<span style="font:700 15px 'Archivo'">&#8594;</span></a>
-              
-              
+                <button class="hv28" type="button" data-add="" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)"><span style="font:700 16px 'Archivo';line-height:1">+</span>Add to cart</button>
             </div>
           </div>
         </article>
@@ -784,17 +793,14 @@
           <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:9px;flex:1">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
               <h3 style="font:700 18px 'Baloo 2';margin:0">Misir Wot</h3>
-              <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap"></span>
+              <span style="font:600 14px 'Archivo';color:#9C6B15;white-space:nowrap">At pickup</span>
             </div>
             
               <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:100px;background:#EDF2E8;color:#3E6B2E;font:700 11.5px 'Archivo';white-space:nowrap"><span aria-hidden="true" style="width:5px;height:5px;border-radius:50%;background:#4F7A3A"></span><span data-t="102">Serves 1</span></span>
             
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Red lentils slow-cooked in berbere until rich and deep. A vegan staple of the menu.</p>
             <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
-              
-              
-                <a class="hv28" href="https://banna-restaurant.cloveronline.com/menu/misir-wot-NNHGWD8KQATZW" target="_blank" rel="noopener" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid rgba(27,21,18,0.2);background:#FFFFFF;color:#1B1512;font:800 14px 'Archivo';white-space:nowrap">Order on Clover<span style="font:700 15px 'Archivo'">&#8594;</span></a>
-              
+                <button class="hv29" type="button" data-add="" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)"><span style="font:700 16px 'Archivo';line-height:1">+</span>Add to cart</button>
             </div>
           </div>
         </article>
@@ -834,10 +840,7 @@
             
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Crispy pastry stuffed with seasoned, spiced lentil filling. Fried to order.</p>
             <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
-              
-                <a class="hv29" href="https://banna-restaurant.cloveronline.com/menu/sambusa-KC5E01QAVVD18" target="_blank" rel="noopener" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)">Order on Clover · $5.99<span style="font:700 15px 'Archivo'">&#8594;</span></a>
-              
-              
+                <button class="hv30" type="button" data-add="" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)"><span style="font:700 16px 'Archivo';line-height:1">+</span>Add to cart</button>
             </div>
           </div>
         </article>
@@ -877,10 +880,7 @@
             
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Torn kitcha flatbread folded through berbere with a side of mitmita. Order it without meat, cooked in plant oil.</p>
             <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
-              
-                <a class="hv30" href="https://banna-restaurant.cloveronline.com/menu/kitcha-fitfit-meat-DMWW5P8V95ABA" target="_blank" rel="noopener" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)">Order on Clover · $19<span style="font:700 15px 'Archivo'">&#8594;</span></a>
-              
-              
+                <button class="hv31" type="button" data-add="" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)"><span style="font:700 16px 'Archivo';line-height:1">+</span>Add to cart</button>
             </div>
           </div>
         </article>
@@ -920,10 +920,7 @@
             
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Penne tossed in a spiced tomato sauce with fresh green pepper. Plant-based exactly as it comes.</p>
             <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
-              
-                <a class="hv31" href="https://banna-restaurant.cloveronline.com/menu/macaroni-pasta-WMY04V583AHJC" target="_blank" rel="noopener" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)">Order on Clover · $16<span style="font:700 15px 'Archivo'">&#8594;</span></a>
-              
-              
+                <button class="hv32" type="button" data-add="" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)"><span style="font:700 16px 'Archivo';line-height:1">+</span>Add to cart</button>
             </div>
           </div>
         </article>
@@ -965,10 +962,7 @@
             
             <p style="font:600 13px/1.5 'Archivo';color:rgba(27,21,18,0.62);margin:0;text-wrap:pretty">Slow-simmered fava beans with tomato, onion and warm bread. Ask for it without egg and it is fully vegan.</p>
             <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
-              
-                <a class="hv32" href="https://banna-restaurant.cloveronline.com/menu/special-ful-4X45CC22H09FW" target="_blank" rel="noopener" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)">Order on Clover · $18.95<span style="font:700 15px 'Archivo'">&#8594;</span></a>
-              
-              
+                <button class="hv33" type="button" data-add="" style="box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:48px;padding:13px 16px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 14px 'Archivo';white-space:nowrap;cursor:pointer;box-shadow:0 7px 16px -7px rgba(199,69,43,0.7)"><span style="font:700 16px 'Archivo';line-height:1">+</span>Add to cart</button>
             </div>
           </div>
         </article>
@@ -980,7 +974,7 @@
           <h3 style="font:700 clamp(20px,3.2vw,26px) 'Baloo 2';margin:0 0 8px;color:#1B1512"><span data-t="112">More vegan dishes are on the way</span></h3>
           <p style="font:500 14px/1.6 'Archivo';color:#6B5D52;margin:0;text-wrap:pretty"><span data-t="113">We're adding more plant-based plates to the menu shortly. Until then, ask about extra vegetable sides when you order, gomen, atkilt and kik alicha are often available fresh.</span></p>
         </div>
-        <a class="hv33" href="https://banna-restaurant.cloveronline.com/menu/all" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:9px;box-sizing:border-box;min-height:50px;padding:14px 28px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 15px 'Archivo';white-space:nowrap;box-shadow:0 8px 18px -8px rgba(199,69,43,0.75)"><span data-t="114">See the full menu</span><span style="font:700 16px 'Archivo'">→</span></a>
+        <a class="hv34" href="Menu.dc.html" style="display:inline-flex;align-items:center;justify-content:center;gap:9px;box-sizing:border-box;min-height:50px;padding:14px 28px;border-radius:100px;border:1px solid #A93720;background:#C7452B;color:#FFFFFF;font:800 15px 'Archivo';white-space:nowrap;box-shadow:0 8px 18px -8px rgba(199,69,43,0.75)">See the full menu<span style="font:700 16px 'Archivo'">→</span></a>
       </div>
     </div>
   </section>
@@ -988,24 +982,24 @@
   <section id="vegan-how" data-screen-label="vegan-how" style="background:#F2EBE1;padding:clamp(48px,8vw,86px) clamp(20px,5vw,48px)">
     <div style="max-width:1100px;margin:0 auto">
       <div style="text-align:center;margin-bottom:clamp(24px,3.5vw,38px)">
-        <div style="font:600 12.5px 'Archivo';letter-spacing:0.22em;color:#4F7A3A;margin-bottom:12px"><span data-t="115">WHY IT TASTES LIKE THIS</span></div>
-        <h2 style="font:700 clamp(26px,4.2vw,38px)/1.12 'Baloo 2';margin:0;color:#1B1512;text-wrap:balance"><span data-t="116">Vegan by Tradition, Not by Substitution</span></h2>
+        <div style="font:600 12.5px 'Archivo';letter-spacing:0.22em;color:#4F7A3A;margin-bottom:12px"><span data-t="114">WHY IT TASTES LIKE THIS</span></div>
+        <h2 style="font:700 clamp(26px,4.2vw,38px)/1.12 'Baloo 2';margin:0;color:#1B1512;text-wrap:balance"><span data-t="115">Vegan by Tradition, Not by Substitution</span></h2>
       </div>
       <div class="vg-how-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,22px)">
         <article style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:22px;padding:clamp(22px,3vw,30px);display:flex;flex-direction:column;gap:11px;box-shadow:0 6px 18px rgba(27,21,18,0.06)">
           <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#EDF2E8;color:#4F7A3A;font:800 14px 'Archivo'">01</span>
-          <h3 style="margin:0;font:700 clamp(19px,2.4vw,22px)/1.2 'Baloo 2';color:#1B1512"><span data-t="117">No butter, no dairy</span></h3>
-          <p style="margin:0;font:500 14.5px/1.6 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="118">Our vegan pots are built on plant oil and berbere, never niter kibbeh. Nothing is swapped in to imitate meat.</span></p>
+          <h3 style="margin:0;font:700 clamp(19px,2.4vw,22px)/1.2 'Baloo 2';color:#1B1512"><span data-t="116">No butter, no dairy</span></h3>
+          <p style="margin:0;font:500 14.5px/1.6 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="117">Our vegan pots are built on plant oil and berbere, never niter kibbeh. Nothing is swapped in to imitate meat.</span></p>
         </article>
         <article style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:22px;padding:clamp(22px,3vw,30px);display:flex;flex-direction:column;gap:11px;box-shadow:0 6px 18px rgba(27,21,18,0.06)">
           <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#EDF2E8;color:#4F7A3A;font:800 14px 'Archivo'">02</span>
-          <h3 style="margin:0;font:700 clamp(19px,2.4vw,22px)/1.2 'Baloo 2';color:#1B1512"><span data-t="119">Fasting-season recipes</span></h3>
-          <p style="margin:0;font:500 14.5px/1.6 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="120">These are the dishes Eritrean and Ethiopian families cook during Tsom, refined over generations of plant-based eating.</span></p>
+          <h3 style="margin:0;font:700 clamp(19px,2.4vw,22px)/1.2 'Baloo 2';color:#1B1512"><span data-t="118">Fasting-season recipes</span></h3>
+          <p style="margin:0;font:500 14.5px/1.6 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="119">These are the dishes Eritrean and Ethiopian families cook during Tsom, refined over generations of plant-based eating.</span></p>
         </article>
         <article style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:22px;padding:clamp(22px,3vw,30px);display:flex;flex-direction:column;gap:11px;box-shadow:0 6px 18px rgba(27,21,18,0.06)">
           <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#EDF2E8;color:#4F7A3A;font:800 14px 'Archivo'">03</span>
-          <h3 style="margin:0;font:700 clamp(19px,2.4vw,22px)/1.2 'Baloo 2';color:#1B1512"><span data-t="121">Built to share</span></h3>
-          <p style="margin:0;font:500 14.5px/1.6 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="122">One platter feeds two or three. Everything arrives on injera, torn and eaten by hand, family-style.</span></p>
+          <h3 style="margin:0;font:700 clamp(19px,2.4vw,22px)/1.2 'Baloo 2';color:#1B1512"><span data-t="120">Built to share</span></h3>
+          <p style="margin:0;font:500 14.5px/1.6 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="121">One platter feeds two or three. Everything arrives on injera, torn and eaten by hand, family-style.</span></p>
         </article>
       </div>
     </div>
@@ -1014,33 +1008,33 @@
   <section id="vegan-faq" data-screen-label="vegan-faq" style="background:#F2EBE1;padding:clamp(48px,8vw,88px) clamp(20px,5vw,48px)">
     <div style="max-width:820px;margin:0 auto">
       <div style="text-align:center;margin-bottom:clamp(22px,3vw,34px)">
-        <div style="font:600 12.5px 'Archivo';letter-spacing:0.22em;color:#4F7A3A;margin-bottom:12px"><span data-t="123">BEFORE YOU ORDER</span></div>
-        <h2 style="font:700 clamp(26px,4.2vw,38px)/1.12 'Baloo 2';margin:0;color:#1B1512"><span data-t="124">Vegan Questions, Answered</span></h2>
+        <div style="font:600 12.5px 'Archivo';letter-spacing:0.22em;color:#4F7A3A;margin-bottom:12px"><span data-t="122">BEFORE YOU ORDER</span></div>
+        <h2 style="font:700 clamp(26px,4.2vw,38px)/1.12 'Baloo 2';margin:0;color:#1B1512"><span data-t="123">Vegan Questions, Answered</span></h2>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
         <details style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:18px;padding:0;overflow:hidden">
-          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="125">Is Ethiopian and Eritrean food naturally vegan?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
-          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="126">A large part of it is. Because Orthodox fasting removes all animal products for roughly 200 days a year, the plant-based side of this cuisine is fully developed on its own terms, not adapted from meat dishes.</span></div>
+          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="124">Is Ethiopian and Eritrean food naturally vegan?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
+          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="125">A large part of it is. Because Orthodox fasting removes all animal products for roughly 200 days a year, the plant-based side of this cuisine is fully developed on its own terms, not adapted from meat dishes.</span></div>
         </details>
         <details style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:18px;padding:0;overflow:hidden">
-          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="127">Is injera vegan?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
-          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="128">Yes. Injera is teff flour and water, fermented for about three days. Nothing else goes into it, no egg, no dairy, no oil.</span></div>
+          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="126">Is injera vegan?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
+          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="127">Yes. Injera is teff flour and water, fermented for about three days. Nothing else goes into it, no egg, no dairy, no oil.</span></div>
         </details>
         <details style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:18px;padding:0;overflow:hidden">
-          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="129">Do you cook the vegan dishes with butter?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
-          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="130">No. Niter kibbeh, the spiced clarified butter used in many meat dishes, is never used in our vegan pots. They are built on plant oil, onion, garlic and spice.</span></div>
+          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="128">Do you cook the vegan dishes with butter?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
+          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="129">No. Niter kibbeh, the spiced clarified butter used in many meat dishes, is never used in our vegan pots. They are built on plant oil, onion, garlic and spice.</span></div>
         </details>
         <details style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:18px;padding:0;overflow:hidden">
-          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="131">How spicy is it?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
-          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="132">It varies by dish. Shiro and kik alicha are mild, misir wot sits in the middle. Every card on this page shows a heat rating, and you can always ask for it milder.</span></div>
+          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="130">How spicy is it?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
+          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="131">It varies by dish. Shiro and kik alicha are mild, misir wot sits in the middle. Every card on this page shows a heat rating, and you can always ask for it milder.</span></div>
         </details>
         <details style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:18px;padding:0;overflow:hidden">
-          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="133">Is it filling without meat?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
-          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="134">Very. Lentils, split peas and chickpeas carry the plate, and one platter comfortably feeds two to three people.</span></div>
+          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="132">Is it filling without meat?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
+          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="133">Very. Lentils, split peas and chickpeas carry the plate, and one platter comfortably feeds two to three people.</span></div>
         </details>
         <details style="background:#FDF9F4;border:1px solid rgba(27,21,18,0.12);border-radius:18px;padding:0;overflow:hidden">
-          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="135">Can I get vegan food delivered?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
-          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="136">Yes. Order direct for pickup or delivery, or find us on Uber Eats and DoorDash. Direct orders help the restaurant most.</span></div>
+          <summary style="list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 16.5px/1.35 'Baloo 2';color:#1B1512"><span data-t="134">Can I get vegan food delivered?</span><span class="faq-plus" aria-hidden="true" style="flex:none;font:700 17px 'Archivo';line-height:1;color:#C7452B"></span></summary>
+          <div style="padding:0 22px 20px;font:400 14.5px/1.65 'Archivo';color:#6B5D52;text-wrap:pretty"><span data-t="135">Yes. Order direct for pickup or delivery, or find us on Uber Eats and DoorDash. Direct orders help the restaurant most.</span></div>
         </details>
       </div>
     </div>
@@ -1063,12 +1057,12 @@
         </svg>
       </div>
       <div style="min-width:0">
-        <div style="font:600 13px 'Archivo';letter-spacing:2px;color:#B07A2B;margin-bottom:14px"><span data-t="137">VEGAN &amp; VEGETARIAN</span></div>
-        <h2 style="font:700 clamp(27px,3.6vw,40px)/1.12 'Baloo 2';margin:0 0 20px;max-width:16ch;text-wrap:balance"><span data-t="138">Cooked the Way Tsom Taught Us</span></h2>
-        <p style="font:600 16px/1.7 'Archivo';color:#E4DBD1;margin:0 0 16px"><span data-t="139">During Tsom, the fasting season observed before Orthodox Christian holidays like Lent and Christmas, Eritrean and Ethiopian households eat entirely plant-based for weeks at a time. That tradition shaped some of the richest vegan cooking in the world: hearty lentils, spiced chickpeas, collard greens, and berbere-stewed vegetables, all built to be satisfying without meat or dairy.</span></p>
-        <p style="font:600 16px/1.7 'Archivo';color:#E4DBD1;margin:0 0 28px"><span data-t="140">At Banna, we don't save that cooking for fasting season. Our vegan dishes are on the menu 365 days a year, made the same slow, traditional way, so anyone eating plant-based can order a full, flavorful platter any day of the week.</span></p>
+        <div style="font:600 13px 'Archivo';letter-spacing:2px;color:#B07A2B;margin-bottom:14px"><span data-t="136">VEGAN &amp; VEGETARIAN</span></div>
+        <h2 style="font:700 clamp(27px,3.6vw,40px)/1.12 'Baloo 2';margin:0 0 20px;max-width:16ch;text-wrap:balance"><span data-t="137">Cooked the Way Tsom Taught Us</span></h2>
+        <p style="font:600 16px/1.7 'Archivo';color:#E4DBD1;margin:0 0 16px"><span data-t="138">During Tsom, the fasting season observed before Orthodox Christian holidays like Lent and Christmas, Eritrean and Ethiopian households eat entirely plant-based for weeks at a time. That tradition shaped some of the richest vegan cooking in the world: hearty lentils, spiced chickpeas, collard greens, and berbere-stewed vegetables, all built to be satisfying without meat or dairy.</span></p>
+        <p style="font:600 16px/1.7 'Archivo';color:#E4DBD1;margin:0 0 28px"><span data-t="139">At Banna, we don't save that cooking for fasting season. Our vegan dishes are on the menu 365 days a year, made the same slow, traditional way, so anyone eating plant-based can order a full, flavorful platter any day of the week.</span></p>
         <div style="display:flex;gap:16px;flex-wrap:wrap">
-          <a class="hv34" href="https://banna-restaurant.cloveronline.com/menu/all" style="background:#C7452B;color:#FFFFFF;font:600 15px 'Archivo';padding:14px 26px;border-radius:100px;border:1px solid rgba(27,21,18,0.14)"><span data-t="141">Order Now</span></a>
+          <a class="hv35" href="#vegan-menu" style="background:#C7452B;color:#FFFFFF;font:600 15px 'Archivo';padding:14px 26px;border-radius:100px;border:1px solid rgba(27,21,18,0.14)"><span data-t="140">Order Now</span></a>
         </div>
       </div>
     </div>
@@ -1087,22 +1081,22 @@
     <div style="position:absolute;top:-40px;right:-40px;left:auto;font:700 200px 'Baloo 2';color:rgba(43,27,15,0.06);line-height:1;user-select:none;pointer-events:none;z-index:0">B</div>
     <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:56px;position:relative;z-index:1">
       <div>
-        <div style="font:600 13px 'Archivo';letter-spacing:2px;color:#1B1512;margin-bottom:14px"><span data-t="142">TAKEOUT &amp; DELIVERY</span></div>
-        <h2 style="font:700 44px/1.08 'Baloo 2';margin:0 0 22px;color:#1B1512"><span data-t="143">One of the Best Ethiopian Restaurants Dallas Has to Offer</span></h2>
-        <p style="font:600 17px/1.7 'Archivo';color:#3E2A15;margin:0 0 32px"><span data-t="144">Dine in, pick up, or have it delivered. Order directly for the full menu, or through your favorite delivery app.</span></p>
+        <div style="font:600 13px 'Archivo';letter-spacing:2px;color:#1B1512;margin-bottom:14px"><span data-t="141">TAKEOUT &amp; DELIVERY</span></div>
+        <h2 style="font:700 44px/1.08 'Baloo 2';margin:0 0 22px;color:#1B1512"><span data-t="142">One of the Best Ethiopian Restaurants Dallas Has to Offer</span></h2>
+        <p style="font:600 17px/1.7 'Archivo';color:#3E2A15;margin:0 0 32px"><span data-t="143">Dine in, pick up, or have it delivered. Order directly for the full menu, or through your favorite delivery app.</span></p>
         <div style="display:flex;flex-direction:column;gap:14px">
-          <div style="display:flex;gap:12px;align-items:center;font:600 15px 'Archivo';color:#1B1512"><span style="width: 34px; height: 34px; background: #1B1512; color: #B07A2B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font:700 15px 'Baloo 2'; flex-shrink: 0;">H</span><span data-t="145">Open daily 11am – 2am</span></div>
+          <div style="display:flex;gap:12px;align-items:center;font:600 15px 'Archivo';color:#1B1512"><span style="width: 34px; height: 34px; background: #1B1512; color: #B07A2B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font:700 15px 'Baloo 2'; flex-shrink: 0;">H</span><span data-t="144">Open daily 11am – 2am</span></div>
           <div style="display:flex;gap:12px;align-items:center;font:600 15px 'Archivo';color:#1B1512"><span style="width:34px;height:34px;background:#1B1512;color:#B07A2B;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 15px 'Baloo 2';flex-shrink:0">@</span>9560 Skillman St #120, Dallas, TX 75243</div>
           <div style="display:flex;gap:12px;align-items:center;font:600 15px 'Archivo';color:#1B1512"><span style="width:34px;height:34px;background:#1B1512;color:#B07A2B;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 15px 'Baloo 2';flex-shrink:0">#</span>(214) 758-0752</div>
-          <a class="hv35" href="https://www.google.com/maps/dir/?api=1&amp;amp;destination=Banna+Restaurant+%26+Bar%2C+9560+Skillman+St+%23120%2C+Dallas%2C+TX+75243" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:9px;margin-top:6px;background:#C7452B;color:#FFFFFF;font:700 16px 'Archivo';min-height:56px;padding:16px 26px;border-radius:100px;border:1px solid #A93720;box-shadow:0 8px 20px -10px rgba(199,69,43,0.75)" data-om-label="Link"><span aria-hidden="true" style="flex:none;font-size:18px">&#9906;</span>Get Directions</a>
+          <a class="hv36" href="https://www.google.com/maps/dir/?api=1&amp;amp;destination=Banna+Restaurant+%26+Bar%2C+9560+Skillman+St+%23120%2C+Dallas%2C+TX+75243" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:9px;margin-top:6px;background:#C7452B;color:#FFFFFF;font:700 16px 'Archivo';min-height:56px;padding:16px 26px;border-radius:100px;border:1px solid #A93720;box-shadow:0 8px 20px -10px rgba(199,69,43,0.75)" data-om-label="Link"><span aria-hidden="true" style="flex:none;font-size:18px">&#9906;</span>Get Directions</a>
         </div>
       </div>
 
       <div style="background:#fff;border:4px solid #1B1512;border-radius:24px;padding:40px;box-shadow:0 6px 18px rgba(27,21,18,0.08);display:flex;flex-direction:column;gap:16px">
         <div style="font:700 20px 'Baloo 2';color:#1B1512;margin-bottom:4px">Choose where to order</div>
-        <a class="hv36" href="https://banna-restaurant.cloveronline.com/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#1B1512;color:#E9E0D4;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">Order Direct (Clover) <span>→</span></a>
-        <a class="hv37" href="https://www.ubereats.com/store/banna-restaurant-and-bar/9eeCsjv6RUW8-X5vssh71A?diningMode=DELIVERY" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#06C167;color:#fff;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">Uber Eats <span>→</span></a>
-        <a class="hv38" href="https://www.doordash.com/store/banna-ethiopian-bar-and-restaurant-dallas-34728527/110909369/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#EB1700;color:#fff;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">DoorDash <span>→</span></a>
+        <a class="hv37" href="https://banna-restaurant.cloveronline.com/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#1B1512;color:#E9E0D4;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">Order Direct (Clover) <span>→</span></a>
+        <a class="hv38" href="https://www.ubereats.com/store/banna-restaurant-and-bar/9eeCsjv6RUW8-X5vssh71A?diningMode=DELIVERY" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#06C167;color:#fff;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">Uber Eats <span>→</span></a>
+        <a class="hv39" href="https://www.doordash.com/store/banna-ethiopian-bar-and-restaurant-dallas-34728527/110909369/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:#EB1700;color:#fff;border-radius:14px;padding:18px 22px;font:600 16px 'Archivo'">DoorDash <span>→</span></a>
       </div>
     </div>
   </section>
@@ -1122,43 +1116,43 @@
           <img src="../img/banna-logo-cropped-transparent.png" alt="Banna Restaurant and Bar logo" style="height:40px;width:auto;display:block">
           
         </div>
-        <p style="font:600 14px/1.6;color:#B8A88E;max-width:280px;margin:0 0 8px"><span data-t="146">"Habesha hospitality means no one leaves the table hungry, or a stranger."</span></p>
+        <p style="font:600 14px/1.6;color:#B8A88E;max-width:280px;margin:0 0 8px"><span data-t="145">"Habesha hospitality means no one leaves the table hungry, or a stranger."</span></p>
         <p style="font:600 14px/1.6;color:#B8A88E;max-width:280px;margin:0">Eritrean &amp; Ethiopian Restaurant and Bar · 9560 Skillman St #120, Dallas, TX 75243</p>
         <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">
-          <a class="hv39" href="tel:+12147580752" style="font:600 14px 'Archivo';color:#B07A2B">(214) 758-0752</a>
-          <a class="hv40" href="mailto:Banna9560@gmail.com" style="font:600 14px 'Archivo';color:#B07A2B">Banna9560@gmail.com</a>
+          <a class="hv40" href="tel:+12147580752" style="font:600 14px 'Archivo';color:#B07A2B">(214) 758-0752</a>
+          <a class="hv41" href="mailto:Banna9560@gmail.com" style="font:600 14px 'Archivo';color:#B07A2B">Banna9560@gmail.com</a>
           <span style="font:600 14px/1.6 'Archivo';color:#B8A88E">Open daily 11am – 2am</span>
         </div>
       </div>
       <div style="display:flex;gap:56px;flex-wrap:wrap">
         <div>
-          <div style="font:600 13px 'Archivo';letter-spacing:1px;color:#B07A2B;margin-bottom:12px"><span data-t="147">EXPLORE</span></div>
+          <div style="font:600 13px 'Archivo';letter-spacing:1px;color:#B07A2B;margin-bottom:12px"><span data-t="146">EXPLORE</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;font:600 14px 'Archivo'">
-            <a class="hv41" href="../menu/" style="color:#E4DBD1"><span data-t="148">Menu</span></a>
-            <a class="hv42" href="../about/" style="color:#E4DBD1"><span data-t="149">About</span></a>
-            <a class="hv43" href="../about/#blog" style="color:#E4DBD1"><span data-t="150">Blog</span></a>
-            <a class="hv44" href="../vegan/" style="color:#E4DBD1"><span data-t="151">Vegan</span></a>
-            <a class="hv45" href="../faq/" style="color:#E4DBD1"><span data-t="152">FAQ</span></a>
-            <a class="hv46" href="../contact/" style="color:#E4DBD1"><span data-t="153">Contact</span></a>
-            <a class="hv47" href="../menu/#order" style="color:#E4DBD1">Order Online</a>
+            <a class="hv42" href="Menu.dc.html" style="color:#E4DBD1"><span data-t="147">Menu</span></a>
+            <a class="hv43" href="About.dc.html" style="color:#E4DBD1"><span data-t="148">About</span></a>
+            <a class="hv44" href="About.dc.html#blog" style="color:#E4DBD1"><span data-t="149">Blog</span></a>
+            <a class="hv45" href="Vegan.dc.html" style="color:#E4DBD1"><span data-t="150">Vegan</span></a>
+            <a class="hv46" href="FAQ.dc.html" style="color:#E4DBD1"><span data-t="151">FAQ</span></a>
+            <a class="hv47" href="Contact.dc.html" style="color:#E4DBD1"><span data-t="152">Contact</span></a>
+            <a class="hv48" href="Menu.dc.html#order" style="color:#E4DBD1">Order Online</a>
           </div>
         </div>
         <div>
-          <div style="font:600 13px 'Archivo';letter-spacing:1px;color:#B07A2B;margin-bottom:12px"><span data-t="154">FOLLOW &amp; REVIEW</span></div>
+          <div style="font:600 13px 'Archivo';letter-spacing:1px;color:#B07A2B;margin-bottom:12px"><span data-t="153">FOLLOW &amp; REVIEW</span></div>
           <div style="display:flex;flex-direction:column;gap:8px;font:600 14px 'Archivo'">
-            <a class="hv48" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" style="color:#E4DBD1">Instagram</a>
-            <a class="hv49" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" style="color:#E4DBD1">Facebook</a>
-            <a class="hv50" href="https://www.tiktok.com/@banna_restaurant" target="_blank" style="color:#E4DBD1">TikTok</a>
-            <a class="hv51" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" style="color:#E4DBD1">Yelp</a>
-            <a class="hv52" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" style="color:#E4DBD1"><span data-t="155">★ Leave us a Google Review</span></a>
-            <a class="hv53" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" style="color:#E4DBD1">Google Business Profile</a>
+            <a class="hv49" href="https://www.instagram.com/banna_restaruant_bar/" target="_blank" style="color:#E4DBD1">Instagram</a>
+            <a class="hv50" href="https://www.facebook.com/profile.php?id=61593342351493" target="_blank" style="color:#E4DBD1">Facebook</a>
+            <a class="hv51" href="https://www.tiktok.com/@banna_restaurant" target="_blank" style="color:#E4DBD1">TikTok</a>
+            <a class="hv52" href="https://www.yelp.com/biz/banna-restaurant-and-bar-dallas-4" target="_blank" style="color:#E4DBD1">Yelp</a>
+            <a class="hv53" href="https://g.page/r/CTMm5qcwNgbJEAE/review" target="_blank" style="color:#E4DBD1"><span data-t="154">★ Leave us a Google Review</span></a>
+            <a class="hv54" href="https://share.google/0nRGXuikmYu6KPP50" target="_blank" style="color:#E4DBD1">Google Business Profile</a>
           </div>
         </div>
       </div>
     </div>
     <div style="max-width:1200px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-      <p style="font:600 13px 'Archivo';color:rgba(250,247,243,0.55);margin:0"><span data-t="156">© 2026 Banna Restaurant &amp; Bar. All rights reserved.</span></p>
-      <p style="font:600 13px 'Archivo';color:rgba(250,247,243,0.55);margin:0"><span data-t="157">Made with love in Dallas, TX</span></p>
+      <p style="font:600 13px 'Archivo';color:rgba(250,247,243,0.55);margin:0"><span data-t="155">© 2026 Banna Restaurant &amp; Bar. All rights reserved.</span></p>
+      <p style="font:600 13px 'Archivo';color:rgba(250,247,243,0.55);margin:0"><span data-t="156">Made with love in Dallas, TX</span></p>
     </div>
   </footer>
 
@@ -1167,13 +1161,10 @@
 
 
 
-<script id="i18n" type="application/json">{"es":{"0":"Menú","1":"Nosotros","2":"Reseñas","3":"Preguntas","4":"Más ▾","5":"Menú","6":"Nosotros","7":"Vegano","8":"Reseñas","9":"Preguntas","10":"Blog","11":"Contacto","12":"Ordenar en línea","13":"★ Déjanos una Reseña en Google","14":"Ordena Ahora","15":"100% A BASE DE PLANTAS · SKILLMAN ST, DALLAS","16":"Comida Vegana Etíope y Eritrea en Dallas","17":"Un platón entero de lentejas, verduras y vegetales especiados sobre injera. Sin carne, sin lácteos, sin mantequilla, preparado al estilo tradicional del ayuno y servido todos los días del año.","18":"Mira qué lleva el platón","19":"Para 3–4","20":"4.8★ en Google","21":"15,521+ servidos","22":"Sin lácteos ni mantequilla","23":"Para llevar · Entrega · En el local","24":"4.8★ en Google","25":"15,521+ servidos","26":"Sin lácteos ni mantequilla","27":"Para llevar · Entrega · En el local","28":"4.8★ en Google","29":"15,521+ servidos","30":"Sin lácteos ni mantequilla","31":"Para llevar · Entrega · En el local","32":"4.8★ en Google","33":"15,521+ servidos","34":"Sin lácteos ni mantequilla","35":"Para llevar · Entrega · En el local","36":"QUÉ LLEVA EL PLATÓN","37":"Diez Guarniciones, Un Plato, Sin Cubiertos","38":"Un beyaynetu es un surtido. Cada montoncito se cocina en su propia olla y luego se sirve sobre una injera redonda. Se parte el pan y se recoge con la mano, sin tenedor.","39":"Toca un número del plato para ver qué es","40":"Cada Guarnición del Platón","41":"Un beyaynetu son estas diez juntas. El número en el plato corresponde al número en la tarjeta.","42":"Injera","43":"Pan plano de teff, fermentado tres días. Ácido y esponjoso. Hay injera sin gluten a pedido.","44":"cal","45":"proteína","46":"fibra","47":"Repollo con Zanahoria","48":"Repollo y zanahoria en un caldo suave de cúrcuma, con papa.","49":"cal","50":"proteína","51":"fibra","52":"Fosolia","53":"Ejotes y zanahoria salteados con cebolla, ajo y un toque de cúrcuma.","54":"cal","55":"proteína","56":"fibra","57":"Shiro","58":"Garbanzos molidos cocidos con ajo y berbere hasta quedar aterciopelados.","59":"cal","60":"proteína","61":"fibra","62":"Defen Misir (Lenteja)","63":"Lentejas cafés enteras cocidas con cebolla y berbere. Sustanciosas y terrosas.","64":"cal","65":"proteína","66":"fibra","67":"Carrot Dinish Alicha","68":"Papa y zanahoria guisadas en una salsa suave de cúrcuma. Sin picante.","69":"cal","70":"proteína","71":"fibra","72":"Gomen","73":"Berza estofada con ajo, cebolla y chile verde.","74":"cal","75":"proteína","76":"fibra","77":"Misir Amarillo (Lenteja)","78":"Lentejas amarillas con cúrcuma y jengibre. Suaves y mantecosas.","79":"cal","80":"proteína","81":"fibra","82":"Misir Wot (Lenteja)","83":"Lentejas rojas cocidas en berbere, profundas y ligeramente picantes.","84":"cal","85":"proteína","86":"fibra","87":"Timatim Salata","88":"Tomate, cebolla morada y jalapeño picados con limón.","89":"cal","90":"proteína","91":"fibra","92":"La selección cambia según la temporada y lo que esté fresco esa mañana.","93":"Aproximado, por una porción de guarnición (unos ½ taza) como viene en el platón.","94":"ORDENA A BASE DE PLANTAS","95":"Todos Nuestros Platos Veganos","96":"Toca cualquier foto para verla de cerca.","97":"Suave","98":"Para 3–4","99":"Suave","100":"Para 1","101":"Medio","102":"Para 1","103":"Suave","104":"Entrada","105":"Medio","106":"Para 1","107":"Medio","108":"Para 1","109":"Suave","110":"Para 1","111":"PRÓXIMAMENTE","112":"Vienen más platos veganos","113":"Pronto agregaremos más platos a base de plantas al menú. Mientras tanto, pregunta por más guarniciones de verduras al ordenar, gomen, atkilt y kik alicha suelen estar frescos.","114":"Ver el menú completo","115":"POR QUÉ SABE ASÍ","116":"Vegano por Tradición, No por Sustitución","117":"Sin mantequilla ni lácteos","118":"Nuestras ollas veganas se hacen con aceite vegetal y berbere, nunca con niter kibbeh. No sustituimos nada para imitar la carne.","119":"Recetas de temporada de ayuno","120":"Son los platos que las familias eritreas y etíopes cocinan durante el Tsom, perfeccionados por generaciones.","121":"Hecho para compartir","122":"Un platón alcanza para dos o tres. Todo llega sobre injera, para comer con la mano, al estilo familiar.","123":"ANTES DE ORDENAR","124":"Preguntas Veganas, Respondidas","125":"¿La comida etíope y eritrea es vegana por naturaleza?","126":"Gran parte sí. Como el ayuno ortodoxo elimina todo producto animal unos 200 días al año, la cocina vegetal de esta tradición está completamente desarrollada por sí misma.","127":"¿La injera es vegana?","128":"Sí. La injera es harina de teff y agua, fermentada unos tres días. No lleva nada más: ni huevo, ni lácteos, ni aceite.","129":"¿Cocinan los platos veganos con mantequilla?","130":"No. El niter kibbeh, la mantequilla clarificada con especias, nunca se usa en nuestras ollas veganas. Se preparan con aceite vegetal, cebolla, ajo y especias.","131":"¿Qué tan picante es?","132":"Depende del plato. El shiro y el kik alicha son suaves; el misir wot es intermedio. Cada tarjeta muestra el nivel de picante y siempre puedes pedirlo más suave.","133":"¿Llena sin carne?","134":"Mucho. Las lentejas, los guisantes y los garbanzos sostienen el plato, y un platón alcanza cómodamente para dos o tres personas.","135":"¿Puedo pedir comida vegana a domicilio?","136":"Sí. Ordena directo para recoger o a domicilio, o búscanos en Uber Eats y DoorDash. Los pedidos directos ayudan más al restaurante.","137":"VEGANO Y VEGETARIANO","138":"Cocinado Como Nos Enseñó el Tsom","139":"Durante el Tsom, la temporada de ayuno antes de festividades ortodoxas como la Cuaresma y la Navidad, los hogares eritreos y etíopes comen completamente a base de plantas durante semanas. Esa tradición dio forma a una de las cocinas veganas más ricas del mundo: lentejas abundantes, garbanzos especiados, verduras y vegetales guisados con berbere, todo hecho para satisfacer sin carne ni lácteos.","140":"En Banna, no reservamos esa cocina para la temporada de ayuno. Nuestros platillos veganos están en el menú los 365 días del año, preparados de la misma manera tradicional, para que cualquiera pueda pedir un plato completo y lleno de sabor cualquier día.","141":"Pregúntale a nuestra mesera","142":"PARA LLEVAR Y ENTREGA","143":"Ordena en Línea","144":"Come aquí, recoge tu pedido o pide entrega a domicilio. Ordena directamente para el menú completo, o por tu app de entrega favorita.","145":"Abierto todos los días de 11am a 2am","146":"\"La hospitalidad habesha significa que nadie se va de la mesa con hambre, ni como un extraño.\"","147":"EXPLORAR","148":"Menú","149":"Nosotros","150":"Blog","151":"Vegano","152":"Preguntas","153":"Contacto","154":"SÍGUENOS Y OPINA","155":"★ Déjanos una Reseña en Google","156":"© 2026 Banna Restaurant & Bar. Todos los derechos reservados.","157":"Hecho con amor en Dallas, TX"},"am":{"0":"ምናሌ","1":"ስለ እኛ","2":"ግምገማዎች","3":"ጥያቄዎች","4":"ተጨማሪ ▾","5":"ምናሌ","6":"ስለ እኛ","7":"ቬጋን","8":"ግምገማዎች","9":"ጥያቄዎች","10":"ብሎግ","11":"አግኙን","12":"በመስመር ላይ ይዘዙ","13":"★ በጉግል ግምገማ ይተውልን","14":"አሁን ይዘዙ","15":"100% ከዕፅዋት የተሠራ · ስኪልማን ጎዳና፣ ዳላስ","16":"በዳላስ የቬጋን የኢትዮጵያ እና የኤርትራ ምግብ","17":"ሙሉ ሰሃን ምስር፣ ጎመን እና በቅመም የበሰሉ አትክልቶች በእንጀራ ላይ። ስጋ የለም፣ ወተት የለም፣ ቅቤ የለም። በባህላዊ የጾም ዘዴ ተዘጋጅቶ ዓመቱን ሙሉ ይቀርባል።","18":"በሰሃኑ ላይ ያለውን ይዩ","19":"ለ3–4 ሰው","20":"በጉግል 4.8★","21":"15,521+ ተስተናግደዋል","22":"ወተትና ቅቤ የለበትም","23":"መውሰጃ · ማድረሻ · በቦታው","24":"በጉግል 4.8★","25":"15,521+ ተስተናግደዋል","26":"ወተትና ቅቤ የለበትም","27":"መውሰጃ · ማድረሻ · በቦታው","28":"በጉግል 4.8★","29":"15,521+ ተስተናግደዋል","30":"ወተትና ቅቤ የለበትም","31":"መውሰጃ · ማድረሻ · በቦታው","32":"በጉግል 4.8★","33":"15,521+ ተስተናግደዋል","34":"ወተትና ቅቤ የለበትም","35":"መውሰጃ · ማድረሻ · በቦታው","36":"በሰሃኑ ላይ ያለው","37":"አሥር ድርሻዎች፣ አንድ ሰሃን፣ ያለ ማንኪያ","38":"በያይነቱ የቅምሻ ሰሃን ነው። እያንዳንዱ ወጥ በራሱ ድስት ተዘጋጅቶ በአንድ ክብ እንጀራ ላይ ይቀርባል። እንጀራውን ቆርሰው ይጠቀለላሉ፤ ሹካ አያስፈልግም።","39":"በሰሃኑ ላይ ያለውን ቁጥር ይንኩና ምን እንደሆነ ይዩ","40":"ሰሃኑን የሚሠሩት ሁሉም ድርሻዎች","41":"አንድ በያይነቱ እነዚህ አሥሩ አንድ ላይ ናቸው። በሰሃኑ ላይ ያለው ቁጥር ከካርዱ ቁጥር ጋር ይመሳሰላል።","42":"እንጀራ","43":"የጤፍ እንጀራ፣ ለሦስት ቀናት የቦካ። ጎምዛዛና ስፖንጅ የመሰለ። ግሉተን-ነፃ እንጀራ በጥያቄ ይገኛል።","44":"ካሎሪ","45":"ፕሮቲን","46":"ፋይበር","47":"ጥቅል ጎመን ከካሮት ጋር","48":"ጥቅል ጎመንና ካሮት በለስላሳ የእርድ ወጥ ውስጥ፣ ከድንች ጋር።","49":"ካሎሪ","50":"ፕሮቲን","51":"ፋይበር","52":"ፎሶሊያ","53":"ፎሶሊያና ካሮት ከሽንኩርት፣ ነጭ ሽንኩርትና በእርድ የተጠበሰ።","54":"ካሎሪ","55":"ፕሮቲን","56":"ፋይበር","57":"ሽሮ","58":"የተፈጨ ሽምብራ ከነጭ ሽንኩርትና በርበሬ ጋር ለስላሳ እስኪሆን ድረስ የበሰለ።","59":"ካሎሪ","60":"ፕሮቲን","61":"ፋይበር","62":"ደፈን ምስር","63":"ሙሉ ቡናማ ምስር ከሽንኩርትና በርበሬ ጋር የበሰለ። ጠገብ የሚያደርግ።","64":"ካሎሪ","65":"ፕሮቲን","66":"ፋይበር","67":"ካሮት ድንች አልጫ","68":"ድንችና ካሮት በእርድ ለስላሳ ወጥ የበሰለ። ምንም አይቃጥልም።","69":"ካሎሪ","70":"ፕሮቲን","71":"ፋይበር","72":"ጎመን","73":"ጎመን ከነጭ ሽንኩርት፣ ሽንኩርትና አረንጓዴ በርበሬ ጋር የተጠበሰ።","74":"ካሎሪ","75":"ፕሮቲን","76":"ፋይበር","77":"ቢጫ ምስር","78":"ቢጫ ምስር ከእርድና ዝንጅብል ጋር። ለስላሳና ልስልስ ያለ።","79":"ካሎሪ","80":"ፕሮቲን","81":"ፋይበር","82":"ምስር ወጥ","83":"ቀይ ምስር በበርበሬ የበሰለ፤ ጥልቅና ትንሽ የሚያቃጥል።","84":"ካሎሪ","85":"ፕሮቲን","86":"ፋይበር","87":"ቲማቲም ሰላጣ","88":"የተከተፈ ቲማቲም፣ ቀይ ሽንኩርትና ቃሪያ ከሎሚ ጋር።","89":"ካሎሪ","90":"ፕሮቲን","91":"ፋይበር","92":"ዝርዝሩ እንደ ወቅቱና በዚያ ጠዋት እንደተገኘው ትኩስ ነገር ይለዋወጣል።","93":"ግምታዊ፣ በሰሃኑ ላይ እንደሚቀርበው አንድ ድርሻ (ግማሽ ኩባያ ገደማ)።","94":"ከዕፅዋት የተሠራ ይዘዙ","95":"በምናሌያችን ያሉ ሁሉም የቬጋን ምግቦች","96":"ከቅርበት ለማየት ማንኛውንም ፎቶ ይንኩ።","97":"ለስላሳ","98":"ለ3–4 ሰው","99":"ለስላሳ","100":"ለ1 ሰው","101":"መካከለኛ","102":"ለ1 ሰው","103":"ለስላሳ","104":"መክፈቻ","105":"መካከለኛ","106":"ለ1 ሰው","107":"መካከለኛ","108":"ለ1 ሰው","109":"ለስላሳ","110":"ለ1 ሰው","111":"በቅርቡ ይመጣል","112":"ተጨማሪ የቬጋን ምግቦች በመንገድ ላይ ናቸው","113":"በቅርቡ ተጨማሪ የዕፅዋት ምግቦችን ወደ ምናሌው እንጨምራለን። እስከዚያው ሲዘዙ ስለ ተጨማሪ የአትክልት ድስቶች ይጠይቁ፤ ጎመን፣ አትክልትና ክክ አልጫ ብዙ ጊዜ ትኩስ አለ።","114":"ሙሉ ምናሌውን ይመልከቱ","115":"ለምን እንዲህ ይጣፍጣል","116":"በባህል ቬጋን፣ በምትክ አይደለም","117":"ቅቤም ወተትም የለም","118":"የቬጋን ወጦቻችን በዘይትና በበርበሬ ይዘጋጃሉ እንጂ በንጥር ቅቤ አይደለም። ስጋን ለመምሰል ምንም አይተካም።","119":"የጾም ወቅት የምግብ አዘገጃጀት","120":"እነዚህ የኤርትራና የኢትዮጵያ ቤተሰቦች በጾም ወቅት የሚያበስሏቸው፣ ለትውልዶች የተሻሻሉ ምግቦች ናቸው።","121":"ለመጋራት የተዘጋጀ","122":"አንድ ሰሃን ለሁለት ወይም ለሦስት ሰው ይበቃል። ሁሉም በእንጀራ ላይ ቀርቦ በእጅ ይበላል።","123":"ከማዘዝዎ በፊት","124":"የቬጋን ጥያቄዎች፣ ተመልሰዋል","125":"የኢትዮጵያና የኤርትራ ምግብ በተፈጥሮው ቬጋን ነው?","126":"ብዙው ክፍሉ አዎ ነው። የኦርቶዶክስ ጾም በዓመት ወደ 200 ቀናት ገደማ ሁሉንም የእንስሳት ተዋጽኦ ስለሚያስወግድ፣ የዚህ ምግብ የዕፅዋት ክፍል በራሱ ሙሉ በሙሉ የዳበረ ነው።","127":"እንጀራ ቬጋን ነው?","128":"አዎ። እንጀራ የጤፍ ዱቄትና ውሃ ብቻ ነው፣ ለሦስት ቀናት ያህል ይቦካል። ሌላ ምንም የለበትም፤ እንቁላል፣ ወተት ወይም ዘይት አይገባበትም።","129":"የቬጋን ምግቦችን በቅቤ ታበስላላችሁ?","130":"አይ። በብዙ የስጋ ምግቦች ውስጥ የሚገባው ንጥር ቅቤ በቬጋን ድስቶቻችን ውስጥ ፈጽሞ አይገባም። በዘይት፣ ሽንኩርት፣ ነጭ ሽንኩርትና ቅመም ብቻ ይዘጋጃሉ።","131":"ምን ያህል ያቃጥላል?","132":"እንደ ምግቡ ይለያያል። ሽሮና ክክ አልጫ ለስላሳ ናቸው፤ ምስር ወጥ መካከለኛ ነው። በዚህ ገጽ ያለ እያንዳንዱ ካርድ የቅመም መጠን ያሳያል፣ ሁልጊዜም ያነሰ እንዲሆን መጠየቅ ይችላሉ።","133":"ያለ ስጋ ያጠግባል?","134":"በጣም። ምስር፣ አተርና ሽምብራ ሰሃኑን ይሸከማሉ፤ አንድ ሰሃን ለሁለት ወይም ለሦስት ሰው በበቂ ይበቃል።","135":"የቬጋን ምግብ ማድረስ እችላለሁ?","136":"አዎ። በቀጥታ ለመውሰድ ወይም ለማድረስ ይዘዙ፣ ወይም በኡበር ኢትስና ዶርዳሽ ያግኙን። ቀጥታ ትዕዛዞች ለምግብ ቤቱ በጣም ይጠቅማሉ።","137":"የቬጋን እና የስጋ-አልባ","138":"ጾም እንዳስተማረን የበሰለ","139":"እንደ ጾም ወቅት፣ የኤርትራ እና የኢትዮጵያ ቤተሰቦች ለሳምንታት ሙሉ በሙሉ የእጽዋት ምግብ ይመገባሉ። ያ ባህል በዓለም ላይ ካሉት እጅግ ሀብታም የቬጋን ምግቦች አንዱን ፈጥሯል፦ ምስር፣ ቅመም የተደረገበት ሽምብራ፣ አትክልቶች እና በበርበሬ የበሰሉ አትክልቶች።","140":"በባና ያንን ምግብ ለጾም ወቅት ብቻ አናስቀምጠውም። የቬጋን ምግቦቻችን በዓመቱ 365 ቀናት በምናሌው ላይ ይገኛሉ፣ በተመሳሳይ ባህላዊ መንገድ የተዘጋጁ።","141":"አስተናጋጃችንን ይጠይቁ","142":"ውሰድ እና ማድረስ","143":"በመስመር ላይ ይዘዙ","144":"በቦታው ይመገቡ፣ ይውሰዱ ወይም ያስደርሱልን። ለሙሉ ምናሌ በቀጥታ ይዘዙ ወይም በሚወዱት የማድረስ መተግበሪያ ይዘዙ።","145":"በየቀኑ ከ11am እስከ 2am ክፍት ነው","146":"«የሐበሻ እንግዳ ተቀባይነት ማለት ማንም ከጠረጴዛው በረሃብ ወይም እንደ እንግዳ አይሄድም።»","147":"ያስሱ","148":"ምናሌ","149":"ስለ እኛ","150":"ብሎግ","151":"ቬጋን","152":"ጥያቄዎች","153":"አግኙን","154":"ይከተሉን እና ይገምግሙ","155":"★ በጉግል ግምገማ ይተውልን","156":"© 2026 ባና ሬስቶራንት እና ባር። ሁሉም መብቶች የተጠበቁ ናቸው።","157":"በፍቅር በዳላስ ቴክሳስ የተሰራ"},"ti":{"0":"ዝርዝር","1":"ብዛዕባና","2":"ግምገማታት","3":"ሕቶታት","4":"ተወሳኺ ▾","5":"ዝርዝር","6":"ብዛዕባና","7":"ቬጋን","8":"ግምገማታት","9":"ሕቶታት","10":"ብሎግ","11":"ርኸቡና","12":"ብመስመር ኣዘዙ","13":"★ ኣብ ጉግል ግምገማ ግደፉልና","14":"ሕጂ ኣዘዙ","15":"100% ካብ ኣትክልቲ · ስኪልማን ጎደና፡ ዳላስ","16":"ኣብ ዳላስ ናይ ቬጋን ኤርትራውን ኢትዮጵያውን መግቢ","17":"ምሉእ ሸሓኒ ብርስን፡ ሓምልን ብቐመም ዝበሰለ ኣሕምልትን ኣብ ልዕሊ እንጀራ። ስጋ የለን፡ ጸባ የለን፡ ጠስሚ የለን። ብባህላዊ ኣገባብ ጾም ተዳልዩ ኲሉ መዓልቲ ይቐርብ።","18":"ኣብቲ ሸሓኒ ዘሎ ርአዩ","19":"ን3–4 ሰብ","20":"ኣብ ጉግል 4.8★","21":"15,521+ ተኣንጊዶም","22":"ጸባን ጠስምን የብሉን","23":"ምውሳድ · ምብጻሕ · ኣብ ቦታ","24":"ኣብ ጉግል 4.8★","25":"15,521+ ተኣንጊዶም","26":"ጸባን ጠስምን የብሉን","27":"ምውሳድ · ምብጻሕ · ኣብ ቦታ","28":"ኣብ ጉግል 4.8★","29":"15,521+ ተኣንጊዶም","30":"ጸባን ጠስምን የብሉን","31":"ምውሳድ · ምብጻሕ · ኣብ ቦታ","32":"ኣብ ጉግል 4.8★","33":"15,521+ ተኣንጊዶም","34":"ጸባን ጠስምን የብሉን","35":"ምውሳድ · ምብጻሕ · ኣብ ቦታ","36":"ኣብቲ ሸሓኒ ዘሎ","37":"ዓሰርተ ኽፋላት፡ ሓደ ሸሓኒ፡ ብዘይ ማንካ","38":"በያይነቱ ናይ ምቕማስ ሸሓኒ እዩ። ነፍሲ ወከፍ ጸብሒ ኣብ ናይ ገዛእ ርእሱ ድስቲ በሲሉ ኣብ ሓደ ዙርያዊ እንጀራ ይቐርብ። እንጀራ ቆሪጽካ ትዅምስዮ፡ ፋርኬታ ኣየድልን።","39":"ኣብቲ ሸሓኒ ዘሎ ቁጽሪ ተንክዩ እንታይ ምዃኑ ርአዩ","40":"ነቲ ሸሓኒ ዝሰርሑ ኲሎም ኽፋላት","41":"ሓደ በያይነቱ እዞም ዓሰርተ ብሓባር እዮም። ኣብቲ ሸሓኒ ዘሎ ቁጽሪ ምስቲ ኣብ ካርዲ ዘሎ ቁጽሪ ይሰማማዕ።","42":"እንጀራ","43":"ናይ ጣፍ እንጀራ፡ ንሰለስተ መዓልቲ ዝበኾዐ። ኣሲሩን ስፖንጅ ዝመስልን። ግሉተን-ኣልቦ እንጀራ ብሕቶ ይርከብ።","44":"ካሎሪ","45":"ፕሮቲን","46":"ፋይበር","47":"ጥቕል ሓምሊ ምስ ካሮት","48":"ጥቕል ሓምልን ካሮትን ኣብ ልስሉስ ናይ ዕርዲ ጸብሒ፡ ምስ ድንሽ።","49":"ካሎሪ","50":"ፕሮቲን","51":"ፋይበር","52":"ፎሶልያ","53":"ፎሶልያን ካሮትን ምስ ሽጉርትን ሽሙን ብዕርድ ዝተጠብሰ።","54":"ካሎሪ","55":"ፕሮቲን","56":"ፋይበር","57":"ሽሮ","58":"ዝተጠሓነ ዓተር ምስ ሹምን በርበረን ልስሉስ ክሳብ ዝኸውን ዝበሰለ።","59":"ካሎሪ","60":"ፕሮቲን","61":"ፋይበር","62":"ደፈን ብርስን","63":"ምሉእ ቡናዊ ብርስን ምስ ሽጉርትን በርበረን ዝበሰለ። ኣጋቢ።","64":"ካሎሪ","65":"ፕሮቲን","66":"ፋይበር","67":"ካሮት ድንሽ ኣልጫ","68":"ድንሽን ካሮትን ብዕርድ ልስሉስ ጸብሒ ዝበሰለ። ዘይቃጽል።","69":"ካሎሪ","70":"ፕሮቲን","71":"ፋይበር","72":"ሓምሊ","73":"ሓምሊ ምስ ሹም፡ ሽጉርትን ቀጠልያ በርበረን ዝተጠብሰ።","74":"ካሎሪ","75":"ፕሮቲን","76":"ፋይበር","77":"ብጫ ብርስን","78":"ብጫ ብርስን ምስ ዕርድን ጅንጅብልን። ልስሉስን ጠስሚ ዝመስልን።","79":"ካሎሪ","80":"ፕሮቲን","81":"ፋይበር","82":"ብርስን ጸብሒ","83":"ቀይሕ ብርስን ብበርበረ ዝበሰለ፤ ዓሚቚን ቁሩብ ዘንድድን።","84":"ካሎሪ","85":"ፕሮቲን","86":"ፋይበር","87":"ኮሚደረ ሰላጣ","88":"ዝተቐርጸ ኮሚደረ፡ ቀይሕ ሽጉርትን ቃርያን ምስ ለሚን።","89":"ካሎሪ","90":"ፕሮቲን","91":"ፋይበር","92":"እቲ ዝርዝር ከከም ወቕቱን ኣብታ ንግሆ እንታይ ትኩስ ከም ዝርከብን ይቀያየር።","93":"ግምታዊ፡ ኣብቲ ሸሓኒ ከም ዝቐርብ ሓደ ኽፋል (ኣስታት ፍርቂ ኩባያ)።","94":"ካብ ኣትክልቲ ኣዘዙ","95":"ኣብ ዝርዝርና ዘለዉ ኲሎም ናይ ቬጋን መግብታት","96":"ብቐረባ ንምርኣይ ንዝኾነ ስእሊ ተንክዩ።","97":"ልስሉስ","98":"ን3–4 ሰብ","99":"ልስሉስ","100":"ን1 ሰብ","101":"ማእከላይ","102":"ን1 ሰብ","103":"ልስሉስ","104":"መኽፈቲ","105":"ማእከላይ","106":"ን1 ሰብ","107":"ማእከላይ","108":"ን1 ሰብ","109":"ልስሉስ","110":"ን1 ሰብ","111":"ኣብ ቀረባ እዋን","112":"ተወሰኽቲ ናይ ቬጋን መግብታት ይመጹ ኣለዉ","113":"ኣብ ቀረባ እዋን ተወሰኽቲ ሓደስቲ ናይ ኣትክልቲ መግብታት ናብ ዝርዝርና ክንውስኽ ኢና። ክሳብ ሽዑ ክትእዝዙ ከለኹም ብዛዕባ ተወሳኺ ናይ ኣሕምልቲ መመላእታ ሕተቱ፤ ጎመን፡ ኣትክልትን ክክ ኣልጫን መብዛሕትኡ ግዜ ትኩስ ኣሎ።","114":"ምሉእ ዝርዝር ርአዩ","115":"ስለምንታይ ከምዚ ይጥዕም","116":"ብባህሊ ቬጋን፡ ብምትካእ ኣይኮነን","117":"ጠስምን ጸባን የለን","118":"ናይ ቬጋን መግብታትና ብዘይትን በርበረን እምበር ብንጥር ጠስሚ ኣይዳለዉን። ስጋ ንምምሳል ዝኾነ ኣይትካእን።","119":"ናይ ጾም ወቕቲ ኣዳላልዋ","120":"እዞም መግብታት ኤርትራውያንን ኢትዮጵያውያንን ስድራቤታት ኣብ ጾም ዝሰርሕዎም፡ ንውሉድ ወለዶ ዝማዕበሉ እዮም።","121":"ንምክፋል ዝተዳለወ","122":"ሓደ ሸሓኒ ንክልተ ወይ ሰለስተ ሰብ ይኣክል። ኲሉ ኣብ እንጀራ ቀሪቡ ብኢድ ይብላዕ።","123":"ቅድሚ ምእዛዝኩም","124":"ናይ ቬጋን ሕቶታት፡ መልሲ ተዋሂብዎም","125":"ናይ ኢትዮጵያን ኤርትራን መግቢ ብተፈጥሮኡ ቬጋን ድዩ?","126":"ዓብዪ ክፋሉ እወ። ኦርቶዶክሳዊ ጾም ኣብ ዓመት ኣስታት 200 መዓልታት ኲሉ ናይ እንስሳ ውጽኢት ስለ ዘውጽእ፡ እቲ ናይ ኣትክልቲ ክፋል ናይዚ መግቢ ብገዛእ ርእሱ ምሉእ ብምሉእ ዝማዕበለ እዩ።","127":"እንጀራ ቬጋን ድዩ?","128":"እወ። እንጀራ ናይ ጣፍ ሓርጭን ማይን ጥራይ እዩ፡ ንሰለስተ መዓልቲ ይበኹዕ። ካልእ ዝኾነ የብሉን፡ እንቋቚሖ፡ ጸባ ወይ ዘይቲ ኣይኣቱን።","129":"ናይ ቬጋን መግብታት ብጠስሚ ትሰርሑ ዲኹም?","130":"ኣይፋልን። ንጥር ጠስሚ ኣብ ናይ ቬጋን ድስትታትና ፈጺሙ ኣይኣቱን። ብዘይቲ፡ ሽጉርቲ፡ ሹምን ቀመምን ጥራይ ይዳለዉ።","131":"ክንደይ የንድድ?","132":"ከከም መግቡ ይፈላለ። ሽሮን ክክ ኣልጫን ልስሉሳት እዮም፡ ብርስን ጸብሒ ማእከላይ እዩ። ኣብዛ ገጽ ዘሎ ነፍሲ ወከፍ ካርድ ናይ ቀመም መጠን የርኢ፡ ወትሩ ከም ዝንኪ ክትሓቱ ትኽእሉ።","133":"ብዘይ ስጋ የጽግብ ድዩ?","134":"ኣዝዩ። ብርስን፡ ኣተርን ዓተርን ነቲ ሸሓኒ ይሽከምዎ፡ ሓደ ሸሓኒ ንክልተ ወይ ሰለስተ ሰብ ብምችኡ ይኣክል።","135":"ናይ ቬጋን መግቢ ከብጽሓለይ ይኽእል ዲዩ?","136":"እወ። ብቐጥታ ንምውሳድ ወይ ንምብጻሕ ኣዘዙ፡ ወይ ኣብ ኡበር ኢትስን ዶርዳሽን ርኸቡና። ቀጥታዊ ትእዛዛት ነቲ ቤት-መግቢ ዝያዳ ይሕግዝዎ።","137":"ቬጋንን ኣትክልታዊን","138":"ከምቲ ጾም ዘምሃረና ተሰሪሑ","139":"ኣብ ግዜ ጾም፡ ስድራቤታት ኤርትራን ኢትዮጵያን ንሰሙናት ምሉእ ብምሉእ ኣትክልታዊ ብልዒ ይምገቡ። እቲ ልምዲ ካብቶም ኣብ ዓለም ዝሃብተሙ ቬጋናዊ ብልዕታት ሓደ ፈጢሩ፦ ዓደስ፡ ቅመም ዘለዎ ሽምብራ፡ ኣትክልትን ብበርበረ ዝበሰለ ኣሊጫን።","140":"ኣብ ባና እቲ ብልዒ ንግዜ ጾም ጥራይ ኣይንሕዞን። ናይ ቬጋን ብልዕታትና ኣብ ምሉእ ዓመት ኣብ ዝርዝር ኣለው፡ ብተመሳሳሊ ባህላዊ መንገዲ ዝተዳለው።","141":"ንኣገልጋሊትና ሕተቱ","142":"ምውሳድን ምብጻሕን","143":"ብመስመር ኣዘዙ","144":"ኣብዚ ብልዑ፡ ውሰዱ ወይ ኣብጽሑልና። ንምሉእ ዝርዝር ብቐጥታ ኣዘዙ ወይ ብዝፈትዉዎ መተግበሪ ምብጻሕ ኣዘዙ።","145":"ኩሉ መዓልቲ ካብ 11ጽባሕ ክሳብ 2ለይቲ ክፉት","146":"«ሓበሻዊ ኣቀባብላ ማለት ካብ ጣውላ ብጥሜት ወይ ከም ጋሻ ዝወጽእ የለን ማለት እዩ።»","147":"ርአዩ","148":"ዝርዝር","149":"ብዛዕባና","150":"ብሎግ","151":"ቬጋን","152":"ሕቶታት","153":"ርኸቡና","154":"ስዓቡናን ገምግሙናን","155":"★ ኣብ ጉግል ግምገማ ግደፉልና","156":"© 2026 ባና ቤት-መግብን መስተን። ኩሉ መሰላት ዝተሓለወ እዩ።","157":"ብፍቕሪ ኣብ ዳላስ ተክሳስ ዝተሰርሐ"}}</script>
-<script src="../klaviyo-gift.js" defer></script>
+<script id="i18n" type="application/json">{"es":{"0":"Menú","1":"Nosotros","2":"Reseñas","3":"Preguntas","4":"Más ▾","5":"Menú","6":"Nosotros","7":"Vegano","8":"Reseñas","9":"Preguntas","10":"Blog","11":"Contacto","12":"Ordenar en línea","13":"★ Déjanos una Reseña en Google","14":"Ordena Ahora","15":"100% A BASE DE PLANTAS · SKILLMAN ST, DALLAS","16":"Comida Vegana Etíope y Eritrea en Dallas","17":"Un platón entero de lentejas, verduras y vegetales especiados sobre injera. Sin carne, sin lácteos, sin mantequilla, preparado al estilo tradicional del ayuno y servido todos los días del año.","18":"Mira qué lleva el platón","19":"Para 3–4","20":"4.8★ en Google","21":"15,521+ servidos","22":"Sin lácteos ni mantequilla","23":"Para llevar · Entrega · En el local","24":"4.8★ en Google","25":"15,521+ servidos","26":"Sin lácteos ni mantequilla","27":"Para llevar · Entrega · En el local","28":"4.8★ en Google","29":"15,521+ servidos","30":"Sin lácteos ni mantequilla","31":"Para llevar · Entrega · En el local","32":"4.8★ en Google","33":"15,521+ servidos","34":"Sin lácteos ni mantequilla","35":"Para llevar · Entrega · En el local","36":"QUÉ LLEVA EL PLATÓN","37":"Diez Guarniciones, Un Plato, Sin Cubiertos","38":"Un beyaynetu es un surtido. Cada montoncito se cocina en su propia olla y luego se sirve sobre una injera redonda. Se parte el pan y se recoge con la mano, sin tenedor.","39":"Toca un número del plato para ver qué es","40":"Cada Guarnición del Platón","41":"Un beyaynetu son estas diez juntas. El número en el plato corresponde al número en la tarjeta.","42":"Injera","43":"Pan plano de teff, fermentado tres días. Ácido y esponjoso. Hay injera sin gluten a pedido.","44":"cal","45":"proteína","46":"fibra","47":"Repollo con Zanahoria","48":"Repollo y zanahoria en un caldo suave de cúrcuma, con papa.","49":"cal","50":"proteína","51":"fibra","52":"Fosolia","53":"Ejotes y zanahoria salteados con cebolla, ajo y un toque de cúrcuma.","54":"cal","55":"proteína","56":"fibra","57":"Shiro","58":"Garbanzos molidos cocidos con ajo y berbere hasta quedar aterciopelados.","59":"cal","60":"proteína","61":"fibra","62":"Defen Misir (Lenteja)","63":"Lentejas cafés enteras cocidas con cebolla y berbere. Sustanciosas y terrosas.","64":"cal","65":"proteína","66":"fibra","67":"Carrot Dinish Alicha","68":"Papa y zanahoria guisadas en una salsa suave de cúrcuma. Sin picante.","69":"cal","70":"proteína","71":"fibra","72":"Gomen","73":"Berza estofada con ajo, cebolla y chile verde.","74":"cal","75":"proteína","76":"fibra","77":"Misir Amarillo (Lenteja)","78":"Lentejas amarillas con cúrcuma y jengibre. Suaves y mantecosas.","79":"cal","80":"proteína","81":"fibra","82":"Misir Wot (Lenteja)","83":"Lentejas rojas cocidas en berbere, profundas y ligeramente picantes.","84":"cal","85":"proteína","86":"fibra","87":"Timatim Salata","88":"Tomate, cebolla morada y jalapeño picados con limón.","89":"cal","90":"proteína","91":"fibra","92":"La selección cambia según la temporada y lo que esté fresco esa mañana.","93":"Aproximado, por una porción de guarnición (unos ½ taza) como viene en el platón.","94":"ORDENA A BASE DE PLANTAS","95":"Todos Nuestros Platos Veganos","96":"Toca cualquier foto para verla de cerca.","97":"Suave","98":"Para 3–4","99":"Suave","100":"Para 1","101":"Medio","102":"Para 1","103":"Suave","104":"Entrada","105":"Medio","106":"Para 1","107":"Medio","108":"Para 1","109":"Suave","110":"Para 1","111":"PRÓXIMAMENTE","112":"Vienen más platos veganos","113":"Pronto agregaremos más platos a base de plantas al menú. Mientras tanto, pregunta por más guarniciones de verduras al ordenar, gomen, atkilt y kik alicha suelen estar frescos.","114":"POR QUÉ SABE ASÍ","115":"Vegano por Tradición, No por Sustitución","116":"Sin mantequilla ni lácteos","117":"Nuestras ollas veganas se hacen con aceite vegetal y berbere, nunca con niter kibbeh. No sustituimos nada para imitar la carne.","118":"Recetas de temporada de ayuno","119":"Son los platos que las familias eritreas y etíopes cocinan durante el Tsom, perfeccionados por generaciones.","120":"Hecho para compartir","121":"Un platón alcanza para dos o tres. Todo llega sobre injera, para comer con la mano, al estilo familiar.","122":"ANTES DE ORDENAR","123":"Preguntas Veganas, Respondidas","124":"¿La comida etíope y eritrea es vegana por naturaleza?","125":"Gran parte sí. Como el ayuno ortodoxo elimina todo producto animal unos 200 días al año, la cocina vegetal de esta tradición está completamente desarrollada por sí misma.","126":"¿La injera es vegana?","127":"Sí. La injera es harina de teff y agua, fermentada unos tres días. No lleva nada más: ni huevo, ni lácteos, ni aceite.","128":"¿Cocinan los platos veganos con mantequilla?","129":"No. El niter kibbeh, la mantequilla clarificada con especias, nunca se usa en nuestras ollas veganas. Se preparan con aceite vegetal, cebolla, ajo y especias.","130":"¿Qué tan picante es?","131":"Depende del plato. El shiro y el kik alicha son suaves; el misir wot es intermedio. Cada tarjeta muestra el nivel de picante y siempre puedes pedirlo más suave.","132":"¿Llena sin carne?","133":"Mucho. Las lentejas, los guisantes y los garbanzos sostienen el plato, y un platón alcanza cómodamente para dos o tres personas.","134":"¿Puedo pedir comida vegana a domicilio?","135":"Sí. Ordena directo para recoger o a domicilio, o búscanos en Uber Eats y DoorDash. Los pedidos directos ayudan más al restaurante.","136":"VEGANO Y VEGETARIANO","137":"Cocinado Como Nos Enseñó el Tsom","138":"Durante el Tsom, la temporada de ayuno antes de festividades ortodoxas como la Cuaresma y la Navidad, los hogares eritreos y etíopes comen completamente a base de plantas durante semanas. Esa tradición dio forma a una de las cocinas veganas más ricas del mundo: lentejas abundantes, garbanzos especiados, verduras y vegetales guisados con berbere, todo hecho para satisfacer sin carne ni lácteos.","139":"En Banna, no reservamos esa cocina para la temporada de ayuno. Nuestros platillos veganos están en el menú los 365 días del año, preparados de la misma manera tradicional, para que cualquiera pueda pedir un plato completo y lleno de sabor cualquier día.","140":"Pregúntale a nuestra mesera","141":"PARA LLEVAR Y ENTREGA","142":"Ordena en Línea","143":"Come aquí, recoge tu pedido o pide entrega a domicilio. Ordena directamente para el menú completo, o por tu app de entrega favorita.","144":"Abierto todos los días de 11am a 2am","145":"\"La hospitalidad habesha significa que nadie se va de la mesa con hambre, ni como un extraño.\"","146":"EXPLORAR","147":"Menú","148":"Nosotros","149":"Blog","150":"Vegano","151":"Preguntas","152":"Contacto","153":"SÍGUENOS Y OPINA","154":"★ Déjanos una Reseña en Google","155":"© 2026 Banna Restaurant & Bar. Todos los derechos reservados.","156":"Hecho con amor en Dallas, TX"},"am":{"0":"ምናሌ","1":"ስለ እኛ","2":"ግምገማዎች","3":"ጥያቄዎች","4":"ተጨማሪ ▾","5":"ምናሌ","6":"ስለ እኛ","7":"ቬጋን","8":"ግምገማዎች","9":"ጥያቄዎች","10":"ብሎግ","11":"አግኙን","12":"በመስመር ላይ ይዘዙ","13":"★ በጉግል ግምገማ ይተውልን","14":"አሁን ይዘዙ","15":"100% ከዕፅዋት የተሠራ · ስኪልማን ጎዳና፣ ዳላስ","16":"በዳላስ የቬጋን የኢትዮጵያ እና የኤርትራ ምግብ","17":"ሙሉ ሰሃን ምስር፣ ጎመን እና በቅመም የበሰሉ አትክልቶች በእንጀራ ላይ። ስጋ የለም፣ ወተት የለም፣ ቅቤ የለም። በባህላዊ የጾም ዘዴ ተዘጋጅቶ ዓመቱን ሙሉ ይቀርባል።","18":"በሰሃኑ ላይ ያለውን ይዩ","19":"ለ3–4 ሰው","20":"በጉግል 4.8★","21":"15,521+ ተስተናግደዋል","22":"ወተትና ቅቤ የለበትም","23":"መውሰጃ · ማድረሻ · በቦታው","24":"በጉግል 4.8★","25":"15,521+ ተስተናግደዋል","26":"ወተትና ቅቤ የለበትም","27":"መውሰጃ · ማድረሻ · በቦታው","28":"በጉግል 4.8★","29":"15,521+ ተስተናግደዋል","30":"ወተትና ቅቤ የለበትም","31":"መውሰጃ · ማድረሻ · በቦታው","32":"በጉግል 4.8★","33":"15,521+ ተስተናግደዋል","34":"ወተትና ቅቤ የለበትም","35":"መውሰጃ · ማድረሻ · በቦታው","36":"በሰሃኑ ላይ ያለው","37":"አሥር ድርሻዎች፣ አንድ ሰሃን፣ ያለ ማንኪያ","38":"በያይነቱ የቅምሻ ሰሃን ነው። እያንዳንዱ ወጥ በራሱ ድስት ተዘጋጅቶ በአንድ ክብ እንጀራ ላይ ይቀርባል። እንጀራውን ቆርሰው ይጠቀለላሉ፤ ሹካ አያስፈልግም።","39":"በሰሃኑ ላይ ያለውን ቁጥር ይንኩና ምን እንደሆነ ይዩ","40":"ሰሃኑን የሚሠሩት ሁሉም ድርሻዎች","41":"አንድ በያይነቱ እነዚህ አሥሩ አንድ ላይ ናቸው። በሰሃኑ ላይ ያለው ቁጥር ከካርዱ ቁጥር ጋር ይመሳሰላል።","42":"እንጀራ","43":"የጤፍ እንጀራ፣ ለሦስት ቀናት የቦካ። ጎምዛዛና ስፖንጅ የመሰለ። ግሉተን-ነፃ እንጀራ በጥያቄ ይገኛል።","44":"ካሎሪ","45":"ፕሮቲን","46":"ፋይበር","47":"ጥቅል ጎመን ከካሮት ጋር","48":"ጥቅል ጎመንና ካሮት በለስላሳ የእርድ ወጥ ውስጥ፣ ከድንች ጋር።","49":"ካሎሪ","50":"ፕሮቲን","51":"ፋይበር","52":"ፎሶሊያ","53":"ፎሶሊያና ካሮት ከሽንኩርት፣ ነጭ ሽንኩርትና በእርድ የተጠበሰ።","54":"ካሎሪ","55":"ፕሮቲን","56":"ፋይበር","57":"ሽሮ","58":"የተፈጨ ሽምብራ ከነጭ ሽንኩርትና በርበሬ ጋር ለስላሳ እስኪሆን ድረስ የበሰለ።","59":"ካሎሪ","60":"ፕሮቲን","61":"ፋይበር","62":"ደፈን ምስር","63":"ሙሉ ቡናማ ምስር ከሽንኩርትና በርበሬ ጋር የበሰለ። ጠገብ የሚያደርግ።","64":"ካሎሪ","65":"ፕሮቲን","66":"ፋይበር","67":"ካሮት ድንች አልጫ","68":"ድንችና ካሮት በእርድ ለስላሳ ወጥ የበሰለ። ምንም አይቃጥልም።","69":"ካሎሪ","70":"ፕሮቲን","71":"ፋይበር","72":"ጎመን","73":"ጎመን ከነጭ ሽንኩርት፣ ሽንኩርትና አረንጓዴ በርበሬ ጋር የተጠበሰ።","74":"ካሎሪ","75":"ፕሮቲን","76":"ፋይበር","77":"ቢጫ ምስር","78":"ቢጫ ምስር ከእርድና ዝንጅብል ጋር። ለስላሳና ልስልስ ያለ።","79":"ካሎሪ","80":"ፕሮቲን","81":"ፋይበር","82":"ምስር ወጥ","83":"ቀይ ምስር በበርበሬ የበሰለ፤ ጥልቅና ትንሽ የሚያቃጥል።","84":"ካሎሪ","85":"ፕሮቲን","86":"ፋይበር","87":"ቲማቲም ሰላጣ","88":"የተከተፈ ቲማቲም፣ ቀይ ሽንኩርትና ቃሪያ ከሎሚ ጋር።","89":"ካሎሪ","90":"ፕሮቲን","91":"ፋይበር","92":"ዝርዝሩ እንደ ወቅቱና በዚያ ጠዋት እንደተገኘው ትኩስ ነገር ይለዋወጣል።","93":"ግምታዊ፣ በሰሃኑ ላይ እንደሚቀርበው አንድ ድርሻ (ግማሽ ኩባያ ገደማ)።","94":"ከዕፅዋት የተሠራ ይዘዙ","95":"በምናሌያችን ያሉ ሁሉም የቬጋን ምግቦች","96":"ከቅርበት ለማየት ማንኛውንም ፎቶ ይንኩ።","97":"ለስላሳ","98":"ለ3–4 ሰው","99":"ለስላሳ","100":"ለ1 ሰው","101":"መካከለኛ","102":"ለ1 ሰው","103":"ለስላሳ","104":"መክፈቻ","105":"መካከለኛ","106":"ለ1 ሰው","107":"መካከለኛ","108":"ለ1 ሰው","109":"ለስላሳ","110":"ለ1 ሰው","111":"በቅርቡ ይመጣል","112":"ተጨማሪ የቬጋን ምግቦች በመንገድ ላይ ናቸው","113":"በቅርቡ ተጨማሪ የዕፅዋት ምግቦችን ወደ ምናሌው እንጨምራለን። እስከዚያው ሲዘዙ ስለ ተጨማሪ የአትክልት ድስቶች ይጠይቁ፤ ጎመን፣ አትክልትና ክክ አልጫ ብዙ ጊዜ ትኩስ አለ።","114":"ለምን እንዲህ ይጣፍጣል","115":"በባህል ቬጋን፣ በምትክ አይደለም","116":"ቅቤም ወተትም የለም","117":"የቬጋን ወጦቻችን በዘይትና በበርበሬ ይዘጋጃሉ እንጂ በንጥር ቅቤ አይደለም። ስጋን ለመምሰል ምንም አይተካም።","118":"የጾም ወቅት የምግብ አዘገጃጀት","119":"እነዚህ የኤርትራና የኢትዮጵያ ቤተሰቦች በጾም ወቅት የሚያበስሏቸው፣ ለትውልዶች የተሻሻሉ ምግቦች ናቸው።","120":"ለመጋራት የተዘጋጀ","121":"አንድ ሰሃን ለሁለት ወይም ለሦስት ሰው ይበቃል። ሁሉም በእንጀራ ላይ ቀርቦ በእጅ ይበላል።","122":"ከማዘዝዎ በፊት","123":"የቬጋን ጥያቄዎች፣ ተመልሰዋል","124":"የኢትዮጵያና የኤርትራ ምግብ በተፈጥሮው ቬጋን ነው?","125":"ብዙው ክፍሉ አዎ ነው። የኦርቶዶክስ ጾም በዓመት ወደ 200 ቀናት ገደማ ሁሉንም የእንስሳት ተዋጽኦ ስለሚያስወግድ፣ የዚህ ምግብ የዕፅዋት ክፍል በራሱ ሙሉ በሙሉ የዳበረ ነው።","126":"እንጀራ ቬጋን ነው?","127":"አዎ። እንጀራ የጤፍ ዱቄትና ውሃ ብቻ ነው፣ ለሦስት ቀናት ያህል ይቦካል። ሌላ ምንም የለበትም፤ እንቁላል፣ ወተት ወይም ዘይት አይገባበትም።","128":"የቬጋን ምግቦችን በቅቤ ታበስላላችሁ?","129":"አይ። በብዙ የስጋ ምግቦች ውስጥ የሚገባው ንጥር ቅቤ በቬጋን ድስቶቻችን ውስጥ ፈጽሞ አይገባም። በዘይት፣ ሽንኩርት፣ ነጭ ሽንኩርትና ቅመም ብቻ ይዘጋጃሉ።","130":"ምን ያህል ያቃጥላል?","131":"እንደ ምግቡ ይለያያል። ሽሮና ክክ አልጫ ለስላሳ ናቸው፤ ምስር ወጥ መካከለኛ ነው። በዚህ ገጽ ያለ እያንዳንዱ ካርድ የቅመም መጠን ያሳያል፣ ሁልጊዜም ያነሰ እንዲሆን መጠየቅ ይችላሉ።","132":"ያለ ስጋ ያጠግባል?","133":"በጣም። ምስር፣ አተርና ሽምብራ ሰሃኑን ይሸከማሉ፤ አንድ ሰሃን ለሁለት ወይም ለሦስት ሰው በበቂ ይበቃል።","134":"የቬጋን ምግብ ማድረስ እችላለሁ?","135":"አዎ። በቀጥታ ለመውሰድ ወይም ለማድረስ ይዘዙ፣ ወይም በኡበር ኢትስና ዶርዳሽ ያግኙን። ቀጥታ ትዕዛዞች ለምግብ ቤቱ በጣም ይጠቅማሉ።","136":"የቬጋን እና የስጋ-አልባ","137":"ጾም እንዳስተማረን የበሰለ","138":"እንደ ጾም ወቅት፣ የኤርትራ እና የኢትዮጵያ ቤተሰቦች ለሳምንታት ሙሉ በሙሉ የእጽዋት ምግብ ይመገባሉ። ያ ባህል በዓለም ላይ ካሉት እጅግ ሀብታም የቬጋን ምግቦች አንዱን ፈጥሯል፦ ምስር፣ ቅመም የተደረገበት ሽምብራ፣ አትክልቶች እና በበርበሬ የበሰሉ አትክልቶች።","139":"በባና ያንን ምግብ ለጾም ወቅት ብቻ አናስቀምጠውም። የቬጋን ምግቦቻችን በዓመቱ 365 ቀናት በምናሌው ላይ ይገኛሉ፣ በተመሳሳይ ባህላዊ መንገድ የተዘጋጁ።","140":"አስተናጋጃችንን ይጠይቁ","141":"ውሰድ እና ማድረስ","142":"በመስመር ላይ ይዘዙ","143":"በቦታው ይመገቡ፣ ይውሰዱ ወይም ያስደርሱልን። ለሙሉ ምናሌ በቀጥታ ይዘዙ ወይም በሚወዱት የማድረስ መተግበሪያ ይዘዙ።","144":"በየቀኑ ከ11am እስከ 2am ክፍት ነው","145":"«የሐበሻ እንግዳ ተቀባይነት ማለት ማንም ከጠረጴዛው በረሃብ ወይም እንደ እንግዳ አይሄድም።»","146":"ያስሱ","147":"ምናሌ","148":"ስለ እኛ","149":"ብሎግ","150":"ቬጋን","151":"ጥያቄዎች","152":"አግኙን","153":"ይከተሉን እና ይገምግሙ","154":"★ በጉግል ግምገማ ይተውልን","155":"© 2026 ባና ሬስቶራንት እና ባር። ሁሉም መብቶች የተጠበቁ ናቸው።","156":"በፍቅር በዳላስ ቴክሳስ የተሰራ"},"ti":{"0":"ዝርዝር","1":"ብዛዕባና","2":"ግምገማታት","3":"ሕቶታት","4":"ተወሳኺ ▾","5":"ዝርዝር","6":"ብዛዕባና","7":"ቬጋን","8":"ግምገማታት","9":"ሕቶታት","10":"ብሎግ","11":"ርኸቡና","12":"ብመስመር ኣዘዙ","13":"★ ኣብ ጉግል ግምገማ ግደፉልና","14":"ሕጂ ኣዘዙ","15":"100% ካብ ኣትክልቲ · ስኪልማን ጎደና፡ ዳላስ","16":"ኣብ ዳላስ ናይ ቬጋን ኤርትራውን ኢትዮጵያውን መግቢ","17":"ምሉእ ሸሓኒ ብርስን፡ ሓምልን ብቐመም ዝበሰለ ኣሕምልትን ኣብ ልዕሊ እንጀራ። ስጋ የለን፡ ጸባ የለን፡ ጠስሚ የለን። ብባህላዊ ኣገባብ ጾም ተዳልዩ ኲሉ መዓልቲ ይቐርብ።","18":"ኣብቲ ሸሓኒ ዘሎ ርአዩ","19":"ን3–4 ሰብ","20":"ኣብ ጉግል 4.8★","21":"15,521+ ተኣንጊዶም","22":"ጸባን ጠስምን የብሉን","23":"ምውሳድ · ምብጻሕ · ኣብ ቦታ","24":"ኣብ ጉግል 4.8★","25":"15,521+ ተኣንጊዶም","26":"ጸባን ጠስምን የብሉን","27":"ምውሳድ · ምብጻሕ · ኣብ ቦታ","28":"ኣብ ጉግል 4.8★","29":"15,521+ ተኣንጊዶም","30":"ጸባን ጠስምን የብሉን","31":"ምውሳድ · ምብጻሕ · ኣብ ቦታ","32":"ኣብ ጉግል 4.8★","33":"15,521+ ተኣንጊዶም","34":"ጸባን ጠስምን የብሉን","35":"ምውሳድ · ምብጻሕ · ኣብ ቦታ","36":"ኣብቲ ሸሓኒ ዘሎ","37":"ዓሰርተ ኽፋላት፡ ሓደ ሸሓኒ፡ ብዘይ ማንካ","38":"በያይነቱ ናይ ምቕማስ ሸሓኒ እዩ። ነፍሲ ወከፍ ጸብሒ ኣብ ናይ ገዛእ ርእሱ ድስቲ በሲሉ ኣብ ሓደ ዙርያዊ እንጀራ ይቐርብ። እንጀራ ቆሪጽካ ትዅምስዮ፡ ፋርኬታ ኣየድልን።","39":"ኣብቲ ሸሓኒ ዘሎ ቁጽሪ ተንክዩ እንታይ ምዃኑ ርአዩ","40":"ነቲ ሸሓኒ ዝሰርሑ ኲሎም ኽፋላት","41":"ሓደ በያይነቱ እዞም ዓሰርተ ብሓባር እዮም። ኣብቲ ሸሓኒ ዘሎ ቁጽሪ ምስቲ ኣብ ካርዲ ዘሎ ቁጽሪ ይሰማማዕ።","42":"እንጀራ","43":"ናይ ጣፍ እንጀራ፡ ንሰለስተ መዓልቲ ዝበኾዐ። ኣሲሩን ስፖንጅ ዝመስልን። ግሉተን-ኣልቦ እንጀራ ብሕቶ ይርከብ።","44":"ካሎሪ","45":"ፕሮቲን","46":"ፋይበር","47":"ጥቕል ሓምሊ ምስ ካሮት","48":"ጥቕል ሓምልን ካሮትን ኣብ ልስሉስ ናይ ዕርዲ ጸብሒ፡ ምስ ድንሽ።","49":"ካሎሪ","50":"ፕሮቲን","51":"ፋይበር","52":"ፎሶልያ","53":"ፎሶልያን ካሮትን ምስ ሽጉርትን ሽሙን ብዕርድ ዝተጠብሰ።","54":"ካሎሪ","55":"ፕሮቲን","56":"ፋይበር","57":"ሽሮ","58":"ዝተጠሓነ ዓተር ምስ ሹምን በርበረን ልስሉስ ክሳብ ዝኸውን ዝበሰለ።","59":"ካሎሪ","60":"ፕሮቲን","61":"ፋይበር","62":"ደፈን ብርስን","63":"ምሉእ ቡናዊ ብርስን ምስ ሽጉርትን በርበረን ዝበሰለ። ኣጋቢ።","64":"ካሎሪ","65":"ፕሮቲን","66":"ፋይበር","67":"ካሮት ድንሽ ኣልጫ","68":"ድንሽን ካሮትን ብዕርድ ልስሉስ ጸብሒ ዝበሰለ። ዘይቃጽል።","69":"ካሎሪ","70":"ፕሮቲን","71":"ፋይበር","72":"ሓምሊ","73":"ሓምሊ ምስ ሹም፡ ሽጉርትን ቀጠልያ በርበረን ዝተጠብሰ።","74":"ካሎሪ","75":"ፕሮቲን","76":"ፋይበር","77":"ብጫ ብርስን","78":"ብጫ ብርስን ምስ ዕርድን ጅንጅብልን። ልስሉስን ጠስሚ ዝመስልን።","79":"ካሎሪ","80":"ፕሮቲን","81":"ፋይበር","82":"ብርስን ጸብሒ","83":"ቀይሕ ብርስን ብበርበረ ዝበሰለ፤ ዓሚቚን ቁሩብ ዘንድድን።","84":"ካሎሪ","85":"ፕሮቲን","86":"ፋይበር","87":"ኮሚደረ ሰላጣ","88":"ዝተቐርጸ ኮሚደረ፡ ቀይሕ ሽጉርትን ቃርያን ምስ ለሚን።","89":"ካሎሪ","90":"ፕሮቲን","91":"ፋይበር","92":"እቲ ዝርዝር ከከም ወቕቱን ኣብታ ንግሆ እንታይ ትኩስ ከም ዝርከብን ይቀያየር።","93":"ግምታዊ፡ ኣብቲ ሸሓኒ ከም ዝቐርብ ሓደ ኽፋል (ኣስታት ፍርቂ ኩባያ)።","94":"ካብ ኣትክልቲ ኣዘዙ","95":"ኣብ ዝርዝርና ዘለዉ ኲሎም ናይ ቬጋን መግብታት","96":"ብቐረባ ንምርኣይ ንዝኾነ ስእሊ ተንክዩ።","97":"ልስሉስ","98":"ን3–4 ሰብ","99":"ልስሉስ","100":"ን1 ሰብ","101":"ማእከላይ","102":"ን1 ሰብ","103":"ልስሉስ","104":"መኽፈቲ","105":"ማእከላይ","106":"ን1 ሰብ","107":"ማእከላይ","108":"ን1 ሰብ","109":"ልስሉስ","110":"ን1 ሰብ","111":"ኣብ ቀረባ እዋን","112":"ተወሰኽቲ ናይ ቬጋን መግብታት ይመጹ ኣለዉ","113":"ኣብ ቀረባ እዋን ተወሰኽቲ ሓደስቲ ናይ ኣትክልቲ መግብታት ናብ ዝርዝርና ክንውስኽ ኢና። ክሳብ ሽዑ ክትእዝዙ ከለኹም ብዛዕባ ተወሳኺ ናይ ኣሕምልቲ መመላእታ ሕተቱ፤ ጎመን፡ ኣትክልትን ክክ ኣልጫን መብዛሕትኡ ግዜ ትኩስ ኣሎ።","114":"ስለምንታይ ከምዚ ይጥዕም","115":"ብባህሊ ቬጋን፡ ብምትካእ ኣይኮነን","116":"ጠስምን ጸባን የለን","117":"ናይ ቬጋን መግብታትና ብዘይትን በርበረን እምበር ብንጥር ጠስሚ ኣይዳለዉን። ስጋ ንምምሳል ዝኾነ ኣይትካእን።","118":"ናይ ጾም ወቕቲ ኣዳላልዋ","119":"እዞም መግብታት ኤርትራውያንን ኢትዮጵያውያንን ስድራቤታት ኣብ ጾም ዝሰርሕዎም፡ ንውሉድ ወለዶ ዝማዕበሉ እዮም።","120":"ንምክፋል ዝተዳለወ","121":"ሓደ ሸሓኒ ንክልተ ወይ ሰለስተ ሰብ ይኣክል። ኲሉ ኣብ እንጀራ ቀሪቡ ብኢድ ይብላዕ።","122":"ቅድሚ ምእዛዝኩም","123":"ናይ ቬጋን ሕቶታት፡ መልሲ ተዋሂብዎም","124":"ናይ ኢትዮጵያን ኤርትራን መግቢ ብተፈጥሮኡ ቬጋን ድዩ?","125":"ዓብዪ ክፋሉ እወ። ኦርቶዶክሳዊ ጾም ኣብ ዓመት ኣስታት 200 መዓልታት ኲሉ ናይ እንስሳ ውጽኢት ስለ ዘውጽእ፡ እቲ ናይ ኣትክልቲ ክፋል ናይዚ መግቢ ብገዛእ ርእሱ ምሉእ ብምሉእ ዝማዕበለ እዩ።","126":"እንጀራ ቬጋን ድዩ?","127":"እወ። እንጀራ ናይ ጣፍ ሓርጭን ማይን ጥራይ እዩ፡ ንሰለስተ መዓልቲ ይበኹዕ። ካልእ ዝኾነ የብሉን፡ እንቋቚሖ፡ ጸባ ወይ ዘይቲ ኣይኣቱን።","128":"ናይ ቬጋን መግብታት ብጠስሚ ትሰርሑ ዲኹም?","129":"ኣይፋልን። ንጥር ጠስሚ ኣብ ናይ ቬጋን ድስትታትና ፈጺሙ ኣይኣቱን። ብዘይቲ፡ ሽጉርቲ፡ ሹምን ቀመምን ጥራይ ይዳለዉ።","130":"ክንደይ የንድድ?","131":"ከከም መግቡ ይፈላለ። ሽሮን ክክ ኣልጫን ልስሉሳት እዮም፡ ብርስን ጸብሒ ማእከላይ እዩ። ኣብዛ ገጽ ዘሎ ነፍሲ ወከፍ ካርድ ናይ ቀመም መጠን የርኢ፡ ወትሩ ከም ዝንኪ ክትሓቱ ትኽእሉ።","132":"ብዘይ ስጋ የጽግብ ድዩ?","133":"ኣዝዩ። ብርስን፡ ኣተርን ዓተርን ነቲ ሸሓኒ ይሽከምዎ፡ ሓደ ሸሓኒ ንክልተ ወይ ሰለስተ ሰብ ብምችኡ ይኣክል።","134":"ናይ ቬጋን መግቢ ከብጽሓለይ ይኽእል ዲዩ?","135":"እወ። ብቐጥታ ንምውሳድ ወይ ንምብጻሕ ኣዘዙ፡ ወይ ኣብ ኡበር ኢትስን ዶርዳሽን ርኸቡና። ቀጥታዊ ትእዛዛት ነቲ ቤት-መግቢ ዝያዳ ይሕግዝዎ።","136":"ቬጋንን ኣትክልታዊን","137":"ከምቲ ጾም ዘምሃረና ተሰሪሑ","138":"ኣብ ግዜ ጾም፡ ስድራቤታት ኤርትራን ኢትዮጵያን ንሰሙናት ምሉእ ብምሉእ ኣትክልታዊ ብልዒ ይምገቡ። እቲ ልምዲ ካብቶም ኣብ ዓለም ዝሃብተሙ ቬጋናዊ ብልዕታት ሓደ ፈጢሩ፦ ዓደስ፡ ቅመም ዘለዎ ሽምብራ፡ ኣትክልትን ብበርበረ ዝበሰለ ኣሊጫን።","139":"ኣብ ባና እቲ ብልዒ ንግዜ ጾም ጥራይ ኣይንሕዞን። ናይ ቬጋን ብልዕታትና ኣብ ምሉእ ዓመት ኣብ ዝርዝር ኣለው፡ ብተመሳሳሊ ባህላዊ መንገዲ ዝተዳለው።","140":"ንኣገልጋሊትና ሕተቱ","141":"ምውሳድን ምብጻሕን","142":"ብመስመር ኣዘዙ","143":"ኣብዚ ብልዑ፡ ውሰዱ ወይ ኣብጽሑልና። ንምሉእ ዝርዝር ብቐጥታ ኣዘዙ ወይ ብዝፈትዉዎ መተግበሪ ምብጻሕ ኣዘዙ።","144":"ኩሉ መዓልቲ ካብ 11ጽባሕ ክሳብ 2ለይቲ ክፉት","145":"«ሓበሻዊ ኣቀባብላ ማለት ካብ ጣውላ ብጥሜት ወይ ከም ጋሻ ዝወጽእ የለን ማለት እዩ።»","146":"ርአዩ","147":"ዝርዝር","148":"ብዛዕባና","149":"ብሎግ","150":"ቬጋን","151":"ሕቶታት","152":"ርኸቡና","153":"ስዓቡናን ገምግሙናን","154":"★ ኣብ ጉግል ግምገማ ግደፉልና","155":"© 2026 ባና ቤት-መግብን መስተን። ኩሉ መሰላት ዝተሓለወ እዩ።","156":"ብፍቕሪ ኣብ ዳላስ ተክሳስ ዝተሰርሐ"}}</script>
+<script src="/banna-cart.js" defer></script>
+<script src="/klaviyo-gift.js" defer></script>
 <script src="../banna.js" defer></script>
-<banna-cart></banna-cart>
-<script src="../banna-config.js"></script>
-<script src="../banna-cart.js" defer></script>
-<script src="../banna-pay.js" defer></script>
 <script src="../banna-addcart.js" defer></script>
 </body>
 </html>
