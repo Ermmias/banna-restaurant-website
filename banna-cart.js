@@ -80,25 +80,37 @@
   ];
   /* Extra sides, confirmed against the Clover menu by Ermmias, Sep 2026. */
   var SIDES = [
-    { name: "Egg", price: 0.79 },
-    { name: "Bread", price: 1.39 },
-    { name: "Injera (Regular)", price: 1.99 },
-    { name: "Injera (Teff)", price: 2.49 },
-    { name: "Gomen", price: 4.99 },
-    { name: "Shiro", price: 4.99 },
-    { name: "Salad", price: 4.99 },
-    { name: "Rice", price: 4.99 },
-    { name: "Defen Misir", price: 4.99 },
-    { name: "Atter", price: 4.99 },
-    { name: "Cabbage", price: 4.99 },
-    { name: "Misir Wot", price: 6.99 },
-    { name: "Fosolia", price: 9.99 }
+    { name: "Injera (Regular)", price: 1.99, img: "side-injera.jpg" },
+    { name: "Injera (Teff)", price: 2.49, img: "side-injera-teff.jpg" },
+    { name: "Bread", price: 1.39, img: "side-bread.jpg" },
+    { name: "Egg", price: 0.79, img: "side-egg.jpg" },
+    { name: "Gomen", price: 4.99, img: "side-gomen.jpg" },
+    { name: "Shiro", price: 4.99, img: "side-shiro.jpg" },
+    { name: "Salad", price: 4.99, img: "side-salad.jpg" },
+    { name: "Rice", price: 4.99, img: "side-rice.jpg" },
+    { name: "Defen Misir", price: 4.99, img: "side-defen-misir.jpg" },
+    { name: "Atter", price: 4.99, img: "side-atter.jpg" },
+    { name: "Cabbage", price: 4.99, img: "side-cabbage.jpg" },
+    { name: "Misir Wot", price: 6.99, img: "miser.jpg" },
+    { name: "Fosolia", price: 9.99, img: "side-fosolia.jpg" }
   ];
 
   /* Photo for cart lines added from the cart's own drink/side chips, which carry
      no image of their own. Matched loosely on the name so live Clover naming
      variants still land on the right photo. */
   var THUMBS = [
+    [/^injera\s*\(teff\)$/i, "side-injera-teff.jpg"],
+    [/^injera/i, "side-injera.jpg"],
+    [/^bread$/i, "side-bread.jpg"],
+    [/^eggs?$/i, "side-egg.jpg"],
+    [/^gomen$/i, "side-gomen.jpg"],
+    [/^shiro$/i, "side-shiro.jpg"],
+    [/^salad$/i, "side-salad.jpg"],
+    [/^rice$/i, "side-rice.jpg"],
+    [/^defen\s*misir$/i, "side-defen-misir.jpg"],
+    [/^atter$/i, "side-atter.jpg"],
+    [/^cabbage$/i, "side-cabbage.jpg"],
+    [/^fosolia$/i, "side-fosolia.jpg"],
     [/topo\s*chico|sparkling/i, "drink-topo-chico.jpg"],
     [/cappuccino/i, "drink-cappuccino.jpg"],
     [/latte/i, "drink-latte.jpg"],
@@ -282,6 +294,19 @@
 
     hasDrink() { return this.cart.some(function (l) { return l.drink; }); }
     addonStrip() {
+      /* Collapsed by default: the items, the total and the Checkout button are what
+         the guest came for, and on a phone the sides list pushed all three out of
+         view. One tap opens it. */
+      if (!this.addonOpen) {
+        return '<button type="button" class="addmore" data-addon-open>' +
+          '<span class="amstack" aria-hidden="true">' +
+          ['side-injera.jpg', 'side-shiro.jpg', 'side-gomen.jpg'].map(function (f) {
+            return '<img src="' + IMG_BASE + f + '" alt="" loading="lazy">';
+          }).join('') + '</span>' +
+          '<span class="amtext"><strong>Add sides or drinks</strong>' +
+          '<span>Injera, gomen, shiro, coffee, tea, sodas</span></span>' +
+          '<span class="amplus" aria-hidden="true">+</span></button>';
+      }
       var tab = this.addon || "sides";
       var loading = tab === "drinks" && DRINKS_STATE === "loading";
       var list = tab === "drinks" ? DRINKS : SIDES;
@@ -289,18 +314,23 @@
         ? "Coffee, tea, water and sodas"
         : "Injera, gomen, shiro and more &mdash; tap to add";
       return '<div class="drinks">' +
+        '<div class="dtop">' +
         '<div class="dtabs">' +
         '<button type="button" class="dtab" data-tab="sides" data-on="' + (tab === "sides") + '">Extra sides</button>' +
         '<button type="button" class="dtab" data-tab="drinks" data-on="' + (tab === "drinks") + '">Drinks</button>' +
+        '</div>' +
+        '<button type="button" class="dclose" data-addon-close aria-label="Hide sides and drinks">&minus;</button>' +
         '</div>' +
         '<div class="dhead"><span>' + (loading ? "Loading today&rsquo;s beverages&hellip;" : sub) + '</span></div>' +
         '<div class="drow">' + (loading
           ? '<span class="dskel"></span><span class="dskel"></span><span class="dskel"></span>'
           : list.map(function (d) {
-              return '<button type="button" class="dchip" data-addon="' + esc(d.name) + '" data-kind="' + tab + '">' +
+              var src = d.img || thumbFor(d.name);
+              return '<button type="button" class="dtile" data-addon="' + esc(d.name) + '" data-kind="' + tab + '" aria-label="Add ' + esc(d.name) + ', ' + money(d.price) + '">' +
+                '<span class="dimg">' + (src ? '<img src="' + IMG_BASE + esc(src) + '" alt="" loading="lazy">' : '') +
+                '<span class="dplus" aria-hidden="true">+</span></span>' +
                 '<span class="dn">' + esc(d.name) + '</span>' +
-                '<span class="dp">' + money(d.price) + '</span>' +
-                '<span class="dplus" aria-hidden="true">+</span></button>';
+                '<span class="dp">' + money(d.price) + '</span></button>';
             }).join("")) +
         '</div></div>';
     }
@@ -349,12 +379,13 @@
       return this.cart.map(function (l) {
         var lsrc = l.img || thumbFor(l.name);
         return '<div class="line">' +
-          (lsrc ? '<img src="' + IMG_BASE + esc(lsrc) + '" alt="" width="56" height="56" loading="lazy">' : '<div class="noimg"></div>') +
-          '<div class="lmeta"><span class="lname">' + esc(l.name) + '</span><span class="leach">' + (l.price > 0 ? money(l.price) + ' each' : 'Priced at pickup') + '</span></div>' +
-          '<div class="qty"><button type="button" data-dec="' + esc(l.name) + '" aria-label="Remove one ' + esc(l.name) + '">&minus;</button>' +
+          (lsrc ? '<img src="' + IMG_BASE + esc(lsrc) + '" alt="" width="68" height="68" loading="lazy">' : '<div class="noimg"></div>') +
+          '<div class="lmeta"><span class="lname">' + esc(l.name) + '</span>' +
+          '<span class="leach">' + (l.price > 0 ? money(l.price) + ' each' : 'Priced at pickup') + '</span>' +
+          '<div class="lbot"><div class="qty"><button type="button" data-dec="' + esc(l.name) + '" aria-label="Remove one ' + esc(l.name) + '">&minus;</button>' +
           '<span>' + l.qty + '</span>' +
           '<button type="button" data-inc="' + esc(l.name) + '" aria-label="Add one ' + esc(l.name) + '">+</button></div>' +
-          '<span class="ltot">' + (l.price > 0 ? money(l.price * l.qty) : '&mdash;') + '</span></div>';
+          '<span class="ltot">' + (l.price > 0 ? money(l.price * l.qty) : '&mdash;') + '</span></div></div></div>';
       }).join("");
     }
 
@@ -362,21 +393,28 @@
       var sub = this.subtotal(), tax = sub * TAX, tot = sub + tax;
       if (this.step === "done") return this.doneBody();
       if (this.step === "cart") {
-        return '<div class="lines">' + this.lines() + '</div>' +
+        var unpriced = this.cart.some(function (l) { return !(l.price > 0); });
+        return '<div class="scrollarea">' +
+          '<div class="lines">' + this.lines() + '</div>' +
           this.addonStrip() +
           '<div class="totals">' +
           '<div class="row"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
           '<div class="row"><span>Estimated tax</span><span>' + money(tax) + '</span></div>' +
-          '<div class="row grand"><span>Total</span><span>' + money(tot) + '</span></div>' +
-          (this.cart.some(function (l) { return !(l.price > 0); }) ? '<div class="row"><span style="font-size:11.5px;opacity:.75">Items marked &ldquo;priced at pickup&rdquo; are added to your total when we confirm the order.</span><span></span></div>' : '') +
+          (unpriced ? '<div class="row"><span style="font-size:11.5px;opacity:.75">Items marked &ldquo;priced at pickup&rdquo; are added to your total when we confirm the order.</span><span></span></div>' : '') +
           '</div>' +
+          '<button type="button" class="quiet" data-clear>Empty cart</button>' +
+          '</div>' +
+          '<div class="foot">' +
+          '<div class="grandline"><span class="glab">Total<em>' + (unpriced ? 'some items priced at pickup' : 'tax included') + '</em></span>' +
+          '<span class="gtot">' + money(tot) + '</span></div>' +
           (orderingOpen()
             ? '<button type="button" class="primary" data-go>Checkout <span aria-hidden="true">&#8594;</span></button>'
             : closedNotice()) +
-          '<button type="button" class="quiet" data-clear>Empty cart</button>';
+          '</div>';
       }
       if (this.step === "details") {
         return '<form data-details>' +
+          '<div class="scrollarea">' +
           '<label>Name for the order<input name="cname" required placeholder="First and last name" value="' + esc(this.name) + '"></label>' +
           '<label>Mobile number<input name="cphone" type="tel" required placeholder="(214) 555-0123" value="' + esc(this.phone) + '"></label>' +
           (this.eta ? '<div class="eta"><span class="elab">Ready for pickup</span>' +
@@ -385,12 +423,16 @@
             (this.eta.rush ? ' &middot; dinner rush, so a little longer than usual' : '') +
             '</span></div>' : "") +
           '<p class="note">Pickup at 9560 Skillman St #120 &mdash; come to the counter and give your name. No need to wait around: we hold your order hot. We call your number if anything changes.</p>' +
+          '</div>' +
+          '<div class="foot">' +
           (orderingOpen()
             ? '<button type="submit" class="primary">Continue to payment &middot; ' + money(tot) + '</button>'
             : closedNotice()) +
-          '<button type="button" class="quiet" data-back>Back to cart</button></form>';
+          '<button type="button" class="quiet" data-back>Back to cart</button>' +
+          '</div></form>';
       }
-      return '<div class="paybox"><div class="payfor">Pickup order for ' + esc(this.name || "you") + '</div><div class="paytot">' + money(tot) + '</div>' +
+      return '<div class="scrollarea">' +
+        '<div class="paybox"><div class="payfor">Pickup order for ' + esc(this.name || "you") + '</div><div class="paytot">' + money(tot) + '</div>' +
         (this.eta ? '<div class="payeta">Ready <strong>' + etaLine(this.eta) + '</strong> &middot; ' +
           this.eta.lo + '&ndash;' + this.eta.hi + ' min</div>' : "") + '</div>' +
         (LIVE_PAY_NOW()
@@ -399,20 +441,24 @@
           ? (window.BannaPay.sandbox
               ? '<div class="stub">Clover sandbox &mdash; test cards only. No real money moves.</div>' : '') +
             '<slot name="cardfields"></slot>' +
+            '</div><div class="foot">' +
             '<button type="button" class="primary" data-realpay>Pay ' + money(tot) + '</button>' +
             '<div class="bp-secure"><span aria-hidden="true">&#128274;</span> Card handled by Clover. We never see or store your card number.</div>'
           : '<div class="cardslot"><div class="slotlabel">SECURE CARD FIELD</div>' +
             '<p>Clover&rsquo;s hosted card form drops in here once the backend is connected. The order then lands in your Clover POS and prints in the kitchen.</p></div>' +
+            '</div><div class="foot">' +
             (PREVIEW
               ? '<div class="stub">Preview mode &mdash; the button below takes no payment and sends nothing to the kitchen.</div>' +
                 '<button type="button" class="primary" data-pay>Pay ' + money(tot) + ' &middot; preview only</button>'
-              : '<a class="primary" href="tel:+12147580752" style="margin-top:16px">Call to place this order &middot; (214) 758-0752</a>')) +
-        '<button type="button" class="quiet" data-back>Back to cart</button>';
+              : '<a class="primary" href="tel:+12147580752">Call to place this order &middot; (214) 758-0752</a>')) +
+        '<button type="button" class="quiet" data-back>Back to cart</button>' +
+        '</div>';
     }
 
     doneBody() {
       var o = this.order || {};
-      return (o.preview ? '<div class="stub">Preview &mdash; no payment was taken, and the kitchen has no ticket for this. Nothing below is a real order.</div>' : "") +
+      return '<div class="scrollarea">' +
+        (o.preview ? '<div class="stub">Preview &mdash; no payment was taken, and the kitchen has no ticket for this. Nothing below is a real order.</div>' : "") +
         '<div class="ok"><div class="okmark" aria-hidden="true">&#10003;</div>' +
         '<h3>Thank you, ' + esc((o.name || "friend").split(" ")[0]) + '</h3>' +
         '<p>' + (o.preview ? "This is what your guest sees once payment is live." : "Your order is in and the kitchen has it.") + '</p></div>' +
@@ -428,9 +474,11 @@
           'We hold it hot &mdash; no need to arrive early.</span></div>' : "") +
         '<div class="addr"><strong>Banna Restaurant &amp; Bar</strong>' +
         '<span>9560 Skillman St #120, Dallas, TX 75243</span></div>' +
+        '</div><div class="foot">' +
         '<a class="primary" href="https://www.google.com/maps/dir/?api=1&destination=Banna+Restaurant+%26+Bar%2C+9560+Skillman+St+%23120%2C+Dallas%2C+TX+75243" target="_blank" rel="noopener">Get Directions</a>' +
         '<a class="callus" href="tel:+12147580752">Questions? Call (214) 758-0752</a>' +
-        '<button type="button" class="quiet" data-close>Done</button>';
+        '<button type="button" class="quiet" data-close>Done</button>' +
+        '</div>';
     }
 
     render() {
@@ -439,7 +487,9 @@
       var titles = { cart: "Your order", details: "Pickup details", pay: "Payment", done: "Order confirmed" };
       var steps = { cart: "STEP 1 OF 3 &middot; REVIEW", details: "STEP 2 OF 3 &middot; YOUR INFO", pay: "STEP 3 OF 3 &middot; PAY", done: "" };
       try { document.body.style.paddingBottom = (n || done) ? "104px" : ""; } catch (e) {}
-      this.root.innerHTML = '<style>' + BannaCart.css + '</style>' + (!n && !done ? "" : (!n ? "" :
+      this.root.innerHTML = '<style>' + BannaCart.css + '</style>' + (!n && !done ? "" : (!n || this.openState ? "" :
+        /* The bar is redundant while the sheet is open, and it stacks above the
+           sheet — leaving it rendered parks it on top of the Checkout button. */
         '<div class="bar"><div class="bmeta"><span class="bcount">' + n + (n === 1 ? " item" : " items") + '</span>' +
         '<span class="bsub">Pickup &middot; <strong>TO GO ONLY</strong></span></div>' +
         '<button type="button" class="bview" data-open>View cart <span>' + money(sub) + '</span></button></div>') +
@@ -465,6 +515,10 @@
       this.root.querySelectorAll("[data-tab]").forEach(function (b) {
         b.onclick = function () { self.addon = b.getAttribute("data-tab"); self.render(); };
       });
+      var aOpen = this.root.querySelector("[data-addon-open]");
+      if (aOpen) aOpen.onclick = function () { self.addonOpen = true; self.render(); };
+      var aClose = this.root.querySelector("[data-addon-close]");
+      if (aClose) aClose.onclick = function () { self.addonOpen = false; self.render(); };
       this.root.querySelectorAll("[data-addon]").forEach(function (b) {
         b.onclick = function () {
           var nm = b.getAttribute("data-addon"), kind = b.getAttribute("data-kind");
@@ -646,6 +700,18 @@
     "@keyframes bagBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}",
     "@keyframes bagShadow{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(.82);opacity:.28}}",
     "@keyframes steamUp{0%{transform:translateY(4px) scaleY(.6);opacity:0}40%{opacity:.9}100%{transform:translateY(-9px) scaleY(1.1);opacity:0}}",
+    ".addmore{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 15px;margin-bottom:14px;border-radius:16px;border:1px dashed rgba(27,21,18,.28);background:#fff;cursor:pointer;font-family:'Archivo',system-ui,sans-serif}",
+    ".addmore:hover{background:" + PANEL + ";border-color:rgba(27,21,18,.4)}",
+    ".amstack{display:flex;flex-shrink:0;padding-left:8px}",
+    ".amstack img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-left:-10px;box-shadow:0 2px 6px rgba(27,21,18,.2)}",
+    ".amtext{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}",
+    ".amtext strong{font-weight:800;font-size:14px;color:" + INK + "}",
+    ".amtext span{font-weight:600;font-size:12px;color:rgba(27,21,18,.55)}",
+    ".amplus{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:30px;height:30px;border-radius:50%;background:" + RED + ";color:#fff;font-weight:800;font-size:16px;line-height:1}",
+    ".dtop{display:flex;align-items:center;gap:8px;margin-bottom:9px}",
+    ".dtop .dtabs{flex:1;margin-bottom:0}",
+    ".dclose{width:34px;height:34px;flex-shrink:0;border-radius:50%;border:1px solid rgba(27,21,18,.16);background:" + CREAM + ";color:" + INK + ";font:700 16px 'Archivo',system-ui,sans-serif;line-height:1;cursor:pointer}",
+    ".dclose:hover{background:" + PANEL + "}",
     ".togo{display:flex;align-items:center;gap:14px;background:#1B1512;border-radius:14px;padding:12px 16px 12px 12px;margin-bottom:16px}",
     ".tgtext{display:flex;flex-direction:column;gap:3px;min-width:0}",
     ".togo strong{font-weight:800;font-size:13px;letter-spacing:.12em;color:#F6EBD9}",
@@ -654,25 +720,41 @@
     ".bview:hover{background:" + RED_D + "}",
     ".bview span{opacity:.85}",
     ".scrim{position:fixed;inset:0;z-index:90;background:rgba(27,21,18,.55)}",
-    ".sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:91;width:min(560px,100%);max-height:90vh;overflow:auto;background:" + CREAM + ";border:1px solid rgba(27,21,18,.14);border-radius:24px 24px 0 0;box-shadow:0 -12px 40px rgba(27,21,18,.3);padding:22px clamp(18px,5vw,26px) calc(24px + env(safe-area-inset-bottom))}",
-    ".shead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}",
+    ".sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:91;width:min(560px,100%);height:min(90vh,760px);display:flex;flex-direction:column;overflow:hidden;background:" + CREAM + ";border:1px solid rgba(27,21,18,.14);border-radius:24px 24px 0 0;box-shadow:0 -12px 40px rgba(27,21,18,.3);padding:22px clamp(18px,5vw,26px) calc(18px + env(safe-area-inset-bottom))}",
+    /* Only the middle scrolls. Totals and the Checkout button stay pinned to the
+       bottom of the sheet, so the guest never has to scroll to find them. */
+    ".scrollarea{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;margin:0 calc(-1 * clamp(18px,5vw,26px));padding:0 clamp(18px,5vw,26px) 4px;display:flex;flex-direction:column}",
+    ".foot{flex:0 0 auto;margin:0 calc(-1 * clamp(18px,5vw,26px));padding:12px clamp(18px,5vw,26px) 0;background:" + CREAM + ";border-top:1px solid rgba(27,21,18,.12)}",
+    ".grandline{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:11px}",
+    ".glab{display:flex;flex-direction:column;gap:1px;font-weight:800;font-size:15px;color:" + INK + "}",
+    ".glab em{font-style:normal;font-weight:600;font-size:11.5px;color:rgba(27,21,18,.55)}",
+    ".gtot{font-weight:800;font-size:25px;letter-spacing:-.02em;color:" + INK + ";white-space:nowrap}",
+    ".shead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;flex:0 0 auto}",
+    ".steplabel,.togo{flex:0 0 auto}",
+    "form{flex:1 1 auto;min-height:0}",
+    "form .scrollarea{gap:14px}",
     ".shead h2{font:700 24px 'Baloo 2',system-ui,sans-serif;margin:0;color:" + INK + "}",
     ".x{width:38px;height:38px;flex-shrink:0;border-radius:50%;border:1px solid rgba(27,21,18,.14);background:#fff;color:" + INK + ";font:700 16px 'Archivo',system-ui,sans-serif;cursor:pointer}",
     ".x:hover{background:" + PANEL + "}",
     ".steplabel{font-weight:600;font-size:12px;letter-spacing:1.4px;color:rgba(27,21,18,.5);margin-bottom:18px}",
-    ".lines{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}",
-    ".line{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid rgba(27,21,18,.12);border-radius:16px;padding:10px 12px}",
-    ".line img,.noimg{width:56px;height:56px;flex-shrink:0;border-radius:12px;object-fit:cover;background:#EFE7DC}",
-    ".lmeta{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}",
-    ".lname{font:700 15px 'Baloo 2',system-ui,sans-serif;color:" + INK + ";text-wrap:pretty}",
+    ".lines{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}",
+    ".foot .totals{margin-bottom:12px}",
+    ".foot .quiet{margin:10px auto 0}",
+    ".foot .callus{margin-top:11px}",
+    ".line{display:flex;align-items:flex-start;gap:13px;background:#fff;border:1px solid rgba(27,21,18,.1);border-radius:20px;padding:10px;box-shadow:0 10px 22px -18px rgba(27,21,18,.55)}",
+    ".line img,.noimg{width:68px;height:68px;flex-shrink:0;border-radius:14px;object-fit:cover;background:#EFE7DC}",
+    ".lmeta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1;padding-top:2px}",
+    ".lname{font:700 16px/1.2 'Baloo 2',system-ui,sans-serif;color:" + INK + ";text-wrap:pretty}",
     ".leach{font-weight:600;font-size:12px;color:rgba(27,21,18,.55)}",
-    ".qty{display:flex;align-items:center;gap:6px;flex-shrink:0}",
-    ".qty button{width:36px;height:36px;border-radius:50%;border:1px solid rgba(27,21,18,.16);background:" + CREAM + ";color:" + INK + ";font:700 18px 'Archivo',system-ui,sans-serif;line-height:1;cursor:pointer}",
+    ".lbot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}",
+    ".qty{display:flex;align-items:center;gap:2px;flex-shrink:0;background:" + CREAM + ";border:1px solid rgba(27,21,18,.12);border-radius:100px;padding:2px}",
+    ".qty button{width:34px;height:34px;border-radius:50%;border:none;background:#fff;color:" + INK + ";font:700 17px 'Archivo',system-ui,sans-serif;line-height:1;cursor:pointer;box-shadow:0 1px 3px rgba(27,21,18,.14)}",
     ".qty button:hover{background:" + PANEL + "}",
-    ".qty span{min-width:22px;text-align:center;font-weight:800;font-size:15px;color:" + INK + "}",
-    ".ltot{font-weight:800;font-size:15px;color:" + GOLD + ";white-space:nowrap;flex-shrink:0;min-width:64px;text-align:right}",
+    ".qty button[data-dec]{font-size:14px}",
+    ".qty span{min-width:26px;text-align:center;font-weight:800;font-size:15px;color:" + INK + "}",
+    ".ltot{font-weight:800;font-size:16px;color:" + INK + ";white-space:nowrap;flex-shrink:0;text-align:right}",
     ".drinks{background:#fff;border:1px solid rgba(27,21,18,.12);border-radius:16px;padding:14px 15px;margin-bottom:16px}",
-    ".dskel{flex:0 0 auto;width:100%;height:46px;border-radius:100px;background:linear-gradient(90deg," + PANEL + " 0%,#E7DDCF 50%," + PANEL + " 100%);background-size:200% 100%;animation:dskel 1.3s linear infinite}",
+    ".dskel{flex:0 0 auto;width:100%;aspect-ratio:1/1;border-radius:16px;background:linear-gradient(90deg," + PANEL + " 0%,#E7DDCF 50%," + PANEL + " 100%);background-size:200% 100%;animation:dskel 1.3s linear infinite}",
     "@keyframes dskel{0%{background-position:100% 0}100%{background-position:-100% 0}}",
     ".dwarn{background:#FBF0D6;border:1px solid #E0C078;border-radius:10px;padding:8px 11px;margin-bottom:11px;font-weight:700;font-size:11.5px;line-height:1.45;color:#6B4E12}",
     ".dtabs{display:flex;gap:7px;margin-bottom:9px}",
@@ -681,13 +763,23 @@
     ".dtab[data-on=\"true\"]{background:" + INK + ";border-color:" + INK + ";color:#F6EBD9}",
     ".dhead{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}",
     ".dhead span{font-weight:600;font-size:12px;color:rgba(27,21,18,.55)}",
-    ".drow{display:flex;flex-direction:column;gap:7px;max-height:232px;overflow-y:auto;padding-right:3px;-webkit-overflow-scrolling:touch}",
+    /* Add-ons are photo tiles: two across on a phone, three on wider sheets. */
+    ".drow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}",
+    "@media (min-width:480px){.drow{grid-template-columns:repeat(3,minmax(0,1fr))}}",
+    ".dtile{display:flex;flex-direction:column;align-items:stretch;gap:3px;min-width:0;padding:6px 6px 10px;border-radius:16px;border:1px solid rgba(27,21,18,.1);background:" + CREAM + ";text-align:left;cursor:pointer;font-family:'Archivo',system-ui,sans-serif;transition:transform .15s ease,box-shadow .15s ease}",
+    ".dtile:hover{transform:translateY(-2px);box-shadow:0 10px 20px -14px rgba(27,21,18,.6)}",
+    ".dtile:active{transform:scale(.97)}",
+    ".dimg{position:relative;display:block;aspect-ratio:4/3;border-radius:11px;overflow:hidden;background:#EFE7DC;margin-bottom:5px}",
+    ".dimg img{width:100%;height:100%;object-fit:cover;display:block}",
+    ".dimg .dplus{position:absolute;right:6px;bottom:6px;width:30px;height:30px;box-shadow:0 3px 8px rgba(27,21,18,.35)}",
+    ".dtile .dn{padding:0 4px;font-size:13px;line-height:1.25}",
+    ".dtile .dp{padding:0 4px;font-size:13px}",
     ".dchip{display:flex;align-items:center;gap:10px;width:100%;text-align:left;min-height:46px;padding:9px 10px 9px 15px;border-radius:100px;border:1px solid rgba(27,21,18,.18);background:" + CREAM + ";cursor:pointer;font-family:'Archivo',system-ui,sans-serif}",
     ".dchip:hover{background:" + PANEL + ";border-color:rgba(27,21,18,.32)}",
     ".dn{font-weight:700;font-size:13.5px;line-height:1.3;color:" + INK + ";flex:1;min-width:0;text-wrap:pretty}",
     ".dp{font-weight:700;font-size:13.5px;color:" + GOLD + ";white-space:nowrap;flex-shrink:0}",
     ".dplus{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px;border-radius:50%;background:" + RED + ";color:#fff;font-weight:800;font-size:14px;line-height:1}",
-    ".totals{display:flex;flex-direction:column;gap:8px;background:" + PANEL + ";border:1px solid rgba(27,21,18,.12);border-radius:16px;padding:16px 18px;margin-bottom:16px}",
+    ".totals{display:flex;flex-direction:column;gap:8px;background:" + PANEL + ";border:1px solid rgba(27,21,18,.12);border-radius:16px;padding:13px 16px;margin-bottom:4px}",
     ".row{display:flex;justify-content:space-between;font-weight:600;font-size:14px;color:" + BROWN + "}",
     ".row.grand{font-weight:800;font-size:18px;color:" + INK + ";border-top:1px solid rgba(27,21,18,.14);padding-top:10px;margin-top:2px}",
     ".primary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:54px;border-radius:100px;border:1px solid " + RED_D + ";background:" + RED + ";color:#fff;font:800 16px 'Archivo',system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 20px -8px rgba(199,69,43,.75)}",
@@ -722,7 +814,19 @@
     ".paytot{font-weight:800;font-size:30px;color:" + INK + ";letter-spacing:-.02em}",
     ".cardslot{background:" + PANEL + ";border:1px dashed rgba(27,21,18,.28);border-radius:16px;padding:22px;text-align:center}",
     ".slotlabel{font-weight:800;font-size:13px;letter-spacing:1.4px;color:" + GOLD + ";margin-bottom:8px}",
-    ".cardslot p{font-weight:600;font-size:13.5px;line-height:1.6;color:" + BROWN + ";margin:0;text-wrap:pretty}"
+    ".cardslot p{font-weight:600;font-size:13.5px;line-height:1.6;color:" + BROWN + ";margin:0;text-wrap:pretty}",
+    /* Short screens: shrink the header furniture so the items list keeps its room. */
+    "@media (max-height:700px){",
+    ".sheet{padding-top:16px}",
+    ".shead h2{font-size:21px}",
+    ".steplabel{margin-bottom:10px}",
+    ".togo{padding:9px 13px 9px 9px;gap:11px;margin-bottom:12px}",
+    ".bagwrap{width:38px;height:44px}",
+    ".bag{left:5px;bottom:4px;width:28px;height:31px}",
+    ".bag .handle{top:-7px;width:15px;height:10px}",
+    ".shadow{left:7px;width:24px}",
+    ".togo span{font-size:11.5px}",
+    "}"
   ].join("");
 
   loadDrinks();
