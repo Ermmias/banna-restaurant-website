@@ -563,7 +563,7 @@
             value: tot2, currency: "USD", transaction_id: self.order.id
           });
         }
-        self.cart = []; self.step = "done"; self.commit(true);
+        self.cart = []; self.step = "done"; self.orderId = null; self.eta = null; self.commit(true);
         trackConfirmed(self.order && self.order.id, self.order && self.order.total, []);
       };
       var go = this.root.querySelector("[data-go]");
@@ -629,7 +629,7 @@
               value: self.order.total, currency: "USD", transaction_id: self.order.id
             });
           }
-          self.cart = []; self.step = "done"; self.commit(true);
+          self.cart = []; self.step = "done"; self.orderId = null; self.eta = null; self.commit(true);
         trackConfirmed(self.order && self.order.id, self.order && self.order.total, []);
         }).catch(function (err) {
           /* Nothing is charged on any path that lands here, and the cart is left
