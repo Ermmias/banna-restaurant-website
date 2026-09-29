@@ -624,9 +624,10 @@
               return { item_name: l.name, price: l.price, quantity: l.qty };
             })
           });
-          if (typeof window.bannaConversion === "function") {
-            window.bannaConversion((window.BANNA_ADS || {}).internalLabel, {
-              value: self.order.total, currency: "USD", transaction_id: self.order.id
+          if (typeof window.trackPurchase === "function") {
+            window.trackPurchase({
+              orderNumber: self.order.id, total: self.order.total,
+              customerName: self.name, phone: self.phone
             });
           }
           self.cart = []; self.step = "done"; self.orderId = null; self.eta = null; self.commit(true);

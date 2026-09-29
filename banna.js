@@ -268,6 +268,9 @@
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href]');
       if (!a || !/cloveronline\.com/.test(a.href)) return;
+      /* Disabled: this label is now the real Purchase conversion (trackPurchase).
+         Firing it on a click would count $1 fake purchases. */
+      return;
       if (typeof gtag !== 'function') return;
       var card = a.closest('[data-dish]');
       var dish = '';
@@ -332,7 +335,7 @@
     id: 'AW-16929805337',
     directionsLabel: 'DIRECTIONS_LABEL', // replace
     cloverLabel: 'LSGDCISaj-ocEJmo4Yg_', // outbound order click (live)
-    internalLabel: 'INTERNAL_LABEL'      // replace when in-house checkout goes live
+    internalLabel: 'LSGDCISaj-ocEJmo4Yg_' // "Purchase" action — real paid orders only (trackPurchase)
   };
   window.bannaConversion = function (label, params) {
     var c = window.BANNA_ADS;
@@ -341,6 +344,27 @@
     var payload = { send_to: c.id + '/' + label };
     if (params) for (var k in params) payload[k] = params[k];
     gtag('event', 'conversion', payload);
+    return true;
+  };
+  /* Google Ads purchase conversion — fired once, when the "Order confirmed"
+     screen opens after a real card charge. transaction_id stops double counts. */
+  window.trackPurchase = function (order) {
+    if (!order || /TEST/i.test(order.customerName || '')) return false;
+    var c = window.BANNA_ADS;
+    if (!c.internalLabel || /_LABEL$/.test(c.internalLabel)) return false;
+    if (typeof gtag !== 'function') return false;
+    var digits = String(order.phone || '').replace(/\D/g, '');
+    if (digits.length === 10) digits = '1' + digits;
+    var ud = {};
+    if (order.email) ud.email = String(order.email).trim().toLowerCase();
+    if (digits.length === 11) ud.phone_number = '+' + digits;
+    if (ud.email || ud.phone_number) gtag('set', 'user_data', ud);
+    gtag('event', 'conversion', {
+      send_to: c.id + '/' + c.internalLabel,
+      value: Number(order.total) || 0,
+      currency: 'USD',
+      transaction_id: order.orderNumber
+    });
     return true;
   };
   (function () {
