@@ -181,16 +181,20 @@
      home page from / and every other page from a subfolder (/menu/, /vegan/ …),
      so a hardcoded "img/" breaks everywhere but the home page. Derive it from a
      photo already on the page instead. */
-  var IMG_BASE = (function () {
+  /* Resolved at use time (not load time) so the page's photos exist; falls back to
+     the site-root path, which works on every page of bannarestaurant.com. */
+  var _imgBase = null;
+  function imgBase() {
+    if (_imgBase) return _imgBase;
     try {
-      var el = document.querySelector('img[src*="img/"]');
-      if (el) {
-        var m = el.getAttribute("src").match(/^(.*?)img\//);
-        if (m) return m[1] + "img/";
+      var els = document.querySelectorAll('img[src]');
+      for (var i = 0; i < els.length; i++) {
+        var m = els[i].getAttribute("src").match(/^((?:\.\.\/)*|\/)img\//);
+        if (m) return (_imgBase = m[1] + "img/");
       }
     } catch (e) {}
-    return "img/";
-  })();
+    return /^(localhost|127\.)|claudeusercontent/.test(location.hostname) ? (location.pathname.split("/").filter(Boolean).length > 1 ? "../img/" : "img/") : "/img/";
+  }
 
   /* The pay button is a STUB — no card is charged and nothing reaches Clover or the
      kitchen. It exists so the flow can be reviewed, so it renders only in preview:
@@ -301,7 +305,7 @@
         return '<button type="button" class="addmore" data-addon-open>' +
           '<span class="amstack" aria-hidden="true">' +
           ['side-injera.jpg', 'side-shiro.jpg', 'side-gomen.jpg'].map(function (f) {
-            return '<img src="' + IMG_BASE + f + '" alt="" loading="lazy">';
+            return '<img src="' + imgBase() + f + '" alt="" loading="lazy">';
           }).join('') + '</span>' +
           '<span class="amtext"><strong>Add sides or drinks</strong>' +
           '<span>Injera, gomen, shiro, coffee, tea, sodas</span></span>' +
@@ -327,7 +331,7 @@
           : list.map(function (d) {
               var src = d.img || thumbFor(d.name);
               return '<button type="button" class="dtile" data-addon="' + esc(d.name) + '" data-kind="' + tab + '" aria-label="Add ' + esc(d.name) + ', ' + money(d.price) + '">' +
-                '<span class="dimg">' + (src ? '<img src="' + IMG_BASE + esc(src) + '" alt="" loading="lazy">' : '') +
+                '<span class="dimg">' + (src ? '<img src="' + imgBase() + esc(src) + '" alt="" loading="lazy">' : '') +
                 '<span class="dplus" aria-hidden="true">+</span></span>' +
                 '<span class="dn">' + esc(d.name) + '</span>' +
                 '<span class="dp">' + money(d.price) + '</span></button>';
@@ -379,7 +383,7 @@
       return this.cart.map(function (l) {
         var lsrc = l.img || thumbFor(l.name);
         return '<div class="line">' +
-          (lsrc ? '<img src="' + IMG_BASE + esc(lsrc) + '" alt="" width="68" height="68" loading="lazy">' : '<div class="noimg"></div>') +
+          (lsrc ? '<img src="' + imgBase() + esc(lsrc) + '" alt="" width="68" height="68" loading="lazy">' : '<div class="noimg"></div>') +
           '<div class="lmeta"><span class="lname">' + esc(l.name) + '</span>' +
           '<span class="leach">' + (l.price > 0 ? money(l.price) + ' each' : 'Priced at pickup') + '</span>' +
           '<div class="lbot"><div class="qty"><button type="button" data-dec="' + esc(l.name) + '" aria-label="Remove one ' + esc(l.name) + '">&minus;</button>' +
